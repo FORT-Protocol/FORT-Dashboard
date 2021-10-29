@@ -28,6 +28,7 @@
     ]
   },
   "devDependencies": {
+    "@ant-design/charts": "^1.2.14",
     "@chakra-ui/react": "^1.6.10",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",

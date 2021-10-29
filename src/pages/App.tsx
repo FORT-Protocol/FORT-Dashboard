@@ -4,6 +4,7 @@ import Options from "./Options"
 import Users from "./Users"
 import logo from "../assets/svg/logo.svg";
 import {useState} from "react";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const App = () => {
   const [index, setIndex] = useState(0)
@@ -12,14 +13,18 @@ const App = () => {
     setIndex(index)
   }
 
+  const {width} = useWindowDimensions()
+
   return (
     <Tabs isLazy size={"lg"} index={index} onChange={handleTabsChange}>
       <TabList alignItems={"center"}>
-        <Stack pl={["22px", "22px", "44px"]} direction={"row"} spacing={4} position={"absolute"}>
-          <img src={logo} alt={"logo"}/>
-          <Text px={4} py={2} borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} fontWeight={600}
-                fontSize={"18px"} color={"#878787"} fontFamily={"Montserrat"}>Dashboard</Text>
-        </Stack>
+        { width >= 1000 && (
+          <Stack pl={["22px", "22px", "44px"]} direction={"row"} spacing={4} position={"absolute"}>
+            <img src={logo} alt={"logo"}/>
+            <Text px={4} py={2} borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} fontWeight={600}
+                  fontSize={"18px"} color={"#878787"} fontFamily={"Montserrat"}>Dashboard</Text>
+          </Stack>
+        )}
         <Spacer/>
         <Tab h={"66px"}>
           <Text color={index === 0 ? "hedge" : "black"} fontWeight={"bold"} fontFamily={"Montserrat"}>Futures</Text>
