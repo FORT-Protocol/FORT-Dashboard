@@ -1,5 +1,5 @@
 import {Button, Spacer, Stack, Text} from "@chakra-ui/react";
-import {FC, useEffect, useState} from "react";
+import {FC, useState} from "react";
 import {Line} from '@ant-design/charts';
 
 interface LineChartProps {
@@ -7,23 +7,14 @@ interface LineChartProps {
   total?: number | string,
   prefix?: string
   suffix?: string
+  data?: any
 }
 
-const DemoLine: React.FC = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
+const LineChart: FC<LineChartProps> = props => {
+  const [selector, setSelector] = useState("1W")
+
   const config = {
-    data: data,
+    data: props.data,
     xField: 'year',
     yField: 'value',
     seriesField: 'category',
@@ -38,11 +29,6 @@ const DemoLine: React.FC = () => {
     },
     color: ['#1979C9', '#D62A0D', '#FAA219'],
   };
-  return <Line {...config} />;
-};
-
-const LineChart: FC<LineChartProps> = props => {
-  const [selector, setSelector] = useState("1W")
 
   return (
     <Stack height="616px" borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} p={["22px", "22px", "44px"]}>
@@ -67,7 +53,7 @@ const LineChart: FC<LineChartProps> = props => {
                   onClick={() => setSelector("All")}>ALL</Button>
         </Stack>
       </Stack>
-      <DemoLine/>
+      <Line {...config} />
     </Stack>
   )
 }

@@ -2,9 +2,10 @@ import {Stack, Text} from "@chakra-ui/react";
 import {FC} from "react";
 
 interface NormProps {
-  value: number,
-  desc: string,
-  color: string
+  value?: number | string,
+  desc?: string,
+  color?: string,
+  data?: any
 }
 
 const Norm: FC<NormProps> = props => {
