@@ -3,7 +3,7 @@ import {FC} from "react";
 import { Pie } from '@ant-design/charts';
 
 const DemoPie: FC = () => {
-  var data = [
+  const data = [
     {
       type: '分类一',
       value: 27,
@@ -29,7 +29,7 @@ const DemoPie: FC = () => {
       value: 5,
     },
   ];
-  var config = {
+  const config = {
     appendPadding: 10,
     data: data,
     angleField: 'value',
@@ -39,7 +39,7 @@ const DemoPie: FC = () => {
       type: 'outer',
       content: '{name} {percentage}',
     },
-    interactions: [{ type: 'pie-legend-active' }, { type: 'element-active' }],
+    interactions: [{type: 'pie-legend-active'}, {type: 'element-active'}],
   };
   return <Pie {...config} />;
 };

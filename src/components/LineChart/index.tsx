@@ -1,6 +1,6 @@
 import {Button, Spacer, Stack, Text} from "@chakra-ui/react";
 import {FC, useEffect, useState} from "react";
-import { Line } from '@ant-design/charts';
+import {Line} from '@ant-design/charts';
 
 interface LineChartProps {
   title?: string,
@@ -22,7 +22,7 @@ const DemoLine: React.FC = () => {
         console.log('fetch data failed', error);
       });
   };
-  var config = {
+  const config = {
     data: data,
     xField: 'year',
     yField: 'value',
@@ -42,6 +42,8 @@ const DemoLine: React.FC = () => {
 };
 
 const LineChart: FC<LineChartProps> = props => {
+  const [selector, setSelector] = useState("1W")
+
   return (
     <Stack height="616px" borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} p={["22px", "22px", "44px"]}>
       {props.title && (
@@ -50,15 +52,19 @@ const LineChart: FC<LineChartProps> = props => {
       <Stack direction={"row"}>
         {props.total && (
           <Stack direction={"row"} alignItems={"baseline"}>
-            <Text color={"hedge"} fontSize={"28px"} fontWeight={600} fontFamily={"Montserrat"}>{props.prefix} {props.total || "-"}</Text>
+            <Text color={"hedge"} fontSize={"28px"} fontWeight={600}
+                  fontFamily={"Montserrat"}>{props.prefix} {props.total || "-"}</Text>
             <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
           </Stack>
         )}
         <Spacer/>
         <Stack direction={"row"}>
-          <Button variant={"ghost"} size={"sm"} fontFamily={"Montserrat"}>1W</Button>
-          <Button variant={"ghost"} size={"sm"} fontFamily={"Montserrat"}>1M</Button>
-          <Button variant={"ghost"} size={"sm"} fontFamily={"Montserrat"}>ALL</Button>
+          <Button variant={"ghost"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1W" ? "hedge" : "black"}
+                  onClick={() => setSelector("1W")}>1W</Button>
+          <Button variant={"ghost"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1M" ? "hedge" : "black"}
+                  onClick={() => setSelector("1M")}>1M</Button>
+          <Button variant={"ghost"} size={"sm"} fontFamily={"Montserrat"} color={selector === "All" ? "hedge" : "black"}
+                  onClick={() => setSelector("All")}>ALL</Button>
         </Stack>
       </Stack>
       <DemoLine/>
