@@ -17,8 +17,8 @@ const LineChart: FC<LineChartProps> = props => {
       <Stack direction={"row"}>
         {props.total && (
           <Stack direction={"row"} alignItems={"baseline"}>
-            <Text color={"#0047BB"} fontSize={"28px"} fontWeight={600} fontFamily={"Montserrat"}>{props.prefix} {props.total || "-"}</Text>
-            <Text color={"#0047BB"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
+            <Text color={"hedge"} fontSize={"28px"} fontWeight={600} fontFamily={"Montserrat"}>{props.prefix} {props.total || "-"}</Text>
+            <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
           </Stack>
         )}
         <Spacer/>

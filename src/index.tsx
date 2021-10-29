@@ -5,12 +5,19 @@ import reportWebVitals from "./reportWebVitals"
 import {ChakraProvider} from "@chakra-ui/react"
 import {RecoilRoot} from "recoil"
 import {HashRouter} from "react-router-dom"
+import { extendTheme } from "@chakra-ui/react"
+
+const theme = extendTheme({
+  colors: {
+    hedge: "#0047BB",
+  },
+})
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
       <HashRouter>
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
           <App/>
         </ChakraProvider>
       </HashRouter>
