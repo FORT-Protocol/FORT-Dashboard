@@ -2,19 +2,9 @@ import React from "react"
 import ReactDOM from "react-dom"
 import App from "./pages/App"
 import reportWebVitals from "./reportWebVitals"
-import {ChakraProvider, Stack} from "@chakra-ui/react"
+import {ChakraProvider} from "@chakra-ui/react"
 import {RecoilRoot} from "recoil"
 import {HashRouter} from "react-router-dom"
-import {createGlobalStyle} from "styled-components"
-
-// export const GlobalStyle = createGlobalStyle`
-//   @font-face {
-//     font-family: 'ChicagoFLFRegular';
-//     src: url(${Chicago}) format('truetype');
-//     font-weight: normal;
-//     font-style: normal;
-//   }
-// `
 
 ReactDOM.render(
   <React.StrictMode>

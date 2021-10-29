@@ -1,4 +1,4 @@
-import {Box, SimpleGrid, Stack} from "@chakra-ui/react";
+import {SimpleGrid, Stack} from "@chakra-ui/react";
 import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 

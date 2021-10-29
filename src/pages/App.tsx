@@ -11,12 +11,12 @@ const App = () => {
         <Stack pl={["22px", "22px", "44px"]} direction={"row"} spacing={4} position={"absolute"}>
           <img src={logo} alt={"logo"}/>
           <Text px={4} py={2} borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} fontWeight={600}
-                fontSize={"18px"} color={"#878787"}>Dashboard</Text>
+                fontSize={"18px"} color={"#878787"} fontFamily={"Montserrat"}>Dashboard</Text>
         </Stack>
         <Spacer/>
-        <Tab h={"66px"} fontWeight={"bold"}>Futures</Tab>
-        <Tab h={"66px"} fontWeight={"bold"}>Options</Tab>
-        <Tab h={"66px"} fontWeight={"bold"}>User</Tab>
+        <Tab h={"66px"} fontWeight={"bold"} fontFamily={"Montserrat"}>Futures</Tab>
+        <Tab h={"66px"} fontWeight={"bold"} fontFamily={"Montserrat"}>Options</Tab>
+        <Tab h={"66px"} fontWeight={"bold"} fontFamily={"Montserrat"}>User</Tab>
         <Spacer/>
       </TabList>
       <TabPanels>
