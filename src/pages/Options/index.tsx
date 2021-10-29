@@ -1,11 +1,11 @@
-import {Box, SimpleGrid, Stack} from "@chakra-ui/react";
+import {SimpleGrid, Stack} from "@chakra-ui/react";
 import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 
 const Options = () => {
   return (
-    <Stack spacing={"44px"} w={"100%"} p={["22px", "22px", "44px"]}>
+    <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 2, 2, 2, 4]} spacing="44px">
         <Norm value={75647} desc={"Total Transaction Volume"} color={"#C7A072"}/>
         <Norm value={75647} desc={"Total Transaction Volume (ETH)"} color={"#E57200"}/>

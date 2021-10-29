@@ -4,7 +4,7 @@ import LineChart from "../../components/LineChart";
 
 const Users = () => {
   return (
-    <Stack spacing={"44px"} w={"100%"} p={["22px", "22px", "44px"]}>
+    <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 2, 2, 3]} spacing="44px">
         <Norm value={75647} desc={"All users"} color={"#C7A072"}/>
         <Norm value={75647} desc={"Futures Trading users"} color={"#E57200"}/>
