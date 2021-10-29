@@ -1,16 +1,18 @@
 import {Box, SimpleGrid, Stack} from "@chakra-ui/react";
+import Norm from "../../components/Norm";
+import LineChart from "../../components/LineChart";
 
 const Users = () => {
   return (
     <Stack spacing={"44px"} w={"100%"} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 2, 2, 3]} spacing="44px">
-        <Box bg="tomato" height="154px" borderRadius={"20px"}></Box>
-        <Box bg="tomato" height="154px" borderRadius={"20px"}></Box>
-        <Box bg="tomato" height="154px" borderRadius={"20px"}></Box>
+        <Norm value={75647} desc={"All users"} color={"#C7A072"}/>
+        <Norm value={75647} desc={"Futures Trading users"} color={"#E57200"}/>
+        <Norm value={75647} desc={"Options Trading users"} color={"#00B388"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
-        <Box bg="blue" height="616px" borderRadius={"20px"}></Box>
-        <Box bg="blue" height="616px" borderRadius={"20px"}></Box>
+        <LineChart title={"New Users"} total={2738}/>
+        <LineChart title={"Active Users"} total={38292}/>
       </SimpleGrid>
     </Stack>
   )

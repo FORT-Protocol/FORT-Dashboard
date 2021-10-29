@@ -1,9 +1,9 @@
-import {Spacer, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text} from "@chakra-ui/react"
+import {color, Spacer, Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text} from "@chakra-ui/react"
 import Futures from "./Futures"
 import Options from "./Options"
 import Users from "./Users"
 import Footer from "../components/Footer";
-import logo from "../assets/logo.svg";
+import logo from "../assets/svg/logo.svg";
 
 const App = () => {
   return (
@@ -14,9 +14,9 @@ const App = () => {
             <img src={logo}/>
           </Stack>
           <Spacer/>
-          <Tab h={"66px"}>Futures</Tab>
-          <Tab h={"66px"}>Options</Tab>
-          <Tab h={"66px"}>User</Tab>
+          <Tab h={"66px"} fontWeight={"bold"}>Futures</Tab>
+          <Tab h={"66px"} fontWeight={"bold"}>Options</Tab>
+          <Tab h={"66px"} fontWeight={"bold"}>User</Tab>
           <Spacer/>
         </TabList>
         <TabPanels>
