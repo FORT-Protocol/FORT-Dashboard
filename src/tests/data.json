@@ -1,0 +1,134 @@
+{
+  "block": 2000,
+  "futures": {
+    "totalTxVolume": 100,
+    "totalTxVolumeETH": 200,
+    "curOpenLongPositionsETH": 200,
+    "curOpenShortPositionsETH": 100,
+    "totalTransactionVolume": [
+      {
+        "year": "1850",
+        "value": 2,
+        "category": "Solid fuel"
+      },
+      {
+        "year": "1851",
+        "value": 54,
+        "category": "Solid fuel"
+      },
+      {
+        "year": "1852",
+        "value": 100,
+        "category": "Solid fuel"
+      }
+    ],
+    "totalTradingVolume": [
+      {
+        "year": "1850",
+        "value": 0,
+        "category": "Liquid fuel"
+      },
+      {
+        "year": "1850",
+        "value": 54,
+        "category": "Solid fuel"
+      },
+      {
+        "year": "1852",
+        "value": 54,
+        "category": "Solid fuel"
+      }
+    ],
+    "cumulativeLiquidationAmount": [
+      {
+        "year": "1850",
+        "value": 0,
+        "category": "Solid fuel"
+      },
+      {
+        "year": "1852",
+        "value": 54,
+        "category": "Solid fuel"
+      }
+    ]
+  },
+  "options": {
+    "totalTxVolume": 200,
+    "totalTxVolumeETH": 400,
+    "curCallOptionPositionsETH": 200,
+    "curShortOptionsETH": 300,
+    "totalTransactionVolume": [
+      {
+        "year": "1850",
+        "value": 0,
+        "category": "Liquid fuel"
+      },
+      {
+        "year": "1850",
+        "value": 54,
+        "category": "Solid fuel"
+      }
+    ],
+    "totalTradingVolume": [
+      {
+        "year": "1850",
+        "value": 0,
+        "category": "Liquid fuel"
+      },
+      {
+        "year": "1850",
+        "value": 54,
+        "category": "Solid fuel"
+      }
+    ],
+    "longShortDistribution": [
+      {
+        "type": "分类一",
+        "value": 27
+      },
+      {
+        "type": "分类二",
+        "value": 25
+      }
+    ],
+    "distributionOfExerciseTimespan": [
+      {
+        "type": "分类一",
+        "value": 27
+      },
+      {
+        "type": "分类二",
+        "value": 25
+      }
+    ]
+  },
+  "users": {
+    "allUser": 3300,
+    "futuresTradingUsers": 2000,
+    "optionsTradingUsers": 300,
+    "newUsers": [
+      {
+        "year": "1850",
+        "value": 0,
+        "category": "Liquid fuel"
+      },
+      {
+        "year": "1850",
+        "value": 54,
+        "category": "Solid fuel"
+      }
+    ],
+    "activeUsers": [
+      {
+        "year": "1850",
+        "value": 0,
+        "category": "Liquid fuel"
+      },
+      {
+        "year": "1850",
+        "value": 54,
+        "category": "Solid fuel"
+      }
+    ]
+  }
+}

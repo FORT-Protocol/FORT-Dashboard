@@ -5,7 +5,6 @@ interface NormProps {
   value?: number | string,
   desc?: string,
   color?: string,
-  data?: any
 }
 
 const Norm: FC<NormProps> = props => {

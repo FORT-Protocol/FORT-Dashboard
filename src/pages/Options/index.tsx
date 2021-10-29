@@ -3,12 +3,10 @@ import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import {useState} from "react";
-import lineChartData from "../../tests/lineChartData.json";
-import pieChartData from "../../tests/pieChartData.json";
+import data from "../../tests/data.json";
 
 const Options = () => {
-  const [data, setData] = useState(lineChartData);
-  const [data2, setData2] = useState(pieChartData);
+  const [tdata] = useState(data);
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
@@ -19,12 +17,12 @@ const Options = () => {
         <Norm value={75647} desc={"Current Short Option Positions (ETH)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
-        <LineChart title={"Total Transaction Volume"} total={382992} data={data}/>
-        <LineChart title={"Total Trading Volume"} total={233323} data={data}/>
+        <LineChart title={"Total Transaction Volume"} total={382992} data={tdata.options.totalTransactionVolume}/>
+        <LineChart title={"Total Trading Volume"} total={233323} data={tdata.options.totalTradingVolume}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
-        <PieChart title={"Long-Short Distribution"} data={data2}/>
-        <PieChart title={"Distribution of Exercise Timespan"} data={data2}/>
+        <PieChart title={"Long-Short Distribution"} data={tdata.options.longShortDistribution}/>
+        <PieChart title={"Distribution of Exercise Timespan"} data={tdata.options.distributionOfExerciseTimespan}/>
       </SimpleGrid>
     </Stack>
   )
