@@ -1,0 +1,2 @@
+export const futuresContractAddress = 0x622f1cb39ade2131061c68e61334d41321033ab4
+export const optionsContractAddress = 0x6c844d364c2836f2111891111f25c7a24da976a9
