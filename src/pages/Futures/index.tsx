@@ -1,21 +1,11 @@
 import {SimpleGrid, Stack} from "@chakra-ui/react";
 import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import lineChartData from "../../tests/lineChartData.json";
 
 const Futures = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
+  const [data, setData] = useState(lineChartData);
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>

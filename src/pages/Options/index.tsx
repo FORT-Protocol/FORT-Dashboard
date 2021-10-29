@@ -2,48 +2,13 @@ import {SimpleGrid, Stack} from "@chakra-ui/react";
 import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
-import {useEffect, useState} from "react";
+import {useState} from "react";
+import lineChartData from "../../tests/lineChartData.json";
+import pieChartData from "../../tests/pieChartData.json";
 
 const Options = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
-
-  const data2 = [
-    {
-      type: '分类一',
-      value: 27,
-    },
-    {
-      type: '分类二',
-      value: 25,
-    },
-    {
-      type: '分类三',
-      value: 18,
-    },
-    {
-      type: '分类四',
-      value: 15,
-    },
-    {
-      type: '分类五',
-      value: 10,
-    },
-    {
-      type: '其他',
-      value: 5,
-    },
-  ];
+  const [data, setData] = useState(lineChartData);
+  const [data2, setData2] = useState(pieChartData);
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
