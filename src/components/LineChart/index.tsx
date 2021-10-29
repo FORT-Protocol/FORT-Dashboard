@@ -18,15 +18,6 @@ const LineChart: FC<LineChartProps> = props => {
     xField: 'year',
     yField: 'value',
     seriesField: 'category',
-    yAxis: {
-      label: {
-        formatter: function formatter(v: any) {
-          return ''.concat(v).replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
-            return ''.concat(s, ',');
-          });
-        },
-      },
-    },
     color: ['#1979C9', '#D62A0D', '#FAA219'],
   };
 
