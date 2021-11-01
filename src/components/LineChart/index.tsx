@@ -38,12 +38,12 @@ const LineChart: FC<LineChartProps> = props => {
         )}
         <Spacer/>
         <Stack direction={"row"} spacing={"20px"}>
-          <Button variant={"outline"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1W" ? "hedge" : "black"}
-                  onClick={() => setSelector("1W")}>1W</Button>
-          <Button variant={"outline"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1M" ? "hedge" : "black"}
-                  onClick={() => setSelector("1M")}>1M</Button>
-          <Button variant={"outline"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "All" ? "hedge" : "black"}
-                  onClick={() => setSelector("All")}>ALL</Button>
+          <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1W" ? "hedge" : "black"}
+                  onClick={() => setSelector("1W")} border={selector === "1W" ? "2px solid #0047BB" : "none"}>1W</Button>
+          <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1M" ? "hedge" : "black"}
+                  onClick={() => setSelector("1M")} border={selector === "1M" ? "2px solid #0047BB" : "none"}>1M</Button>
+          <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "All" ? "hedge" : "black"}
+                  onClick={() => setSelector("All")} border={selector === "All" ? "2px solid #0047BB" : "none"}>ALL</Button>
         </Stack>
       </Stack>
       <Line {...config} />
