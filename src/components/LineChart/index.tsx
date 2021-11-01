@@ -1,6 +1,7 @@
 import {Button, Spacer, Stack, Text} from "@chakra-ui/react";
 import {FC, useState} from "react";
 import {Line} from '@ant-design/charts';
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 interface LineChartProps {
   title?: string,
@@ -12,6 +13,7 @@ interface LineChartProps {
 
 const LineChart: FC<LineChartProps> = props => {
   const [selector, setSelector] = useState("1W")
+  const {width} = useWindowDimensions()
 
   const config = {
     data: props.data,
@@ -24,7 +26,7 @@ const LineChart: FC<LineChartProps> = props => {
   return (
     <Stack borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} p={["22px", "22px", "44px"]} spacing={"8px"}>
       {props.title && (
-        <Text fontSize={"18px"} color={"#878787"} fontFamily={"Montserrat"}>{props.title}</Text>
+        <Text fontSize={width < 1000 ? "12px" : "18px"} fontWeight={600} color={"#878787"} fontFamily={"Montserrat"}>{props.title}</Text>
       )}
       <Stack direction={"row"}>
         {props.total && (
