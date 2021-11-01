@@ -22,10 +22,10 @@ const Futures = () => {
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
         <PieChart title={"Long-Short Distribution"} data={tData.options.longShortDistribution}/>
-        <PieChart title={"Distribution of Exercise Timespan"} data={tData.options.distributionOfExerciseTimespan}/>
+        <PieChart title={"Leverage Distribution"} data={tData.options.distributionOfExerciseTimespan}/>
       </SimpleGrid>
       <SimpleGrid columns={1}>
-        <PieChart title={"Distribution of Exercise Timespan"} data={tData.options.distributionOfExerciseTimespan}/>
+        <PieChart title={"Open Price distribution (USDT)"} data={tData.options.distributionOfExerciseTimespan}/>
       </SimpleGrid>
     </Stack>
   )
