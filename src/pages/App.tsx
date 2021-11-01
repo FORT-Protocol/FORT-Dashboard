@@ -21,6 +21,7 @@ import smallLogo from "../assets/svg/small-logo.svg"
 import {useState} from "react";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import {HamburgerIcon, CloseIcon} from "@chakra-ui/icons";
+import Swap from "./Swap";
 
 const App = () => {
   const [index, setIndex] = useState(0)
@@ -54,6 +55,11 @@ const App = () => {
               <Tab h={"66px"} p={0}>
                 <Stack borderBottom={"2px"} borderColor={index === 2 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
                   <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 2 ? 700 : 500} fontFamily={"Montserrat"}>User</Text>
+                </Stack>
+              </Tab>
+              <Tab h={"66px"} p={0}>
+                <Stack borderBottom={"2px"} borderColor={index === 3 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
+                  <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 3 ? 700 : 500} fontFamily={"Montserrat"}>Swap</Text>
                 </Stack>
               </Tab>
             </Stack>
@@ -98,6 +104,11 @@ const App = () => {
                         <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 2 ? 700 : 500} fontFamily={"Montserrat"}>User</Text>
                       </Stack>
                     </Tab>
+                    <Tab h={"66px"} p={0} w={"120px"}>
+                      <Stack borderBottom={"2px"} borderColor={index === 3 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
+                        <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 3 ? 700 : 500} fontFamily={"Montserrat"}>Swap</Text>
+                      </Stack>
+                    </Tab>
                   </Stack>
                 </TabList>
               </DrawerBody>
@@ -114,6 +125,9 @@ const App = () => {
         </TabPanel>
         <TabPanel p={0}>
           <Users/>
+        </TabPanel>
+        <TabPanel p={0}>
+          <Swap/>
         </TabPanel>
       </TabPanels>
     </Tabs>
