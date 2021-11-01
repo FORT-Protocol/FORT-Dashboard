@@ -5,7 +5,7 @@
     "totalTxVolumeETH": 200,
     "curOpenLongPositionsETH": 200,
     "curOpenShortPositionsETH": 100,
-    "totalTransactionVolume": [
+    "totalTransactionVolumeList": [
       {
         "day": "1850",
         "value": 2,
@@ -22,7 +22,7 @@
         "category": "Solid fuel"
       }
     ],
-    "totalTradingVolume": [
+    "totalTradingVolumeList": [
       {
         "day": "1850",
         "value": 0,
@@ -99,7 +99,7 @@
     "totalTxVolumeETH": 400,
     "curCallOptionPositionsETH": 200,
     "curShortOptionsETH": 300,
-    "totalTransactionVolume": [
+    "totalTransactionVolumeList": [
       {
         "day": "1850",
         "value": 0,
@@ -111,7 +111,7 @@
         "category": "Solid fuel"
       }
     ],
-    "totalTradingVolume": [
+    "totalTradingVolumeList": [
       {
         "day": "1850",
         "value": 0,
@@ -160,7 +160,7 @@
     "allUser": 3300,
     "futuresTradingUsers": 2000,
     "optionsTradingUsers": 300,
-    "newUsers": [
+    "newUsersList": [
       {
         "day": "1850",
         "value": 0,
@@ -172,7 +172,7 @@
         "category": "Solid fuel"
       }
     ],
-    "activeUsers": [
+    "activeUsersList": [
       {
         "day": "1850",
         "value": 0,
@@ -181,6 +181,24 @@
       {
         "day": "1850",
         "value": 54,
+        "category": "Solid fuel"
+      }
+    ]
+  },
+  "swap": {
+    "numberOfNEST": 63773,
+    "numberOfDCU": 7382,
+    "cumulativeNumberOfTransaction": 38833,
+    "totalTransactionVolume": 3443,
+    "totalTransactionVolumeList": [
+      {
+        "day": "1851",
+        "value": 54,
+        "category": "Solid fuel"
+      },
+      {
+        "day": "1852",
+        "value": 100,
         "category": "Solid fuel"
       }
     ]

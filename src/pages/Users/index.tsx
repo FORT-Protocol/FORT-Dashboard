@@ -15,8 +15,8 @@ const Users = () => {
         <Norm value={tData.users.optionsTradingUsers} desc={"Options Trading users"} color={"#00B388"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
-        <LineChart title={"New Users"} total={2738} data={tData.users.newUsers}/>
-        <LineChart title={"Active Users"} total={38292} data={tData.users.activeUsers}/>
+        <LineChart title={"New Users"} total={2738} data={tData.users.newUsersList}/>
+        <LineChart title={"Active Users"} total={38292} data={tData.users.activeUsersList}/>
       </SimpleGrid>
     </Stack>
   )

@@ -17,8 +17,8 @@ const Futures = () => {
         <Norm value={tData.futures.curOpenShortPositionsETH} desc={"Current Open Short Positions (ETH)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing="44px">
-        <LineChart title={"Total Transaction Volume"} total={725647} suffix={"DCU"} data={tData.futures.totalTransactionVolume}/>
-        <LineChart title={"Total Trading Volume"} total={12389} prefix={"$"} data={tData.futures.totalTradingVolume}/>
+        <LineChart title={"Total Transaction Volume"} total={725647} suffix={"DCU"} data={tData.futures.totalTransactionVolumeList}/>
+        <LineChart title={"Total Trading Volume"} total={12389} prefix={"$"} data={tData.futures.totalTradingVolumeList}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
         <PieChart title={"Long-Short Distribution"} data={tData.futures.longShortDistribution}/>
