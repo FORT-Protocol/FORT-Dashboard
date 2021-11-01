@@ -21,9 +21,8 @@ const useFetchFuturesTxlist = (lastBlock: number = 0) => {
     })
     setFuturesTxlist(list)
   }
-  console.log(futuresTxlist)
 
-  return null
+  return futuresTxlist
 }
 
 export default useFetchFuturesTxlist

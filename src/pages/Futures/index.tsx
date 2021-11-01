@@ -4,14 +4,22 @@ import LineChart from "../../components/LineChart";
 import {useState} from "react";
 import testData from "../../tests/data.json";
 import PieChart from "../../components/PieChart";
+import useFetchFuturesTxlist from "../../hooks/useFetchFuturesTxlist";
+import useBlockNumber from "../../hooks/useBlockNumber";
+import {totalTxVolumeAtom} from "../../state/futures/updateTotalTxVolume";
+import {useRecoilValue} from "recoil";
 
 const Futures = () => {
   const [tData] = useState(testData);
+  // 获取当前区块高度，调用钩子函数后台更新Futures交易列表
+  useFetchFuturesTxlist(useBlockNumber())
+  // 调用Recoil状态直接供前端显示
+  const totalTxVolume = useRecoilValue(totalTxVolumeAtom({}))
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 2, 2, 2, 4]} spacing="44px">
-        <Norm value={tData.futures.totalTxVolume} desc={"Total Transaction Volume"} color={"#C7A072"}/>
+        <Norm value={totalTxVolume.toFixed(2)} desc={"Total Transaction Volume"} color={"#C7A072"}/>
         <Norm value={tData.futures.totalTxVolumeETH} desc={"Total Transaction Volume (ETH)"} color={"#E57200"}/>
         <Norm value={tData.futures.curOpenLongPositionsETH} desc={"Current Open Long Positions (ETH)"} color={"#00B388"}/>
         <Norm value={tData.futures.curOpenShortPositionsETH} desc={"Current Open Short Positions (ETH)"} color={"#F23A12"}/>
