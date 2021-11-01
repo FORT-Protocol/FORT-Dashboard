@@ -20,7 +20,7 @@ const LineChart: FC<LineChartProps> = props => {
     xField: 'day',
     yField: 'value',
     seriesField: 'category',
-    color: ['#1979C9', '#D62A0D', '#FAA219'],
+    color: ['#0047BB', "#4FB08B", "#D7772C", "#F6E272", "#BEDE9F", "#5BCBEA"],
   };
 
   return (
@@ -37,12 +37,12 @@ const LineChart: FC<LineChartProps> = props => {
           </Stack>
         )}
         <Spacer/>
-        <Stack direction={"row"}>
-          <Button variant={"ghost"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1W" ? "hedge" : "black"}
+        <Stack direction={"row"} spacing={"20px"}>
+          <Button variant={"outline"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1W" ? "hedge" : "black"}
                   onClick={() => setSelector("1W")}>1W</Button>
-          <Button variant={"ghost"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1M" ? "hedge" : "black"}
+          <Button variant={"outline"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1M" ? "hedge" : "black"}
                   onClick={() => setSelector("1M")}>1M</Button>
-          <Button variant={"ghost"} size={"sm"} fontFamily={"Montserrat"} color={selector === "All" ? "hedge" : "black"}
+          <Button variant={"outline"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "All" ? "hedge" : "black"}
                   onClick={() => setSelector("All")}>ALL</Button>
         </Stack>
       </Stack>
