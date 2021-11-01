@@ -7,46 +7,46 @@
     "curOpenShortPositionsETH": 100,
     "totalTransactionVolume": [
       {
-        "year": "1850",
+        "day": "1850",
         "value": 2,
         "category": "Solid fuel"
       },
       {
-        "year": "1851",
+        "day": "1851",
         "value": 54,
         "category": "Solid fuel"
       },
       {
-        "year": "1852",
+        "day": "1852",
         "value": 100,
         "category": "Solid fuel"
       }
     ],
     "totalTradingVolume": [
       {
-        "year": "1850",
+        "day": "1850",
         "value": 0,
         "category": "Liquid fuel"
       },
       {
-        "year": "1850",
+        "day": "1850",
         "value": 54,
         "category": "Solid fuel"
       },
       {
-        "year": "1852",
+        "day": "1852",
         "value": 54,
         "category": "Solid fuel"
       }
     ],
     "cumulativeLiquidationAmount": [
       {
-        "year": "1850",
+        "day": "1850",
         "value": 0,
         "category": "Solid fuel"
       },
       {
-        "year": "1852",
+        "day": "1852",
         "value": 54,
         "category": "Solid fuel"
       }
@@ -59,24 +59,24 @@
     "curShortOptionsETH": 300,
     "totalTransactionVolume": [
       {
-        "year": "1850",
+        "day": "1850",
         "value": 0,
         "category": "Liquid fuel"
       },
       {
-        "year": "1850",
+        "day": "1850",
         "value": 54,
         "category": "Solid fuel"
       }
     ],
     "totalTradingVolume": [
       {
-        "year": "1850",
+        "day": "1850",
         "value": 0,
         "category": "Liquid fuel"
       },
       {
-        "year": "1850",
+        "day": "1850",
         "value": 54,
         "category": "Solid fuel"
       }
@@ -108,24 +108,24 @@
     "optionsTradingUsers": 300,
     "newUsers": [
       {
-        "year": "1850",
+        "day": "1850",
         "value": 0,
         "category": "Liquid fuel"
       },
       {
-        "year": "1850",
+        "day": "1850",
         "value": 54,
         "category": "Solid fuel"
       }
     ],
     "activeUsers": [
       {
-        "year": "1850",
+        "day": "1850",
         "value": 0,
         "category": "Liquid fuel"
       },
       {
-        "year": "1850",
+        "day": "1850",
         "value": 54,
         "category": "Solid fuel"
       }

@@ -15,7 +15,7 @@ const LineChart: FC<LineChartProps> = props => {
 
   const config = {
     data: props.data,
-    xField: 'year',
+    xField: 'day',
     yField: 'value',
     seriesField: 'category',
     color: ['#1979C9', '#D62A0D', '#FAA219'],
