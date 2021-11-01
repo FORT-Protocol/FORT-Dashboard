@@ -3,6 +3,7 @@ import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import {useState} from "react";
 import testData from "../../tests/data.json";
+import PieChart from "../../components/PieChart";
 
 const Futures = () => {
   const [tData] = useState(testData);
@@ -18,7 +19,13 @@ const Futures = () => {
       <SimpleGrid columns={1} spacing="44px">
         <LineChart title={"Total Transaction Volume"} total={725647} suffix={"DCU"} data={tData.futures.totalTransactionVolume}/>
         <LineChart title={"Total Trading Volume"} total={12389} prefix={"$"} data={tData.futures.totalTradingVolume}/>
-        <LineChart title={"Cumulative liquidation amount"} total={367288} suffix={"DCU"} data={tData.futures.cumulativeLiquidationAmount}/>
+      </SimpleGrid>
+      <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
+        <PieChart title={"Long-Short Distribution"} data={tData.options.longShortDistribution}/>
+        <PieChart title={"Distribution of Exercise Timespan"} data={tData.options.distributionOfExerciseTimespan}/>
+      </SimpleGrid>
+      <SimpleGrid columns={1}>
+        <PieChart title={"Distribution of Exercise Timespan"} data={tData.options.distributionOfExerciseTimespan}/>
       </SimpleGrid>
     </Stack>
   )
