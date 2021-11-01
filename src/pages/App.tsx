@@ -1,7 +1,6 @@
 import {
   DrawerContent,
   IconButton,
-  Spacer,
   Stack,
   Tab,
   TabList,
@@ -33,25 +32,32 @@ const App = () => {
   const {width} = useWindowDimensions()
 
   return (
-    <Tabs isLazy size={"lg"} index={index} onChange={handleTabsChange}>
+    <Tabs isLazy size={"lg"} index={index} onChange={handleTabsChange} variant={"unstyled"}>
       {width >= 1000 ? (
-        <TabList alignItems={"center"}>
-          <Stack pl={["22px", "22px", "44px"]} direction={"row"} spacing={4} position={"absolute"}>
-            <img src={logo} alt={"logo"}/>
-            <Text px={4} py={2} borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} fontWeight={600}
-                  fontSize={"18px"} color={"#878787"} fontFamily={"Montserrat"}>Dashboard</Text>
+        <TabList alignItems={"center"} h={"66px"}>
+          <Stack w={"100%"} h={"66px"} justifyContent={"center"} spacing={0}>
+            <Stack pl={["22px", "22px", "44px"]} direction={"row"} spacing={4} position={"absolute"}>
+              <img src={logo} alt={"logo"}/>
+            </Stack>
+            <Stack justifyContent={"center"} direction={"row"} w={"100%"} spacing={0}>
+              <Tab h={"66px"} p={0}>
+                <Stack borderBottom={"2px"} borderColor={index === 0 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
+                  <Text color={index === 0 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 0 ? 700 : 500} fontFamily={"Montserrat"}>Futures</Text>
+                </Stack>
+              </Tab>
+              <Tab h={"66px"} p={0}>
+                <Stack borderBottom={"2px"} borderColor={index === 1 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
+                  <Text color={index === 1 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 1 ? 700 : 500} fontFamily={"Montserrat"}>Options</Text>
+                </Stack>
+              </Tab>
+              <Tab h={"66px"} p={0}>
+                <Stack borderBottom={"2px"} borderColor={index === 2 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
+                  <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 2 ? 700 : 500} fontFamily={"Montserrat"}>User</Text>
+                </Stack>
+              </Tab>
+            </Stack>
+            <Divider/>
           </Stack>
-          <Spacer/>
-          <Tab h={"66px"}>
-            <Text color={index === 0 ? "hedge" : "black"} fontWeight={"bold"} fontFamily={"Montserrat"}>Futures</Text>
-          </Tab>
-          <Tab h={"66px"}>
-            <Text color={index === 1 ? "hedge" : "black"} fontWeight={"bold"} fontFamily={"Montserrat"}>Options</Text>
-          </Tab>
-          <Tab h={"66px"}>
-            <Text color={index === 2 ? "hedge" : "black"} fontWeight={"bold"} fontFamily={"Montserrat"}>User</Text>
-          </Tab>
-          <Spacer/>
         </TabList>
       ) : (
         <Stack w={"100%"} alignItems={"center"} spacing={0}>
