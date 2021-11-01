@@ -17,9 +17,10 @@ import Futures from "./Futures"
 import Options from "./Options"
 import Users from "./Users"
 import logo from "../assets/svg/logo.svg";
+import smallLogo from "../assets/svg/small-logo.svg"
 import {useState} from "react";
 import useWindowDimensions from "../hooks/useWindowDimensions";
-import {HamburgerIcon} from "@chakra-ui/icons";
+import {HamburgerIcon, CloseIcon} from "@chakra-ui/icons";
 
 const App = () => {
   const [index, setIndex] = useState(0)
@@ -65,7 +66,7 @@ const App = () => {
             <IconButton aria-label="Search database" icon={<HamburgerIcon/>}
                         variant={"ghost"} position={"absolute"} onClick={onOpen}/>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} w={"100%"} h={"64px"}>
-              <img src={logo} alt={"logo"}/>
+              <img src={smallLogo} alt={"logo"}/>
             </Stack>
           </Stack>
           <Divider/>
@@ -73,19 +74,29 @@ const App = () => {
             <DrawerOverlay/>
             <DrawerContent>
               <DrawerBody>
+                <Stack direction={"row"} alignItems={"center"} w={"100%"}>
+                  <IconButton aria-label="Search database" icon={<CloseIcon/>} color={"hedge"}
+                              variant={"ghost"} position={"absolute"} onClick={onClose}/>
+                  <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} w={"100%"} h={"64px"}>
+                    <img src={smallLogo} alt={"logo"}/>
+                  </Stack>
+                </Stack>
                 <TabList>
-                  <Stack w={"100%"}>
-                    <Tab h={"66px"}>
-                      <Text color={index === 0 ? "hedge" : "black"} fontWeight={"bold"}
-                            fontFamily={"Montserrat"}>Futures</Text>
+                  <Stack py={"44px"} w={"100%"} alignItems={"center"}>
+                    <Tab h={"66px"} p={0} w={"120px"}>
+                      <Stack borderBottom={"2px"} borderColor={index === 0 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
+                        <Text color={index === 0 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 0 ? 700 : 500} fontFamily={"Montserrat"}>Futures</Text>
+                      </Stack>
                     </Tab>
-                    <Tab h={"66px"}>
-                      <Text color={index === 1 ? "hedge" : "black"} fontWeight={"bold"}
-                            fontFamily={"Montserrat"}>Options</Text>
+                    <Tab h={"66px"} p={0} w={"120px"}>
+                      <Stack borderBottom={"2px"} borderColor={index === 1 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
+                        <Text color={index === 1 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 1 ? 700 : 500} fontFamily={"Montserrat"}>Options</Text>
+                      </Stack>
                     </Tab>
-                    <Tab h={"66px"}>
-                      <Text color={index === 2 ? "hedge" : "black"} fontWeight={"bold"}
-                            fontFamily={"Montserrat"}>User</Text>
+                    <Tab h={"66px"} p={0} w={"120px"}>
+                      <Stack borderBottom={"2px"} borderColor={index === 2 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
+                        <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 2 ? 700 : 500} fontFamily={"Montserrat"}>User</Text>
+                      </Stack>
                     </Tab>
                   </Stack>
                 </TabList>
