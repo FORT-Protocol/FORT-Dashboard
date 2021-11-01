@@ -83,21 +83,33 @@
     ],
     "longShortDistribution": [
       {
-        "type": "分类一",
+        "type": "Short",
         "value": 27
       },
       {
-        "type": "分类二",
+        "type": "Long",
         "value": 25
       }
     ],
     "distributionOfExerciseTimespan": [
       {
-        "type": "分类一",
+        "type": "1 Year",
         "value": 27
       },
       {
-        "type": "分类二",
+        "type": "1 Month",
+        "value": 25
+      },
+      {
+        "type": "1-3 Month",
+        "value": 25
+      },
+      {
+        "type": "3-6 Month",
+        "value": 25
+      },
+      {
+        "type": "6-12 Month",
         "value": 25
       }
     ]
