@@ -21,11 +21,11 @@ const Futures = () => {
         <LineChart title={"Total Trading Volume"} total={12389} prefix={"$"} data={tData.futures.totalTradingVolume}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
-        <PieChart title={"Long-Short Distribution"} data={tData.options.longShortDistribution}/>
-        <PieChart title={"Leverage Distribution"} data={tData.options.distributionOfExerciseTimespan}/>
+        <PieChart title={"Long-Short Distribution"} data={tData.futures.longShortDistribution}/>
+        <PieChart title={"Leverage Distribution"} data={tData.futures.leverageDistribution}/>
       </SimpleGrid>
       <SimpleGrid columns={1}>
-        <PieChart title={"Open Price distribution (USDT)"} data={tData.options.distributionOfExerciseTimespan}/>
+        <PieChart title={"Open Price distribution (USDT)"} data={tData.futures.openPriceDistributionUSDT}/>
       </SimpleGrid>
     </Stack>
   )

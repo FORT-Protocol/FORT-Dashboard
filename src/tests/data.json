@@ -39,16 +39,58 @@
         "category": "Solid fuel"
       }
     ],
-    "cumulativeLiquidationAmount": [
+    "longShortDistribution": [
       {
-        "day": "1850",
-        "value": 0,
-        "category": "Solid fuel"
+        "type": "Short",
+        "value": 27
       },
       {
-        "day": "1852",
-        "value": 54,
-        "category": "Solid fuel"
+        "type": "Long",
+        "value": 25
+      }
+    ],
+    "leverageDistribution": [
+      {
+        "type": "1 Times",
+        "value": 27
+      },
+      {
+        "type": "2 Times",
+        "value": 25
+      },
+      {
+        "type": "3 Times",
+        "value": 10
+      },
+      {
+        "type": "4 Times",
+        "value": 30
+      },
+      {
+        "type": "5 Times",
+        "value": 40
+      }
+    ],
+    "openPriceDistributionUSDT": [
+      {
+        "type": "0-1k",
+        "value": 10
+      },
+      {
+        "type": "1k-2k",
+        "value": 10
+      },
+      {
+        "type": "2k-3k",
+        "value": 10
+      },
+      {
+        "type": "3k-4k",
+        "value": 30
+      },
+      {
+        "type": "4k-5k",
+        "value": 40
       }
     ]
   },
