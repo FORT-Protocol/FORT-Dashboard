@@ -26,7 +26,5 @@ const updateAllUsers = (futuresTxList: Block[], optionsTxList: Block[]) => {
     users.add(block.from)
   })
 
-  console.log(users)
-
   return users.size
 }
