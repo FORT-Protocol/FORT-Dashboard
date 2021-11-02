@@ -4,25 +4,25 @@ import { blockNumberAtom } from "../state/app"
 import { useEffect } from "react"
 import { futuresContractAddress } from "../constant/contract"
 
-const useFetchFuturesTxlist = (lastBlock: number = 0) => {
+const useFetchFuturesTxList = (lastBlock: number = 0) => {
   const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
   const address = futuresContractAddress
   const api = require("etherscan-api").init(apiKey)
-  const [futuresTxlist, setFuturesTxlist] = useRecoilState(futuresTxListAtom)
+  const [futuresTxList, setFuturesTxList] = useRecoilState(futuresTxListAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)
 
   useEffect(() => {
-    fetchTxlist()
+    fetchTxList()
   }, [blockNumber])
 
-  async function fetchTxlist() {
+  async function fetchTxList() {
     const list = await api.account.txlist(address, lastBlock, "latest", 1, 100, "asc").then((res: any) => {
       return res.result
     })
-    setFuturesTxlist(list)
+    setFuturesTxList(list)
   }
 
-  return futuresTxlist
+  return futuresTxList
 }
 
-export default useFetchFuturesTxlist
+export default useFetchFuturesTxList
