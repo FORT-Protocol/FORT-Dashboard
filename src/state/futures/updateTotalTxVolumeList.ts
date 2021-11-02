@@ -23,9 +23,15 @@ const updateTotalTxVolumeList = (txList: Block[]) => {
   txList.map((block) => {
     const func = block.input.slice(0,10)
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
-    totalTxVolumeListMap[date] = 0
-    longTxVolumeListMap[date] = 0
-    shortVolumeListMap[date] = 0
+    if (!totalTxVolumeListMap[date]){
+      totalTxVolumeListMap[date] = 0
+    }
+    if (!longTxVolumeListMap[date]){
+      longTxVolumeListMap[date] = 0
+    }
+    if (!shortVolumeListMap[date]){
+      shortVolumeListMap[date] = 0
+    }
 
     if (func === "0x15ee0aad") {
       // buy(address tokenAddress, uint256 lever, bool orientation, uint256 dcuAmount)
