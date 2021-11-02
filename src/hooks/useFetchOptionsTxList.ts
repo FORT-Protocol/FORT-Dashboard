@@ -1,14 +1,14 @@
 import {optionsContractAddress} from "../constant/contract";
 import {useRecoilState} from "recoil";
-import {futuresTxListAtom} from "../state/futures";
 import {blockNumberAtom} from "../state/app";
 import {useEffect} from "react";
+import {optionsTxListAtom} from "../state/options";
 
 const useFetchOptionsTxList = (lastBlock: number) => {
   const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
   const address = optionsContractAddress
   const api = require("etherscan-api").init(apiKey)
-  const [optionsTxList, setOptionsTxList] = useRecoilState(futuresTxListAtom)
+  const [optionsTxList, setOptionsTxList] = useRecoilState(optionsTxListAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)
 
   useEffect(() => {

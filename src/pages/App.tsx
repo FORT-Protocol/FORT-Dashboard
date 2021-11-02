@@ -39,7 +39,7 @@ const App = () => {
   ]
 
   // 获取当前区块高度，调用钩子函数后台更新Futures交易列表
-  // useFetchFuturesTxList(0)
+  useFetchFuturesTxList(0)
   useFetchOptionsTxList(0)
 
   const handleTabsChange = (index: number) => {
