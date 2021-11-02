@@ -2,10 +2,10 @@ import {atomFamily, selectorFamily} from "recoil";
 import {optionsTxListAtom} from "../options";
 import {Block} from "../app";
 
-const optionsTradingUsersAtom = atomFamily({
-  key: "users-futuresTradingUsers::value",
+export const optionsTradingUsersAtom = atomFamily({
+  key: "users-optionsTradingUsers::value",
   default: selectorFamily({
-    key: "users-futuresTradingUsers::default",
+    key: "users-optionsTradingUsers::default",
     get: () => ({get}) => {
       const txList = get(optionsTxListAtom)
       return updateOptionsTradingUsers(txList)
@@ -15,5 +15,11 @@ const optionsTradingUsersAtom = atomFamily({
 
 
 const updateOptionsTradingUsers = (txList: Block[]) => {
+  let users = new Set()
 
+  txList.map((block)=>{
+    users.add(block.from)
+  })
+
+  return users.size
 }

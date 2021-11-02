@@ -4,9 +4,9 @@ import {futuresTxListAtom} from "../futures";
 import {Block} from "../app";
 
 export const allUserAtom = atomFamily({
-  key: "users-totalTxVolume::value",
+  key: "users-allUser::value",
   default: selectorFamily({
-    key: "users-totalTxVolume::default",
+    key: "users-allUser::default",
     get: () => ({get}) => {
       const optionsTxList = get(optionsTxListAtom)
       const futuresTxList = get(futuresTxListAtom)
@@ -25,6 +25,8 @@ const updateAllUsers = (futuresTxList: Block[], optionsTxList: Block[]) => {
   optionsTxList.map((block)=>{
     users.add(block.from)
   })
+
+  console.log(users)
 
   return users.size
 }
