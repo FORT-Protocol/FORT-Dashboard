@@ -6,16 +6,18 @@ import {useState} from "react";
 import data from "../../tests/data.json";
 import {useRecoilValue} from "recoil";
 import {totalTxVolumeAtom} from "../../state/options/updateTotalTxVolume";
+import {currentCallOptionsDCUAtom} from "../../state/options/updateCurrentCallOptionsETH";
 
 const Options = () => {
   const [tData] = useState(data);
   const totalTxVolume = useRecoilValue(totalTxVolumeAtom({}))
+  const curcallOptionPosition = useRecoilValue(currentCallOptionsDCUAtom({}))
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 2, 2, 2, 3]} spacing="44px">
         <Norm value={totalTxVolume.toFixed(2)} desc={"Total Transaction Volume (DCU)"} color={"#C7A072"}/>
-        <Norm value={tData.options.curCallOptionPositionsETH} desc={"Current Call Option Positions (DCU)"} color={"#00B388"}/>
+        <Norm value={curcallOptionPosition} desc={"Current Call Option Positions (DCU)"} color={"#00B388"}/>
         <Norm value={tData.options.curShortOptionsETH} desc={"Current Short Option Positions (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
