@@ -4,15 +4,11 @@ import LineChart from "../../components/LineChart";
 import {useState} from "react";
 import testData from "../../tests/data.json";
 import PieChart from "../../components/PieChart";
-import useFetchFuturesTxlist from "../../hooks/useFetchFuturesTxlist";
-import useBlockNumber from "../../hooks/useBlockNumber";
 import {totalTxVolumeAtom} from "../../state/futures/updateTotalTxVolume";
 import {useRecoilValue} from "recoil";
 
 const Futures = () => {
   const [tData] = useState(testData);
-  // 获取当前区块高度，调用钩子函数后台更新Futures交易列表
-  useFetchFuturesTxlist(useBlockNumber())
   // 调用Recoil状态直接供前端显示
   const totalTxVolume = useRecoilValue(totalTxVolumeAtom({}))
 

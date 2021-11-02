@@ -22,10 +22,16 @@ import {useState} from "react";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import {HamburgerIcon, CloseIcon} from "@chakra-ui/icons";
 import Swap from "./Swap";
+import useFetchFuturesTxlist from "../hooks/useFetchFuturesTxlist";
+import useBlockNumber from "../hooks/useBlockNumber";
 
 const App = () => {
   const [index, setIndex] = useState(0)
   const {isOpen, onOpen, onClose} = useDisclosure()
+  const blockNumber = useBlockNumber()
+
+  // 获取当前区块高度，调用钩子函数后台更新Futures交易列表
+  useFetchFuturesTxlist(blockNumber)
 
   const handleTabsChange = (index: number) => {
     setIndex(index)
