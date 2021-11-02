@@ -2,40 +2,20 @@
 import {web3} from "../../provider";
 import {atomFamily, selectorFamily} from "recoil";
 import {futuresTxlistAtom} from "./index";
-
-interface block {
-  blockNumber: string,
-  "timeStamp": string,
-  "hash": string,
-  "nonce": string,
-  "blockHash": string,
-  "transactionIndex": string,
-  "from": string,
-  "to": string,
-  "value": string,
-  "gas": string,
-  "gasPrice": string,
-  "isError": string,
-  "txreceipt_status": string,
-  "input": string,
-  "contractAddress": string,
-  "cumulativeGasUsed": string,
-  "gasUsed": string,
-  "confirmations": string
-}
+import {Block} from "../app";
 
 export const totalTxVolumeAtom = atomFamily({
   key: "futures-totalTxVolume::value",
   default: selectorFamily({
     key: "futures-totalTxVolume::default",
-    get: param => ({get}) => {
+    get: () => ({get}) => {
       const txList = get(futuresTxlistAtom)
       return updateTotalTxVolume(txList)
     }
   })
 })
 
-const updateTotalTxVolume = (txList: block[]) => {
+const updateTotalTxVolume = (txList: Block[]) => {
   let totalTxVolume = 0
 
   txList.map((block) => {
