@@ -17,9 +17,9 @@ const Users = () => {
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 2, 2, 3]} spacing="44px">
-        <Norm value={allUser} desc={"All users"} color={"#C7A072"}/>
-        <Norm value={futuresTradingUsers} desc={"Futures Trading users"} color={"#E57200"}/>
-        <Norm value={optionsTradingUsers} desc={"Options Trading users"} color={"#00B388"}/>
+        <Norm value={allUser.size} desc={"All users"} color={"#C7A072"}/>
+        <Norm value={futuresTradingUsers.size} desc={"Futures Trading users"} color={"#E57200"}/>
+        <Norm value={optionsTradingUsers.size} desc={"Options Trading users"} color={"#00B388"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
         <LineChart title={"New Users"} total={2738} data={tData.users.newUsersList}/>

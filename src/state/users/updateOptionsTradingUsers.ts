@@ -15,11 +15,11 @@ export const optionsTradingUsersAtom = atomFamily({
 
 
 const updateOptionsTradingUsers = (txList: Block[]) => {
-  let users = new Set()
+  let users = new Set<string>()
 
   txList.map((block)=>{
     users.add(block.from)
   })
 
-  return users.size
+  return users
 }
