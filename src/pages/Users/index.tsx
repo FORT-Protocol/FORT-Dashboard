@@ -7,12 +7,14 @@ import {useRecoilValue} from "recoil";
 import {allUserAtom} from "../../state/users/updateAllUsers";
 import {futuresTradingUsersAtom} from "../../state/users/updateFuturesTradingUsers";
 import {optionsTradingUsersAtom} from "../../state/users/updateOptionsTradingUsers";
+import {newUsersListAtom} from "../../state/users/updateNewUsersList";
 
 const Users = () => {
   const [tData] = useState(data);
   const allUser = useRecoilValue(allUserAtom({}))
   const futuresTradingUsers = useRecoilValue(futuresTradingUsersAtom({}))
   const optionsTradingUsers = useRecoilValue(optionsTradingUsersAtom({}))
+  const newUsersList = useRecoilValue(newUsersListAtom({}))
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
@@ -22,7 +24,7 @@ const Users = () => {
         <Norm value={optionsTradingUsers.size} desc={"Options Trading users"} color={"#00B388"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
-        <LineChart title={"New Users"} total={2738} data={tData.users.newUsersList}/>
+        <LineChart title={"New Users"} total={allUser.size} data={newUsersList}/>
         <LineChart title={"Active Users"} total={38292} data={tData.users.activeUsersList}/>
       </SimpleGrid>
     </Stack>
