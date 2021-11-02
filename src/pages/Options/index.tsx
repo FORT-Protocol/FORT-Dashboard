@@ -8,12 +8,14 @@ import {useRecoilValue} from "recoil";
 import {totalTxVolumeAtom} from "../../state/options/updateTotalTxVolume";
 import {currentCallOptionsDCUAtom} from "../../state/options/updateCurrentCallOptionsETH";
 import {currentShortOptionsDCUAtom} from "../../state/options/updateCurrentShortOptionsETH";
+import {longShortDistributionAtom} from "../../state/options/updateLongShortDistribution";
 
 const Options = () => {
   const [tData] = useState(data);
   const totalTxVolume = useRecoilValue(totalTxVolumeAtom({}))
   const curCallOptionPosition = useRecoilValue(currentCallOptionsDCUAtom({}))
   const curShortOptionPosition = useRecoilValue(currentShortOptionsDCUAtom({}))
+  const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
@@ -27,7 +29,7 @@ const Options = () => {
         <LineChart title={"Total Trading Volume"} total={233323} data={tData.options.totalTradingVolumeList}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
-        <PieChart title={"Long-Short Distribution"} data={tData.options.longShortDistribution}/>
+        <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>
         <PieChart title={"Distribution of Exercise Timespan"} data={tData.options.distributionOfExerciseTimespan}/>
       </SimpleGrid>
     </Stack>

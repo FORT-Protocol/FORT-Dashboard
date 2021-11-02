@@ -1,6 +1,5 @@
 import {atomFamily, selectorFamily} from "recoil";
 import {futuresTxListAtom} from "./index";
-import updateTotalTxVolume from "./updateTotalTxVolume";
 import {Block} from "../app";
 import {web3} from "../../provider";
 
@@ -10,7 +9,7 @@ export const totalTradingVolumeListAtom = atomFamily({
     key: "futures-totalTradingVolumeList::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
-      return updateTotalTxVolume(txList)
+      return updateTotalTradingVolumeList(txList)
     }
   })
 })
@@ -33,5 +32,3 @@ const updateTotalTradingVolumeList = (txList: Block[]) => {
 
   return
 }
-
-export default updateTotalTradingVolumeList

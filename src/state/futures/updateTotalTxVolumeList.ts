@@ -67,5 +67,3 @@ const updateTotalTxVolumeList = (txList: Block[]) => {
 
   return totalTxVolumeList
 }
-
-export default updateTotalTxVolumeList

@@ -30,5 +30,3 @@ const updateCurrentCallOptionsDCU = (txList: Block[]) => {
 
   return currentCallOptionsDCU
 }
-
-export default updateCurrentCallOptionsDCU

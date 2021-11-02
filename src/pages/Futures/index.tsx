@@ -6,8 +6,8 @@ import testData from "../../tests/data.json";
 import PieChart from "../../components/PieChart";
 import {totalTxVolumeAtom} from "../../state/futures/updateTotalTxVolume";
 import {useRecoilValue} from "recoil";
-import {curOpenShortPositionsAtom} from "../../state/futures/updateCurrentOpenShortPositionDCU";
-import {curOpenLongPositionsAtom} from "../../state/futures/updateCurrentOpenLongPositionsDCU";
+import {currentOpenShortPositionsAtom} from "../../state/futures/updateCurrentOpenShortPositionDCU";
+import {currentOpenLongPositionsAtom} from "../../state/futures/updateCurrentOpenLongPositionsDCU";
 import {totalTxVolumeListAtom} from "../../state/futures/updateTotalTxVolumeList";
 import {longShortDistributionAtom} from "../../state/futures/updateLongShortDistribution";
 import {leverageDistributionAtom} from "../../state/futures/updateLeverageDistribution";
@@ -17,8 +17,8 @@ const Futures = () => {
   const [tData] = useState(testData);
   // 调用Recoil状态直接供前端显示
   const totalTxVolume = useRecoilValue(totalTxVolumeAtom({}))
-  const curOpenLongPositions = useRecoilValue(curOpenLongPositionsAtom({}))
-  const curOpenShortPositions = useRecoilValue(curOpenShortPositionsAtom({}))
+  const curOpenLongPositions = useRecoilValue(currentOpenLongPositionsAtom({}))
+  const curOpenShortPositions = useRecoilValue(currentOpenShortPositionsAtom({}))
   const totalTxVolumeList = useRecoilValue(totalTxVolumeListAtom({}))
   const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
   const leverageDistribution = useRecoilValue(leverageDistributionAtom({}))

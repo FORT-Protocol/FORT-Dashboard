@@ -5,7 +5,7 @@ import {futuresTxListAtom} from "./index";
 import {Block} from "../app";
 import {web3} from "../../provider";
 
-export const curOpenLongPositionsAtom = atomFamily({
+export const currentOpenLongPositionsAtom = atomFamily({
   key: "futures-curOpenLongPositions::value",
   default: selectorFamily({
     key: "futures-curOpenLongPositions::default",
@@ -32,5 +32,3 @@ const updateCurrentOpenLongPositionsDCU = (txList: Block[]) => {
   })
   return currentOpenLongPositions
 }
-
-export default updateCurrentOpenLongPositionsDCU

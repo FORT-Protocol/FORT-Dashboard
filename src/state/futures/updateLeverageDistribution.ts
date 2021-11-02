@@ -63,5 +63,3 @@ const updateLeverageDistribution = (txList: Block[]) => {
     },
   ]
 }
-
-export default updateLeverageDistribution

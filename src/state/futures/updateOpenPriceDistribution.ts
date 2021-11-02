@@ -64,5 +64,3 @@ const updateOpenPriceDistribution = (txList: Block[]) => {
     }
   ]
 }
-
-export default updateOpenPriceDistribution
