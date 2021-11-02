@@ -16,36 +16,36 @@ export const newUsersListAtom = atomFamily({
 })
 
 const updateNewUsersList = (futuresTxList: Block[], optionsTxList: Block[]) => {
-  let newUserListMap: {[index: string]: number} = {}
+  let newUserListMap: {[index: string]: Set<string>} = {}
   let users = new Set<string>()
   let newUserList: {day: string, value: number}[] = []
 
   futuresTxList.map((block) => {
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
     if (!newUserListMap[date]){
-      newUserListMap[date] = 0
+      newUserListMap[date] = new Set<string>()
     }
     if (!users.has(block.from)){
       users.add(block.from)
-      newUserListMap[date] += 1
+      newUserListMap[date].add(block.from)
     }
   })
 
   optionsTxList.map((block) => {
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
     if (!newUserListMap[date]){
-      newUserListMap[date] = 0
+      newUserListMap[date] = new Set<string>()
     }
     if (!users.has(block.from)){
       users.add(block.from)
-      newUserListMap[date] += 1
+      newUserListMap[date].add(block.from)
     }
   })
 
   Object.keys(newUserListMap).forEach((key)=>{
     newUserList.push({
       day: key,
-      value: newUserListMap[key],
+      value: newUserListMap[key].size,
     })
   })
 
