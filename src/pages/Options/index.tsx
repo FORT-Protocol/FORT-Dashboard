@@ -9,6 +9,7 @@ import {totalTxVolumeAtom} from "../../state/options/updateTotalTxVolume";
 import {currentCallOptionsDCUAtom} from "../../state/options/updateCurrentCallOptionsETH";
 import {currentShortOptionsDCUAtom} from "../../state/options/updateCurrentShortOptionsETH";
 import {longShortDistributionAtom} from "../../state/options/updateLongShortDistribution";
+import {totalTxVolumeListAtom} from "../../state/options/updateTotalTxVolumeList";
 
 const Options = () => {
   const [tData] = useState(data);
@@ -16,6 +17,7 @@ const Options = () => {
   const curCallOptionPosition = useRecoilValue(currentCallOptionsDCUAtom({}))
   const curShortOptionPosition = useRecoilValue(currentShortOptionsDCUAtom({}))
   const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
+  const totalTxVolumeList = useRecoilValue(totalTxVolumeListAtom({}))
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
@@ -25,7 +27,7 @@ const Options = () => {
         <Norm value={curShortOptionPosition} desc={"Current Short Option Positions (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
-        <LineChart title={"Total Transaction Volume"} total={382992} data={tData.options.totalTransactionVolumeList}/>
+        <LineChart title={"Total Transaction Volume"} total={382992} data={totalTxVolumeList}/>
         <LineChart title={"Total Trading Volume"} total={233323} data={tData.options.totalTradingVolumeList}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
