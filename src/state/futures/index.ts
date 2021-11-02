@@ -1,6 +1,6 @@
 import {atom} from "recoil"
 
 export const futuresTxlistAtom = atom({
-  key: "futuresTxlist",
+  key: "futuresTxList",
   default: [],
 })
