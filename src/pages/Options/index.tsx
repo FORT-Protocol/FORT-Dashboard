@@ -10,6 +10,7 @@ import {currentCallOptionsDCUAtom} from "../../state/options/updateCurrentCallOp
 import {currentShortOptionsDCUAtom} from "../../state/options/updateCurrentShortOptionsETH";
 import {longShortDistributionAtom} from "../../state/options/updateLongShortDistribution";
 import {totalTxVolumeListAtom} from "../../state/options/updateTotalTxVolumeList";
+import {distributionOfExerciseTimespanAtom} from "../../state/options/updateDistributionOfExerciseTimespan";
 
 const Options = () => {
   const [tData] = useState(data);
@@ -18,6 +19,7 @@ const Options = () => {
   const curShortOptionPosition = useRecoilValue(currentShortOptionsDCUAtom({}))
   const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
   const totalTxVolumeList = useRecoilValue(totalTxVolumeListAtom({}))
+  const distributionOfExerciseTimespan = useRecoilValue(distributionOfExerciseTimespanAtom({}))
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
@@ -32,7 +34,7 @@ const Options = () => {
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
         <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>
-        <PieChart title={"Distribution of Exercise Timespan"} data={tData.options.distributionOfExerciseTimespan}/>
+        <PieChart title={"Distribution of Exercise Timespan"} data={distributionOfExerciseTimespan}/>
       </SimpleGrid>
     </Stack>
   )
