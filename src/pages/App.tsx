@@ -29,6 +29,12 @@ const App = () => {
   const [index, setIndex] = useState(0)
   const {isOpen, onOpen, onClose} = useDisclosure()
   const blockNumber = useBlockNumber()
+  const tabList = [
+    {index: 0, label: "Futures", path: "/", content: <Futures/>},
+    {index: 1, label: "Options", path: "/options", content: <Options/>},
+    {index: 2, label: "Users", path: "/users", content: <Users/>},
+    {index: 3, label: "Swap", path: "/swap", content: <Swap/>}
+  ]
 
   // 获取当前区块高度，调用钩子函数后台更新Futures交易列表
   useFetchFuturesTxlist(blockNumber)
@@ -48,26 +54,15 @@ const App = () => {
               <img src={logo} alt={"logo"}/>
             </Stack>
             <Stack justifyContent={"center"} direction={"row"} w={"100%"} spacing={0}>
-              <Tab h={"66px"} p={0}>
-                <Stack borderBottom={"2px"} borderColor={index === 0 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
-                  <Text color={index === 0 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 0 ? 700 : 500} fontFamily={"Montserrat"}>Futures</Text>
-                </Stack>
-              </Tab>
-              <Tab h={"66px"} p={0}>
-                <Stack borderBottom={"2px"} borderColor={index === 1 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
-                  <Text color={index === 1 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 1 ? 700 : 500} fontFamily={"Montserrat"}>Options</Text>
-                </Stack>
-              </Tab>
-              <Tab h={"66px"} p={0}>
-                <Stack borderBottom={"2px"} borderColor={index === 2 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
-                  <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 2 ? 700 : 500} fontFamily={"Montserrat"}>User</Text>
-                </Stack>
-              </Tab>
-              <Tab h={"66px"} p={0}>
-                <Stack borderBottom={"2px"} borderColor={index === 3 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
-                  <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 3 ? 700 : 500} fontFamily={"Montserrat"}>Swap</Text>
-                </Stack>
-              </Tab>
+              {tabList.map((tab) => (
+                <Tab h={"66px"} p={0} key={tab.index}>
+                  <Stack borderBottom={"2px"} borderColor={index === tab.index ? "hedge" : "white"} h={"66px"}
+                         w={"120px"} justifyContent={"center"}>
+                    <Text color={index === tab.index ? "hedge" : "black"} fontSize={"16px"}
+                          fontWeight={index === tab.index ? 700 : 500} fontFamily={"Montserrat"}>{tab.label}</Text>
+                  </Stack>
+                </Tab>
+              ))}
             </Stack>
             <Divider/>
           </Stack>
@@ -95,26 +90,13 @@ const App = () => {
                 </Stack>
                 <TabList>
                   <Stack py={"44px"} w={"100%"} alignItems={"center"}>
-                    <Tab h={"66px"} p={0} w={"120px"}>
-                      <Stack borderBottom={"2px"} borderColor={index === 0 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
-                        <Text color={index === 0 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 0 ? 700 : 500} fontFamily={"Montserrat"}>Futures</Text>
-                      </Stack>
-                    </Tab>
-                    <Tab h={"66px"} p={0} w={"120px"}>
-                      <Stack borderBottom={"2px"} borderColor={index === 1 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
-                        <Text color={index === 1 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 1 ? 700 : 500} fontFamily={"Montserrat"}>Options</Text>
-                      </Stack>
-                    </Tab>
-                    <Tab h={"66px"} p={0} w={"120px"}>
-                      <Stack borderBottom={"2px"} borderColor={index === 2 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
-                        <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 2 ? 700 : 500} fontFamily={"Montserrat"}>User</Text>
-                      </Stack>
-                    </Tab>
-                    <Tab h={"66px"} p={0} w={"120px"}>
-                      <Stack borderBottom={"2px"} borderColor={index === 3 ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
-                        <Text color={index === 2 ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === 3 ? 700 : 500} fontFamily={"Montserrat"}>Swap</Text>
-                      </Stack>
-                    </Tab>
+                    {tabList.map((tab)=> (
+                      <Tab h={"66px"} p={0} w={"120px"} key={tab.index}>
+                        <Stack borderBottom={"2px"} borderColor={index === tab.index ? "hedge": "white"} h={"66px"} w={"120px"} justifyContent={"center"}>
+                          <Text color={index === tab.index ? "hedge" : "black"} fontSize={"16px"} fontWeight={index === tab.index ? 700 : 500} fontFamily={"Montserrat"}>{tab.label}</Text>
+                        </Stack>
+                      </Tab>
+                    ))}
                   </Stack>
                 </TabList>
               </DrawerBody>
@@ -123,18 +105,11 @@ const App = () => {
         </Stack>
       )}
       <TabPanels>
-        <TabPanel p={0}>
-          <Futures/>
-        </TabPanel>
-        <TabPanel p={0}>
-          <Options/>
-        </TabPanel>
-        <TabPanel p={0}>
-          <Users/>
-        </TabPanel>
-        <TabPanel p={0}>
-          <Swap/>
-        </TabPanel>
+        {tabList.map((tab, index)=>(
+          <TabPanel p={0} key={index}>
+            {tab.content}
+          </TabPanel>
+        ))}
       </TabPanels>
     </Tabs>
   )
