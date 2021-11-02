@@ -10,6 +10,7 @@ import {curOpenShortPositionsAtom} from "../../state/futures/updateCurrentOpenSh
 import {curOpenLongPositionsAtom} from "../../state/futures/updateCurrentOpenLongPositionsDCU";
 import {totalTxVolumeListAtom} from "../../state/futures/updateTotalTxVolumeList";
 import {longShortDistributionAtom} from "../../state/futures/updateLongShortDistribution";
+import {leverageDistributionAtom} from "../../state/futures/updateLeverageDistribution";
 
 const Futures = () => {
   const [tData] = useState(testData);
@@ -19,6 +20,7 @@ const Futures = () => {
   const curOpenShortPositions = useRecoilValue(curOpenShortPositionsAtom({}))
   const totalTxVolumeList = useRecoilValue(totalTxVolumeListAtom({}))
   const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
+  const leverageDistribution = useRecoilValue(leverageDistributionAtom({}))
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
@@ -33,7 +35,7 @@ const Futures = () => {
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
         <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>
-        <PieChart title={"Leverage Distribution"} data={tData.futures.leverageDistribution}/>
+        <PieChart title={"Leverage Distribution"} data={leverageDistribution}/>
       </SimpleGrid>
       <SimpleGrid columns={1}>
         <PieChart title={"Open Price distribution (USDT)"} data={tData.futures.openPriceDistributionUSDT}/>
