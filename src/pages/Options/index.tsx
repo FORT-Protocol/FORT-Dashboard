@@ -27,7 +27,7 @@ const Options = () => {
         <Norm value={curShortOptionPosition} desc={"Current Short Option Positions (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
-        <LineChart title={"Total Transaction Volume"} total={382992} data={totalTxVolumeList}/>
+        <LineChart title={"Total Transaction Volume"} total={totalTxVolume.toFixed(2)} data={totalTxVolumeList}/>
         <LineChart title={"Total Trading Volume"} total={233323} data={tData.options.totalTradingVolumeList}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
