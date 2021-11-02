@@ -1,7 +1,7 @@
 // 更新 Total Transaction Volume
 import {web3} from "../../provider";
 import {atomFamily, selectorFamily} from "recoil";
-import {futuresTxlistAtom} from "./index";
+import {futuresTxListAtom} from "./index";
 import {Block} from "../app";
 
 export const totalTxVolumeAtom = atomFamily({
@@ -9,7 +9,7 @@ export const totalTxVolumeAtom = atomFamily({
   default: selectorFamily({
     key: "futures-totalTxVolume::default",
     get: () => ({get}) => {
-      const txList = get(futuresTxlistAtom)
+      const txList = get(futuresTxListAtom)
       return updateTotalTxVolume(txList)
     }
   })

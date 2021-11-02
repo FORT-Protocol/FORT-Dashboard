@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil"
-import { futuresTxlistAtom } from "../state/futures"
+import { futuresTxListAtom } from "../state/futures"
 import { blockNumberAtom } from "../state/app"
 import { useEffect } from "react"
 import { futuresContractAddress } from "../constant/contract"
@@ -8,7 +8,7 @@ const useFetchFuturesTxlist = (lastBlock: number = 0) => {
   const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
   const address = futuresContractAddress
   const api = require("etherscan-api").init(apiKey)
-  const [futuresTxlist, setFuturesTxlist] = useRecoilState(futuresTxlistAtom)
+  const [futuresTxlist, setFuturesTxlist] = useRecoilState(futuresTxListAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)
 
   useEffect(() => {
