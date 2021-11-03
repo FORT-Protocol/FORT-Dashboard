@@ -24,14 +24,12 @@ import {HamburgerIcon, CloseIcon} from "@chakra-ui/icons";
 import Swap from "./Swap";
 import useFetchFuturesTxList from "../hooks/useFetchFuturesTxList";
 import useFetchOptionsTxList from "../hooks/useFetchOptionsTxList";
-import useBlockNumber from "../hooks/useBlockNumber";
 import useFetchSwapTxList from "../hooks/useFetchSwapTxList";
 
 
 const App = () => {
   const [index, setIndex] = useState(0)
   const {isOpen, onOpen, onClose} = useDisclosure()
-  const blockNumber = useBlockNumber()
   const tabList = [
     {index: 0, label: "Futures", path: "/", content: <Futures/>},
     {index: 1, label: "Options", path: "/options", content: <Options/>},
@@ -39,10 +37,9 @@ const App = () => {
     {index: 3, label: "Swap", path: "/swap", content: <Swap/>}
   ]
 
-  // 获取当前区块高度，调用钩子函数后台更新Futures交易列表
-  useFetchFuturesTxList(0)
-  useFetchOptionsTxList(0)
-  useFetchSwapTxList(0)
+  useFetchFuturesTxList()
+  useFetchOptionsTxList()
+  useFetchSwapTxList()
 
   const handleTabsChange = (index: number) => {
     setIndex(index)
