@@ -7,7 +7,7 @@ interface LineChartProps {
   title?: string,
   prefix?: string
   suffix?: string
-  data?: any
+  data: {day: string, value: number, category: string}[]
 }
 
 const LineChart: FC<LineChartProps> = props => {
@@ -19,7 +19,7 @@ const LineChart: FC<LineChartProps> = props => {
 
   useEffect(()=>{
     if (selector === "1W"){
-      const tempData = props.data.filter((data: {day: string, value: number, category: string})=> {
+      const tempData = props.data.filter((data)=> {
         const day = new Date(data.day).getTime()
         return today - day <= 7 * 84600000
       })
