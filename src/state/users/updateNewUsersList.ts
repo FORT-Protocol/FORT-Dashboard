@@ -49,6 +49,5 @@ const updateNewUsersList = (futuresTxList: Block[], optionsTxList: Block[]) => {
       category: "Total"
     })
   })
-
   return newUserList
 }

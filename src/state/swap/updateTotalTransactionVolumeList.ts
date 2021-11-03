@@ -2,6 +2,7 @@ import {atomFamily, selectorFamily} from "recoil";
 import {TokenTxBlock} from "../app";
 import {swapTxListAtom} from "./index";
 import {web3} from "../../provider";
+import fillAllDayToInitObjectMap from "../../utils/fillAllDayToInitObjectMap";
 
 export const totalTransactionVolumeListAtom = atomFamily({
   key: "swap-totalTransactionVolumeList::value",
@@ -18,12 +19,13 @@ const updateTotalTransactionVolumeList = (txList: TokenTxBlock[]) => {
   let totalTransactionVolumeListMap: {[index: string]: number} = {}
   let transactionVolumeList: {day: string, value: number, category: string}[] = []
 
+  const now = new Date().getTime()
+  const past = new Date("2021.10.20").getTime()
+  fillAllDayToInitObjectMap(totalTransactionVolumeListMap, now, past, 0)
+
   txList.forEach((block)=>{
     if (block.tokenSymbol === "DCU"){
       const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
-      if (!totalTransactionVolumeListMap[date]){
-        totalTransactionVolumeListMap[date] = 0
-      }
       totalTransactionVolumeListMap[date] += Number(web3.utils.fromWei(block.value))
     }
   })

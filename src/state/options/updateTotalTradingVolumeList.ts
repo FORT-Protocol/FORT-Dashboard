@@ -2,6 +2,7 @@ import {atomFamily, selectorFamily} from "recoil";
 import {optionsTxListAtom} from "./index";
 import {Block} from "../app";
 import {web3} from "../../provider";
+import fillAllDayToInitObjectMap from "../../utils/fillAllDayToInitObjectMap";
 
 export const totalTradingVolumeListAtom = atomFamily({
   key: "options-totalTradingVolumeList::value",
@@ -20,19 +21,15 @@ const updateTotalTradingVolumeList = (txList: Block[]) => {
   let sellVolumeListMap: {[index: string]: number} = {}
   let totalTradingVolumeList: {day: string, value: number, category: string}[] = []
 
+  const now = new Date().getTime()
+  const past = new Date("2021.10.20").getTime()
+  fillAllDayToInitObjectMap(totalTradingVolumeListMap, now, past, 0)
+  fillAllDayToInitObjectMap(buyTxVolumeListMap, now, past, 0)
+  fillAllDayToInitObjectMap(sellVolumeListMap, now, past, 0)
+
   txList.forEach((block)=>{
     const func = block.input.slice(0,10)
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
-
-    if (!totalTradingVolumeListMap[date]){
-      totalTradingVolumeListMap[date] = 0
-    }
-    if (!buyTxVolumeListMap[date]){
-      buyTxVolumeListMap[date] = 0
-    }
-    if (!sellVolumeListMap[date]){
-      sellVolumeListMap[date] = 0
-    }
 
     if (func === "0xee1ca960") {
     //  open(address tokenAddress, uint256 strikePrice, bool orientation, uint256 exerciseBlock, uint256 dcuAmount)

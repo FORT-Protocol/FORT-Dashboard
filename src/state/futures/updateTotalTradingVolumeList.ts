@@ -2,6 +2,7 @@ import {atomFamily, selectorFamily} from "recoil";
 import {futuresTxListAtom} from "./index";
 import {Block} from "../app";
 import {web3} from "../../provider";
+import fillAllDayToInitObjectMap from "../../utils/fillAllDayToInitObjectMap";
 
 export const totalTradingVolumeListAtom = atomFamily({
   key: "futures-totalTradingVolumeList::value",
@@ -21,18 +22,15 @@ const updateTotalTradingVolumeList = (txList: Block[]) => {
 
   let TotalTradingVolumeList: {day: string, value: number, category: string}[] = []
 
+  const now = new Date().getTime()
+  const past = new Date("2021.10.20").getTime()
+  fillAllDayToInitObjectMap(totalTradingVolumeListMap, now, past, 0)
+  fillAllDayToInitObjectMap(buyTradingVolumeListMap, now, past, 0)
+  fillAllDayToInitObjectMap(sellTradingVolumeListMap, now, past, 0)
+
   txList.forEach((block) => {
     const func = block.input.slice(0,10)
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
-    if (!totalTradingVolumeListMap[date]){
-      totalTradingVolumeListMap[date] = 0
-    }
-    if (!buyTradingVolumeListMap[date]){
-      buyTradingVolumeListMap[date] = 0
-    }
-    if (!sellTradingVolumeListMap[date]){
-      sellTradingVolumeListMap[date] = 0
-    }
 
     if (func === "0x15ee0aad") {
       // buy(address tokenAddress, uint256 lever, bool orientation, uint256 dcuAmount)
@@ -42,6 +40,7 @@ const updateTotalTradingVolumeList = (txList: Block[]) => {
     }
 
     if (func === "0xd79875eb"){
+      // sell(uint256 amount, uint256 sellPrice)
       const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256"], block.input.slice(10))
       sellTradingVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
       totalTradingVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
