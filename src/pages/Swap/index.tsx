@@ -1,18 +1,17 @@
 import {SimpleGrid, Stack} from "@chakra-ui/react";
-import {useState} from "react";
-import data from "../../tests/data.json";
 import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
-import {useRecoilValue} from "recoil";
 import {cumulativeNumberOfTransactionAtom} from "../../state/swap/updateCumulativeNumberOfTransaction";
 import {totalTransactionVolumeListAtom} from "../../state/swap/updateTotalTransactionVolumeList";
 import {totalTransactionVolumeAtom} from "../../state/swap/updateTotalTransactionVolume";
+import {useRecoilValue} from "recoil";
+import {numberOfNESTAtom} from "../../state/swap/updateNumberOfNEST";
+import {numberOfDCUAtom} from "../../state/swap/updateNumberOfDCU";
 
 const Swap = () => {
-  const [tData] = useState(data);
   const cumulativeNumberOfTransaction = useRecoilValue(cumulativeNumberOfTransactionAtom({}))
-  const numberOfNEST = useRecoilValue(cumulativeNumberOfTransactionAtom({}))
-  const numberOfDCU = useRecoilValue(cumulativeNumberOfTransactionAtom({}))
+  const numberOfNEST = useRecoilValue(numberOfNESTAtom({}))
+  const numberOfDCU = useRecoilValue(numberOfDCUAtom({}))
   const totalTransactionVolumeList = useRecoilValue(totalTransactionVolumeListAtom({}))
   const totalTransactionVolume = useRecoilValue(totalTransactionVolumeAtom({}))
 
@@ -25,7 +24,7 @@ const Swap = () => {
         <Norm value={totalTransactionVolume} desc={"Total Transaction Volume"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing="44px">
-        <LineChart title={"Total Transaction Volume"} total={725647} suffix={"DCU"} data={tData.swap.totalTransactionVolumeList}/>
+        <LineChart title={"Total Transaction Volume"} total={725647} suffix={"DCU"} data={totalTransactionVolumeList}/>
       </SimpleGrid>
     </Stack>
   )

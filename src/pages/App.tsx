@@ -25,6 +25,7 @@ import Swap from "./Swap";
 import useFetchFuturesTxList from "../hooks/useFetchFuturesTxList";
 import useFetchOptionsTxList from "../hooks/useFetchOptionsTxList";
 import useBlockNumber from "../hooks/useBlockNumber";
+import useFetchSwapTxList from "../hooks/useFetchSwapTxList";
 
 
 const App = () => {
@@ -41,6 +42,7 @@ const App = () => {
   // 获取当前区块高度，调用钩子函数后台更新Futures交易列表
   useFetchFuturesTxList(0)
   useFetchOptionsTxList(0)
+  useFetchSwapTxList(0)
 
   const handleTabsChange = (index: number) => {
     setIndex(index)

@@ -1,15 +1,21 @@
 import {atomFamily, selectorFamily} from "recoil";
+import {Block} from "../app";
+import {swapTxListAtom} from "./index";
 
 export const totalTransactionVolumeAtom = atomFamily({
   key: "swap-totalTransactionVolumeAtom::value",
   default: selectorFamily({
-    key: "swap-totalTransactionVolumeAtom::default",
+    key: "futures-curOpenLongPositions::default",
     get: () => ({get}) => {
-      return updateTotalTransactionVolume()
+      const txList = get(swapTxListAtom)
+      return updateTotalTransactionVolume(txList)
     }
   })
 })
 
-const updateTotalTransactionVolume = () => {
+const updateTotalTransactionVolume = (txList: Block[]) => {
+  console.log(txList)
   return 0
 }
+
+export default updateTotalTransactionVolume
