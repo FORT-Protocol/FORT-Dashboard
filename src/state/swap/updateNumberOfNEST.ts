@@ -15,7 +15,7 @@ export const numberOfNESTAtom = atomFamily({
 
 const updateNumberOfNEST = (txList: Block[]) => {
   console.log(txList)
-  return 0
+  return 2
 }
 
 export default updateNumberOfNEST

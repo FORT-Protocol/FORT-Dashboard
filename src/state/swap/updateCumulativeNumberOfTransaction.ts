@@ -14,8 +14,7 @@ export const cumulativeNumberOfTransactionAtom = atomFamily({
 })
 
 const updateCumulativeNumberOfTransaction = (txList: Block[]) => {
-  console.log(txList)
-  return 0
+  return txList.length
 }
 
 export default updateCumulativeNumberOfTransaction

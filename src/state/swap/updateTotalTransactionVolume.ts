@@ -15,7 +15,7 @@ export const totalTransactionVolumeAtom = atomFamily({
 
 const updateTotalTransactionVolume = (txList: Block[]) => {
   console.log(txList)
-  return 0
+  return 2
 }
 
 export default updateTotalTransactionVolume

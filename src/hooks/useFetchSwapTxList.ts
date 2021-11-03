@@ -16,7 +16,9 @@ const useFetchSwapTxList = (lastBlock: number = 0) => {
   }, [blockNumber])
 
   async function fetchTxList() {
-    const list = await api.account.tokentx(tokenAddress, null, lastBlock, 'latest', 1, 100, 'asc')
+    const list = await api.account.tokentx(tokenAddress, null, lastBlock, 'latest', 1, 100, 'asc').then((res: any) => {
+      return res.result
+    })
     setSwapTxList(list)
   }
 
