@@ -23,9 +23,16 @@ const updateTotalTxVolumeList = (txList: Block[]) => {
   txList.forEach((block) => {
     const func = block.input.slice(0,10)
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
-    totalTxVolumeListMap[date] = 0
-    longTxVolumeListMap[date] = 0
-    shortVolumeListMap[date] = 0
+
+    if (!totalTxVolumeListMap[date]){
+      totalTxVolumeListMap[date] = 0
+    }
+    if (!longTxVolumeListMap[date]){
+      longTxVolumeListMap[date] = 0
+    }
+    if (!shortVolumeListMap[date]){
+      shortVolumeListMap[date] = 0
+    }
 
     if (func === "0xee1ca960") {
       // open(address tokenAddress, uint256 strikePrice, bool orientation, uint256 exerciseBlock, uint256 dcuAmount)

@@ -2,8 +2,6 @@ import {SimpleGrid, Stack} from "@chakra-ui/react";
 import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
-import {useState} from "react";
-import data from "../../tests/data.json";
 import {useRecoilValue} from "recoil";
 import {totalTxVolumeAtom} from "../../state/options/updateTotalTxVolume";
 import {currentCallOptionsDCUAtom} from "../../state/options/updateCurrentCallOptionsETH";
@@ -11,15 +9,16 @@ import {currentShortOptionsDCUAtom} from "../../state/options/updateCurrentShort
 import {longShortDistributionAtom} from "../../state/options/updateLongShortDistribution";
 import {totalTxVolumeListAtom} from "../../state/options/updateTotalTxVolumeList";
 import {distributionOfExerciseTimespanAtom} from "../../state/options/updateDistributionOfExerciseTimespan";
+import {totalTradingVolumeListAtom} from "../../state/options/updateTotalTradingVolumeList";
 
 const Options = () => {
-  const [tData] = useState(data);
   const totalTxVolume = useRecoilValue(totalTxVolumeAtom({}))
   const curCallOptionPosition = useRecoilValue(currentCallOptionsDCUAtom({}))
   const curShortOptionPosition = useRecoilValue(currentShortOptionsDCUAtom({}))
   const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
   const totalTxVolumeList = useRecoilValue(totalTxVolumeListAtom({}))
   const distributionOfExerciseTimespan = useRecoilValue(distributionOfExerciseTimespanAtom({}))
+  const totalTradingVolumeList = useRecoilValue(totalTradingVolumeListAtom({}))
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
@@ -30,7 +29,7 @@ const Options = () => {
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
         <LineChart title={"Total Transaction Volume"} total={totalTxVolume.toFixed(2)} data={totalTxVolumeList}/>
-        <LineChart title={"Total Trading Volume"} total={233323} data={tData.options.totalTradingVolumeList}/>
+        <LineChart title={"Total Trading Volume"} total={233323} data={totalTradingVolumeList}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing="44px">
         <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>
