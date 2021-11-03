@@ -6,7 +6,7 @@ import {web3} from "../../provider";
 export const totalTransactionVolumeAtom = atomFamily({
   key: "swap-totalTransactionVolumeAtom::value",
   default: selectorFamily({
-    key: "futures-curOpenLongPositions::default",
+    key: "swap-curOpenLongPositions::default",
     get: () => ({get}) => {
       const txList = get(swapTxListAtom)
       return updateTotalTransactionVolume(txList)

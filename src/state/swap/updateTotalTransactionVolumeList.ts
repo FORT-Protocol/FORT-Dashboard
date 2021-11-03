@@ -7,7 +7,7 @@ import fillAllDayToInitMap from "../../utils/fillAllDayToInitMap";
 export const totalTransactionVolumeListAtom = atomFamily({
   key: "swap-totalTransactionVolumeList::value",
   default: selectorFamily({
-    key: "futures-curOpenLongPositions::default",
+    key: "swap-curOpenLongPositions::default",
     get: () => ({get}) => {
       const txList = get(swapTxListAtom)
       return updateTotalTransactionVolumeList(txList)

@@ -5,7 +5,7 @@ import {swapTxListAtom} from "./index";
 export const cumulativeNumberOfTransactionAtom = atomFamily({
   key: "swap-cumulativeNumberOfTransaction::value",
   default: selectorFamily({
-    key: "futures-curOpenLongPositions::default",
+    key: "swap-curOpenLongPositions::default",
     get: () => ({get}) => {
       const txList = get(swapTxListAtom)
       return updateCumulativeNumberOfTransaction(txList)
