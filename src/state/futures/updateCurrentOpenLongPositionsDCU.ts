@@ -16,7 +16,6 @@ export const currentOpenLongPositionsAtom = atomFamily({
   })
 })
 
-
 const updateCurrentOpenLongPositionsDCU = (txList: Block[]) => {
   let currentOpenLongPositions = 0
 
