@@ -2,7 +2,7 @@ import {atomFamily, selectorFamily} from "recoil";
 import {optionsTxListAtom} from "../options";
 import {futuresTxListAtom} from "../futures";
 import {Block} from "../app";
-import fillAllDayToInitObjectMap from "../../utils/fillAllDayToInitObjectMap";
+import fillAllDayToInitMap from "../../utils/fillAllDayToInitMap";
 
 export const activeUsersListAtom = atomFamily({
   key: "users-activeUsersList::value",
@@ -22,7 +22,7 @@ const updateActiveUsersList = (futuresTxList: Block[], optionsTxList: Block[]) =
 
   const now = new Date().getTime()
   const past = new Date("2021.10.20").getTime()
-  fillAllDayToInitObjectMap(activeUserListMap, now, past, "set")
+  fillAllDayToInitMap(activeUserListMap, now, past, "set")
 
   futuresTxList.map((block) => {
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)

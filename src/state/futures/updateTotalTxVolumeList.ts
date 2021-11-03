@@ -2,7 +2,7 @@ import {atomFamily, selectorFamily} from "recoil";
 import {futuresTxListAtom} from "./index";
 import {Block} from "../app";
 import {web3} from "../../provider";
-import fillAllDayToInitObjectMap from "../../utils/fillAllDayToInitObjectMap";
+import fillAllDayToInitMap from "../../utils/fillAllDayToInitMap";
 
 export const totalTxVolumeListAtom = atomFamily({
   key: "futures-totalTxVolumeList::value",
@@ -23,9 +23,9 @@ const updateTotalTxVolumeList = (txList: Block[]) => {
 
   const now = new Date().getTime()
   const past = new Date("2021.10.20").getTime()
-  fillAllDayToInitObjectMap(totalTxVolumeListMap, now, past, "number")
-  fillAllDayToInitObjectMap(longTxVolumeListMap, now, past, "number")
-  fillAllDayToInitObjectMap(shortVolumeListMap, now, past, "number")
+  fillAllDayToInitMap(totalTxVolumeListMap, now, past, "number")
+  fillAllDayToInitMap(longTxVolumeListMap, now, past, "number")
+  fillAllDayToInitMap(shortVolumeListMap, now, past, "number")
 
   txList.forEach((block) => {
     const func = block.input.slice(0,10)
