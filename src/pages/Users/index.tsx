@@ -23,8 +23,8 @@ const Users = () => {
         <Norm value={optionsTradingUsers.size} desc={"Options Trading users"} color={"#00B388"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
-        <LineChart title={"New Users"} data={newUsersList}/>
-        <LineChart title={"Active Users"} data={activeUsersList}/>
+        <LineChart title={"New Users"} data={newUsersList} noFixed={true}/>
+        <LineChart title={"Active Users"} data={activeUsersList} noFixed={true}/>
       </SimpleGrid>
     </Stack>
   )

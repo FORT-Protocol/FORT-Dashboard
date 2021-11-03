@@ -8,6 +8,7 @@ interface LineChartProps {
   prefix?: string
   suffix?: string
   data: { day: string, value: number, category: string }[]
+  noFixed?: boolean
 }
 
 const LineChart: FC<LineChartProps> = props => {
@@ -86,7 +87,7 @@ const LineChart: FC<LineChartProps> = props => {
       <Stack direction={"row"}>
         <Stack direction={"row"} alignItems={"baseline"}>
           <Text color={"hedge"} fontSize={"28px"} fontWeight={600}
-                fontFamily={"Montserrat"}>{props.prefix} {sum.toFixed(2) || "-"}</Text>
+                fontFamily={"Montserrat"}>{props.prefix} {props.noFixed ? sum : sum.toFixed(2)}</Text>
           <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
         </Stack>
         <Spacer/>
