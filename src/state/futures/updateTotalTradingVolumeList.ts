@@ -24,9 +24,9 @@ const updateTotalTradingVolumeList = (txList: Block[]) => {
 
   const now = new Date().getTime()
   const past = new Date("2021.10.20").getTime()
-  fillAllDayToInitObjectMap(totalTradingVolumeListMap, now, past, 0)
-  fillAllDayToInitObjectMap(buyTradingVolumeListMap, now, past, 0)
-  fillAllDayToInitObjectMap(sellTradingVolumeListMap, now, past, 0)
+  fillAllDayToInitObjectMap(totalTradingVolumeListMap, now, past, "number")
+  fillAllDayToInitObjectMap(buyTradingVolumeListMap, now, past, "number")
+  fillAllDayToInitObjectMap(sellTradingVolumeListMap, now, past, "number")
 
   txList.forEach((block) => {
     const func = block.input.slice(0,10)

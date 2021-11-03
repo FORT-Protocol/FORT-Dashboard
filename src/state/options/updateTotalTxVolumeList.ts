@@ -23,9 +23,9 @@ const updateTotalTxVolumeList = (txList: Block[]) => {
 
   const now = new Date().getTime()
   const past = new Date("2021.10.20").getTime()
-  fillAllDayToInitObjectMap(totalTxVolumeListMap, now, past, 0)
-  fillAllDayToInitObjectMap(longTxVolumeListMap, now, past, 0)
-  fillAllDayToInitObjectMap(shortVolumeListMap, now, past, 0)
+  fillAllDayToInitObjectMap(totalTxVolumeListMap, now, past, "number")
+  fillAllDayToInitObjectMap(longTxVolumeListMap, now, past, "number")
+  fillAllDayToInitObjectMap(shortVolumeListMap, now, past, "number")
 
   txList.forEach((block) => {
     const func = block.input.slice(0,10)

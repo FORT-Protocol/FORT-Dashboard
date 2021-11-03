@@ -21,7 +21,7 @@ const updateTotalTransactionVolumeList = (txList: TokenTxBlock[]) => {
 
   const now = new Date().getTime()
   const past = new Date("2021.10.20").getTime()
-  fillAllDayToInitObjectMap(totalTransactionVolumeListMap, now, past, 0)
+  fillAllDayToInitObjectMap(totalTransactionVolumeListMap, now, past, "number")
 
   txList.forEach((block)=>{
     if (block.tokenSymbol === "DCU"){
