@@ -3,6 +3,7 @@ import {blockNumberAtom} from "../state/app";
 import {nestTokenAddress, swapContractAddress} from "../constant/contract";
 import {useEffect} from "react";
 import fetcher from "../utils/fetcher";
+import {web3} from "../provider";
 
 export const numberOfNESTAtom = atom({
   key: "swap-numberOfNESTAtom::value",
@@ -22,7 +23,7 @@ const useNumberOfNEST = () => {
 
   async function fetchTxList() {
     const res = await fetcher("https://api.etherscan.com/api?module=account&action=tokenbalance&apiKey=" + apiKey + "&tag=latest&contractaddress=" + tokenAddress + "&address=" + swapAddress)
-    setNumberOfNEST(res.result)
+    setNumberOfNEST(Number(web3.utils.fromWei(res.result)))
   }
 
   return numberOfNEST
