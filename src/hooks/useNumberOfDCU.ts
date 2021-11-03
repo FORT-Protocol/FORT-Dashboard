@@ -2,7 +2,7 @@ import {atom, useRecoilState} from "recoil";
 import {blockNumberAtom} from "../state/app";
 import {dcuTokenAddress, swapContractAddress} from "../constant/contract";
 import {useEffect} from "react";
-import {web3} from "../provider";
+import fetcher from "../utils/fetcher";
 
 export const numberOfDCUAtom = atom({
   key: "swap-numberOfDCU::value",
@@ -13,7 +13,6 @@ const useNumberOfDCU = () => {
   const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
   const swapAddress = swapContractAddress
   const tokenAddress = dcuTokenAddress
-  const api = require("etherscan-api").init(apiKey)
   const [numberOfDCU, setNumberOfDCU] = useRecoilState(numberOfDCUAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)
 
@@ -22,10 +21,8 @@ const useNumberOfDCU = () => {
   }, [blockNumber])
 
   async function fetchTxList() {
-    const res = await api.account.tokenbalance(swapAddress, "", tokenAddress).then((res: any) => {
-      return Number(web3.utils.fromWei(res.result))
-    })
-    setNumberOfDCU(res)
+    const res = await fetcher("https://api.etherscan.com/api?module=account&action=tokenbalance&apiKey=" + apiKey + "&tag=latest&contractaddress=" + tokenAddress + "&address=" + swapAddress)
+    setNumberOfDCU(res.result)
   }
 
   return numberOfDCU

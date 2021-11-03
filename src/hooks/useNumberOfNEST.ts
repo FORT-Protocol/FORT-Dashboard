@@ -2,7 +2,7 @@ import {atom, useRecoilState} from "recoil";
 import {blockNumberAtom} from "../state/app";
 import {nestTokenAddress, swapContractAddress} from "../constant/contract";
 import {useEffect} from "react";
-import {web3} from "../provider";
+import fetcher from "../utils/fetcher";
 
 export const numberOfNESTAtom = atom({
   key: "swap-numberOfNESTAtom::value",
@@ -13,7 +13,6 @@ const useNumberOfNEST = () => {
   const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
   const swapAddress = swapContractAddress
   const tokenAddress = nestTokenAddress
-  const api = require("etherscan-api").init(apiKey)
   const [numberOfNEST, setNumberOfNEST] = useRecoilState(numberOfNESTAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)
 
@@ -22,10 +21,8 @@ const useNumberOfNEST = () => {
   }, [blockNumber])
 
   async function fetchTxList() {
-    const res = await api.account.tokenbalance(swapAddress, "", tokenAddress).then((res: any) => {
-      return Number(web3.utils.fromWei(res.result))
-    })
-    setNumberOfNEST(res)
+    const res = await fetcher("https://api.etherscan.com/api?module=account&action=tokenbalance&apiKey=" + apiKey + "&tag=latest&contractaddress=" + tokenAddress + "&address=" + swapAddress)
+    setNumberOfNEST(res.result)
   }
 
   return numberOfNEST

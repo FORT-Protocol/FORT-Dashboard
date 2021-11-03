@@ -3,11 +3,11 @@ import {useRecoilState} from "recoil";
 import {blockNumberAtom} from "../state/app";
 import {useEffect} from "react";
 import {optionsTxListAtom} from "../state/options";
+import fetcher from "../utils/fetcher";
 
 const useFetchOptionsTxList = (lastBlock: number) => {
   const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
   const address = optionsContractAddress
-  const api = require("etherscan-api").init(apiKey)
   const [optionsTxList, setOptionsTxList] = useRecoilState(optionsTxListAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)
 
@@ -16,10 +16,8 @@ const useFetchOptionsTxList = (lastBlock: number) => {
   }, [blockNumber])
 
   async function fetchTxList() {
-    const list = await api.account.txlist(address, lastBlock, "latest", 1, 100, "asc").then((res: any) => {
-      return res.result
-    })
-    setOptionsTxList(list)
+    const list = await fetcher("https://api.etherscan.com/api?module=account&action=txlist&startblock=0&endblock=latest&page=1&offset=1000&sort=asc&address=" + address + "&apiKey=" + apiKey)
+    setOptionsTxList(list.result)
   }
 
   return optionsTxList
