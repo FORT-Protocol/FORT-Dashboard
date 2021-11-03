@@ -57,7 +57,7 @@ const LineChart: FC<LineChartProps> = props => {
       })
       setSum(s)
     }
-  }, [selector, setSelector])
+  }, [selector, setSelector, data, setData])
 
   const config = {
     data: data,
