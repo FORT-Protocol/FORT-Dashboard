@@ -64,6 +64,13 @@ const LineChart: FC<LineChartProps> = props => {
     yField: 'value',
     seriesField: 'category',
     color: ['#0047BB', "#4FB08B", "#D7772C", "#F6E272", "#BEDE9F", "#5BCBEA"],
+    point: {
+      shape: "circle",
+      size: 4
+    },
+    lineStyle: {
+      lineWidth: 3,
+    }
   };
 
   return (
