@@ -16,22 +16,46 @@ const LineChart: FC<LineChartProps> = props => {
   const {width} = useWindowDimensions()
   const [data, setData] = useState(props.data)
   const today = new Date().getTime()
+  const [sum, setSum] = useState(0)
 
   useEffect(()=>{
     if (selector === "1W"){
-      setData(props.data.filter((data: {day: string, value: number, category: string})=> {
+      const tempData = props.data.filter((data: {day: string, value: number, category: string})=> {
         const day = new Date(data.day).getTime()
         return today - day <= 7 * 84600000
-      }))
+      })
+      setData(tempData)
+      let s = 0
+      tempData.forEach((d: {day: string, value: number, category: string})=> {
+        if (d.category === "Total"){
+          s += d.value
+        }
+      })
+      setSum(s)
     }
     if (selector === "1M"){
-      setData(props.data.filter((data: {day: string, value: number, category: string})=> {
+      const tempData = props.data.filter((data: {day: string, value: number, category: string})=> {
         const day = new Date(data.day).getTime()
         return today - day <= 30 * 84600000
-      }))
+      })
+      setData(tempData)
+      let s = 0
+      tempData.forEach((d: {day: string, value: number, category: string})=> {
+        if (d.category === "Total"){
+          s += d.value
+        }
+      })
+      setSum(s)
     }
     if (selector === "All"){
       setData(props.data)
+      let s = 0
+      props.data.forEach((d: {day: string, value: number, category: string})=> {
+        if (d.category === "Total"){
+          s += d.value
+        }
+      })
+      setSum(s)
     }
   }, [selector, setSelector])
 
@@ -52,7 +76,7 @@ const LineChart: FC<LineChartProps> = props => {
         {props.total && (
           <Stack direction={"row"} alignItems={"baseline"}>
             <Text color={"hedge"} fontSize={"28px"} fontWeight={600}
-                  fontFamily={"Montserrat"}>{props.prefix} {props.total || "-"}</Text>
+                  fontFamily={"Montserrat"}>{props.prefix} {sum.toFixed(2) || "-"}</Text>
             <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
           </Stack>
         )}
