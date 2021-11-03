@@ -1,5 +1,5 @@
 import {Button, Spacer, Stack, Text} from "@chakra-ui/react";
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {Line} from '@ant-design/charts';
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
@@ -14,9 +14,29 @@ interface LineChartProps {
 const LineChart: FC<LineChartProps> = props => {
   const [selector, setSelector] = useState("1W")
   const {width} = useWindowDimensions()
+  const [data, setData] = useState(props.data)
+  const today = new Date().getTime()
+
+  useEffect(()=>{
+    if (selector === "1W"){
+      setData(props.data.filter((data: {day: string, value: number, category: string})=> {
+        const day = new Date(data.day).getTime()
+        return today - day <= 7 * 84600000
+      }))
+    }
+    if (selector === "1M"){
+      setData(props.data.filter((data: {day: string, value: number, category: string})=> {
+        const day = new Date(data.day).getTime()
+        return today - day <= 30 * 84600000
+      }))
+    }
+    if (selector === "All"){
+      setData(props.data)
+    }
+  }, [selector, setSelector])
 
   const config = {
-    data: props.data,
+    data: data,
     xField: 'day',
     yField: 'value',
     seriesField: 'category',
