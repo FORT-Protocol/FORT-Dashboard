@@ -24,7 +24,7 @@ const Swap = () => {
         <Norm value={totalTransactionVolume.toFixed(2)} desc={"Total Transaction Volume (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing="44px">
-        <LineChart title={"Total Transaction Volume"} total={725647} suffix={"DCU"} data={totalTransactionVolumeList}/>
+        <LineChart title={"Total Transaction Volume"} total={totalTransactionVolume} suffix={"DCU"} data={totalTransactionVolumeList}/>
       </SimpleGrid>
     </Stack>
   )
