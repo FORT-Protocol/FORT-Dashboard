@@ -4,7 +4,7 @@ import { Pie } from '@ant-design/charts';
 
 interface PieChartProps {
   title?: string
-  data?: any
+  data: {value: number, type: string}[]
 }
 
 const PieChart: FC<PieChartProps> = props => {
