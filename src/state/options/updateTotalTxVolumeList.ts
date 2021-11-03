@@ -20,7 +20,7 @@ const updateTotalTxVolumeList = (txList: Block[]) => {
   let shortVolumeListMap: {[index: string]: number} = {}
   let totalTxVolumeList: {day: string, value: number, category: string}[] = []
 
-  txList.map((block) => {
+  txList.forEach((block) => {
     const func = block.input.slice(0,10)
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
     totalTxVolumeListMap[date] = 0

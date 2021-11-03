@@ -1,5 +1,5 @@
 import {atomFamily, selectorFamily} from "recoil";
-import {Block} from "../app";
+import {TokenTxBlock} from "../app";
 import {swapTxListAtom} from "./index";
 
 export const numberOfNESTAtom = atomFamily({
@@ -13,7 +13,7 @@ export const numberOfNESTAtom = atomFamily({
   })
 })
 
-const updateNumberOfNEST = (txList: Block[]) => {
+const updateNumberOfNEST = (txList: TokenTxBlock[]) => {
   console.log(txList)
   return 2
 }

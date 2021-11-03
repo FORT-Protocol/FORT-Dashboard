@@ -1,5 +1,5 @@
 import {atomFamily, selectorFamily} from "recoil";
-import {Block} from "../app";
+import {TokenTxBlock} from "../app";
 import {swapTxListAtom} from "./index";
 
 export const totalTransactionVolumeListAtom = atomFamily({
@@ -13,7 +13,7 @@ export const totalTransactionVolumeListAtom = atomFamily({
   })
 })
 
-const updateTotalTransactionVolumeList = (txList: Block[]) => {
+const updateTotalTransactionVolumeList = (txList: TokenTxBlock[]) => {
   console.log(txList)
   return []
 }

@@ -17,7 +17,7 @@ export const leverageDistributionAtom = atomFamily({
 const updateLeverageDistribution = (txList: Block[]) => {
   let times1 = 0, times2 = 0, times3 = 0, times4 = 0, times5 = 0
 
-  txList.map((block) => {
+  txList.forEach((block) => {
     const func = block.input.slice(0, 10)
     if (func === "0x15ee0aad") {
       // buy(address tokenAddress, uint256 lever, bool orientation, uint256 dcuAmount)

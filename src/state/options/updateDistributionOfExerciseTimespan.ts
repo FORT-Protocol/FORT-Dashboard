@@ -19,7 +19,7 @@ const updateDistributionOfExerciseTimespan = (txList: Block[], blockNumber: numb
   // 1 Month, 1-3 Month, 3-6 Month, 6-12 Month, 1 year
   let distribution = [0, 0, 0, 0, 0]
 
-  txList.map((block) => {
+  txList.forEach((block) => {
     const func = block.input.slice(0,10)
     if (func === "0xee1ca960") {
       // open(address tokenAddress, uint256 strikePrice, bool orientation, uint256 exerciseBlock, uint256 dcuAmount)

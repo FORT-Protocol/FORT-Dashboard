@@ -18,7 +18,7 @@ export const totalTxVolumeAtom = atomFamily({
 const updateTotalTxVolume = (txList: Block[]) => {
   let totalTxVolume = 0
 
-  txList.map((block) => {
+  txList.forEach((block) => {
     const func = block.input.slice(0,10)
     if (func === "0x15ee0aad") {
       // buy(address tokenAddress, uint256 lever, bool orientation, uint256 dcuAmount)

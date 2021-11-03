@@ -1,5 +1,5 @@
 import {atomFamily, selectorFamily} from "recoil";
-import {Block} from "../app";
+import {TokenTxBlock} from "../app";
 import {swapTxListAtom} from "./index";
 
 export const cumulativeNumberOfTransactionAtom = atomFamily({
@@ -13,8 +13,9 @@ export const cumulativeNumberOfTransactionAtom = atomFamily({
   })
 })
 
-const updateCumulativeNumberOfTransaction = (txList: Block[]) => {
-  return txList.length
+const updateCumulativeNumberOfTransaction = (txList: TokenTxBlock[]) => {
+  const tl = txList.filter((block)=>{ return block.tokenSymbol === "DCU" })
+  return tl.length
 }
 
 export default updateCumulativeNumberOfTransaction

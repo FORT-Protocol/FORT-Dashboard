@@ -18,7 +18,7 @@ const updateOpenPriceDistribution = (txList: Block[]) => {
   // 0-5k, 5-10k, 10-15k, 15-20k, >20k
   let distribution = [0, 0, 0, 0, 0]
 
-  txList.map((block) => {
+  txList.forEach((block) => {
     const func = block.input.slice(0,10)
     if (func === "0x15ee0aad") {
       // buy(address tokenAddress, uint256 lever, bool orientation, uint256 dcuAmount)
