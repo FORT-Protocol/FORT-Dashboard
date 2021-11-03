@@ -16,7 +16,7 @@ export const totalTransactionVolumeAtom = atomFamily({
 
 const updateTotalTransactionVolume = (txList: TokenTxBlock[]) => {
   let sum = 0
-  const tl = txList.filter((block)=>{ return block.tokenSymbol === "DCU" })
+  const tl = txList.filter((block)=>{ return Number(block.blockNumber) >= 13491361  && block.tokenSymbol === "DCU" })
   tl.forEach((block)=>{
     sum += Number(web3.utils.fromWei(block.value))
   })

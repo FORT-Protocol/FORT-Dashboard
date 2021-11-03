@@ -14,7 +14,7 @@ export const cumulativeNumberOfTransactionAtom = atomFamily({
 })
 
 const updateCumulativeNumberOfTransaction = (txList: TokenTxBlock[]) => {
-  const tl = txList.filter((block)=>{ return block.tokenSymbol === "DCU" })
+  const tl = txList.filter((block)=>{ return Number(block.blockNumber) >= 13491361 && block.tokenSymbol === "DCU" })
   return tl.length
 }
 

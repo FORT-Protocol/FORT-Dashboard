@@ -24,7 +24,7 @@ const updateTotalTransactionVolumeList = (txList: TokenTxBlock[]) => {
   fillAllDayToInitMap(totalTransactionVolumeListMap, now, past, "number")
 
   txList.forEach((block)=>{
-    if (block.tokenSymbol === "DCU"){
+    if (block.tokenSymbol === "DCU" && Number(block.blockNumber) >= 13491361) {
       const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
       totalTransactionVolumeListMap[date] += Number(web3.utils.fromWei(block.value))
     }
