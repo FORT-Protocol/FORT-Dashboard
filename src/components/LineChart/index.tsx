@@ -70,7 +70,11 @@ const LineChart: FC<LineChartProps> = props => {
     },
     lineStyle: {
       lineWidth: 3,
-    }
+    },
+    slider: {
+      start: 0,
+      end: 1,
+    },
   };
 
   return (

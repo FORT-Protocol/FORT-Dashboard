@@ -16,7 +16,7 @@ export const futuresTradingUsersAtom = atomFamily({
 const updateFuturesTradingUsers = (txList: Block[]) => {
   let users = new Set<string>()
 
-  txList.map((block)=>{
+  txList.forEach((block)=>{
     users.add(block.from)
   })
 

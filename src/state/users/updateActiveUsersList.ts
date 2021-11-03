@@ -24,12 +24,12 @@ const updateActiveUsersList = (futuresTxList: Block[], optionsTxList: Block[]) =
   const past = new Date("2021.10.20").getTime()
   fillAllDayToInitMap(activeUserListMap, now, past, "set")
 
-  futuresTxList.map((block) => {
+  futuresTxList.forEach((block) => {
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
     activeUserListMap[date].add(block.from)
   })
 
-  optionsTxList.map((block)=>{
+  optionsTxList.forEach((block)=>{
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
     if (!activeUserListMap[date]){
       activeUserListMap[date] = new Set<string>()

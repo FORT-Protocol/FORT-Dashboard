@@ -25,7 +25,7 @@ const updateNewUsersList = (futuresTxList: Block[], optionsTxList: Block[]) => {
   const past = new Date("2021.10.20").getTime()
   fillAllDayToInitMap(newUserListMap, now, past, "set")
 
-  futuresTxList.map((block) => {
+  futuresTxList.forEach((block) => {
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
     if (!users.has(block.from)){
       users.add(block.from)
@@ -33,7 +33,7 @@ const updateNewUsersList = (futuresTxList: Block[], optionsTxList: Block[]) => {
     }
   })
 
-  optionsTxList.map((block) => {
+  optionsTxList.forEach((block) => {
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
     if (!newUserListMap[date]){
       newUserListMap[date] = new Set<string>()
