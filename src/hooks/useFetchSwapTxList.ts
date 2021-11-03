@@ -6,7 +6,7 @@ import {swapTxListAtom} from "../state/swap";
 import fetcher from "../utils/fetcher";
 
 const useFetchSwapTxList = () => {
-  const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
+  const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY3 || process.env.REACT_APP_ETHERSCAN_APIKEY
   const swapAddress = swapContractAddress
   const [swapTxList, setSwapTxList] = useRecoilState(swapTxListAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)

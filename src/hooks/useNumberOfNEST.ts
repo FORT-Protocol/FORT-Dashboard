@@ -11,7 +11,7 @@ export const numberOfNESTAtom = atom({
 })
 
 const useNumberOfNEST = () => {
-  const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
+  const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY5 || process.env.REACT_APP_ETHERSCAN_APIKEY
   const swapAddress = swapContractAddress
   const tokenAddress = nestTokenAddress
   const [numberOfNEST, setNumberOfNEST] = useRecoilState(numberOfNESTAtom)

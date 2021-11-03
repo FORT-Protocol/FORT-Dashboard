@@ -11,7 +11,7 @@ export const numberOfDCUAtom = atom({
 })
 
 const useNumberOfDCU = () => {
-  const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
+  const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY4 || process.env.REACT_APP_ETHERSCAN_APIKEY
   const swapAddress = swapContractAddress
   const tokenAddress = dcuTokenAddress
   const [numberOfDCU, setNumberOfDCU] = useRecoilState(numberOfDCUAtom)

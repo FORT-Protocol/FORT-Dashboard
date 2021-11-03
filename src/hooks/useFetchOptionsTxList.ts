@@ -6,7 +6,7 @@ import {optionsTxListAtom} from "../state/options";
 import fetcher from "../utils/fetcher";
 
 const useFetchOptionsTxList = () => {
-  const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
+  const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY2 || process.env.REACT_APP_ETHERSCAN_APIKEY
   const address = optionsContractAddress
   const [optionsTxList, setOptionsTxList] = useRecoilState(optionsTxListAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)
