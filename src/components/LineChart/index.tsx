@@ -5,7 +5,6 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 interface LineChartProps {
   title?: string,
-  total?: number | string,
   prefix?: string
   suffix?: string
   data?: any
@@ -73,13 +72,11 @@ const LineChart: FC<LineChartProps> = props => {
         <Text fontSize={width < 1000 ? "12px" : "18px"} fontWeight={600} color={"#878787"} fontFamily={"Montserrat"}>{props.title}</Text>
       )}
       <Stack direction={"row"}>
-        {props.total && (
-          <Stack direction={"row"} alignItems={"baseline"}>
-            <Text color={"hedge"} fontSize={"28px"} fontWeight={600}
-                  fontFamily={"Montserrat"}>{props.prefix} {sum.toFixed(2) || "-"}</Text>
-            <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
-          </Stack>
-        )}
+        <Stack direction={"row"} alignItems={"baseline"}>
+          <Text color={"hedge"} fontSize={"28px"} fontWeight={600}
+                fontFamily={"Montserrat"}>{props.prefix} {sum.toFixed(2) || "-"}</Text>
+          <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
+        </Stack>
         <Spacer/>
         <Stack direction={"row"} spacing={"20px"}>
           <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"} color={selector === "1W" ? "hedge" : "black"}
