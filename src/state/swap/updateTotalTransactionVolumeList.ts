@@ -16,7 +16,7 @@ export const totalTransactionVolumeListAtom = atomFamily({
 
 const updateTotalTransactionVolumeList = (txList: TokenTxBlock[]) => {
   let totalTransactionVolumeListMap: {[index: string]: number} = {}
-  let transactionVolumeList: {day: string, value: number}[] = []
+  let transactionVolumeList: {day: string, value: number, category: string}[] = []
 
   txList.forEach((block)=>{
     if (block.tokenSymbol === "DCU"){
@@ -32,6 +32,7 @@ const updateTotalTransactionVolumeList = (txList: TokenTxBlock[]) => {
     transactionVolumeList.push({
       day: key,
       value: totalTransactionVolumeListMap[key],
+      category: "Total"
     })
   })
 

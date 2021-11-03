@@ -17,7 +17,7 @@ export const activeUsersListAtom = atomFamily({
 
 const updateActiveUsersList = (futuresTxList: Block[], optionsTxList: Block[]) => {
   let activeUserListMap: {[index: string]: Set<string>} = {}
-  let activeUserList: {day: string, value: number}[] = []
+  let activeUserList: {day: string, value: number, category: string}[] = []
 
   futuresTxList.map((block) => {
     const date = new Date(Number(block.timeStamp)*1000).toJSON().substr(0, 10)
@@ -41,6 +41,7 @@ const updateActiveUsersList = (futuresTxList: Block[], optionsTxList: Block[]) =
     activeUserList.push({
       day: key,
       value: activeUserListMap[key].size,
+      category: "Total"
     })
   })
 
