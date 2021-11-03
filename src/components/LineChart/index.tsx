@@ -12,7 +12,7 @@ interface LineChartProps {
 }
 
 const LineChart: FC<LineChartProps> = props => {
-  const [selector, setSelector] = useState("1W")
+  const [selector, setSelector] = useState("1M")
   const {width} = useWindowDimensions()
   const [data, setData] = useState(props.data)
   const today = new Date().getTime()
