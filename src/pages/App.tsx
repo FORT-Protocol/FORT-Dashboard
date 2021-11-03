@@ -60,7 +60,7 @@ const App = () => {
             </Stack>
             <Stack justifyContent={"center"} direction={"row"} w={"100%"} spacing={0}>
               {tabList.map((tab) => (
-                <Tab h={"66px"} p={0} key={tab.index}>
+                <Tab h={"66px"} p={0} key={tab.index} _focus={{ outline: "none" }}>
                   <Stack borderBottom={"2px"} borderColor={index === tab.index ? "hedge" : "white"} h={"66px"}
                          w={"120px"} justifyContent={"center"}>
                     <Text color={index === tab.index ? "hedge" : "black"} fontSize={"16px"}
