@@ -5,8 +5,8 @@ import {cumulativeNumberOfTransactionAtom} from "../../state/swap/updateCumulati
 import {totalTransactionVolumeListAtom} from "../../state/swap/updateTotalTransactionVolumeList";
 import {totalTransactionVolumeAtom} from "../../state/swap/updateTotalTransactionVolume";
 import {useRecoilValue} from "recoil";
-import useNumberOfNEST from "../../state/swap/useNumberOfNEST";
-import useNumberOfDCU from "../../state/swap/useNumberOfDCU";
+import useNumberOfNEST from "../../hooks/useNumberOfNEST";
+import useNumberOfDCU from "../../hooks/useNumberOfDCU";
 
 const Swap = () => {
   const cumulativeNumberOfTransaction = useRecoilValue(cumulativeNumberOfTransactionAtom({}))

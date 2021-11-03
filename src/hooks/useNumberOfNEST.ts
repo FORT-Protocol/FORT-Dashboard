@@ -1,8 +1,8 @@
 import {atom, useRecoilState} from "recoil";
-import {blockNumberAtom} from "../app";
-import {nestTokenAddress, swapContractAddress} from "../../constant/contract";
+import {blockNumberAtom} from "../state/app";
+import {nestTokenAddress, swapContractAddress} from "../constant/contract";
 import {useEffect} from "react";
-import {web3} from "../../provider";
+import {web3} from "../provider";
 
 export const numberOfNESTAtom = atom({
   key: "swap-numberOfNESTAtom::value",
