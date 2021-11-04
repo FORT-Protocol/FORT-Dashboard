@@ -69,6 +69,7 @@ const LineChart: FC<LineChartProps> = props => {
       shape: "circle",
       size: 4
     },
+    interactions: [{ type: 'marker-active' }],
     lineStyle: {
       lineWidth: 3,
     },
