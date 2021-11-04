@@ -4,12 +4,18 @@ import {blockNumberAtom} from "../state/app";
 import {useEffect} from "react";
 import {swapTxListAtom} from "../state/swap";
 import fetcher from "../utils/fetcher";
+import {etherscanEndpoint} from "../constant/etherscan";
+
+const env = process.env.REACT_APP_ENV || "mainnet"
+const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY3 || process.env.REACT_APP_ETHERSCAN_APIKEY
 
 const useFetchSwapTxList = () => {
-  const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY3 || process.env.REACT_APP_ETHERSCAN_APIKEY
-  const swapAddress = swapContractAddress
+  const swapAddress = ( env === "mainnet" ) ?  swapContractAddress["mainnet"] : swapContractAddress["rinkeby"]
+  const api = ( env === "mainnet" ) ? etherscanEndpoint["mainnet"] : etherscanEndpoint["rinkeby"]
+
   const [swapTxList, setSwapTxList] = useRecoilState(swapTxListAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)
+
 
   useEffect(() => {
     fetchTxList()
@@ -17,10 +23,10 @@ const useFetchSwapTxList = () => {
 
   async function fetchTxList(startblock = "0",
                              endblock = "latest",
-                             offset = "1000",
+                             offset = "10000",
                              page = "1",
                              sort = "asc") {
-    const list = await fetcher("https://api.etherscan.com/api?module=account&action=tokentx&startblock=" + startblock
+    const list = await fetcher(api + "api?module=account&action=tokentx&startblock=" + startblock
       + "&endblock=" + endblock
       + "&page=" + page
       + "&offset=" + offset
