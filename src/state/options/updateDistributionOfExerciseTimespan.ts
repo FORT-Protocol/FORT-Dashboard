@@ -41,23 +41,23 @@ const updateDistributionOfExerciseTimespan = (txList: Block[], blockNumber: numb
 
   return [
     {
-      "type": "1 Month",
+      "type": "1 M",
       "value": distribution[0]
     },
     {
-      "type": "1-3 Month",
+      "type": "1-3 M",
       "value": distribution[1]
     },
     {
-      "type": "3-6 Month",
+      "type": "3-6 M",
       "value": distribution[2]
     },
     {
-      "type": "6-12 Month",
+      "type": "6-12 M",
       "value": distribution[3]
     },
     {
-      "type": "> 1 Year",
+      "type": "> 1 Y",
       "value": distribution[4]
     }
   ]
