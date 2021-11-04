@@ -2,6 +2,8 @@ import {atomFamily, selectorFamily} from "recoil";
 import {TokenTxBlock} from "../app";
 import {swapTxListAtom} from "./index";
 
+const env = process.env.REACT_APP_ENV || "mainnet"
+
 export const cumulativeNumberOfTransactionAtom = atomFamily({
   key: "swap-cumulativeNumberOfTransaction::value",
   default: selectorFamily({
@@ -14,7 +16,8 @@ export const cumulativeNumberOfTransactionAtom = atomFamily({
 })
 
 const updateCumulativeNumberOfTransaction = (txList: TokenTxBlock[]) => {
-  const tl = txList.filter((block)=>{ return Number(block.blockNumber) >= 13491361 && block.tokenSymbol === "DCU" })
+  const initBlock = (env === "mainnet") ? 13491361 : 9497542
+  const tl = txList.filter((block)=>{ return Number(block.blockNumber) >= initBlock && block.tokenSymbol === "DCU" })
   return tl.length
 }
 
