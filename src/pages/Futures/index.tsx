@@ -27,7 +27,7 @@ const Futures = () => {
 
   return (
     <Stack spacing={["22px", "22px", "44px"]} p={["22px", "22px", "44px"]}>
-      <SimpleGrid columns={[1, 3, 3, 3, 3]} spacing={["22px", "22px", "44px"]}>
+      <SimpleGrid columns={[1, 1, 3, 3]} spacing={["22px", "22px", "44px"]}>
         <Norm value={status === PROCESSING ? "-" : totalTxVolume.toFixed(2)} desc={"Total Transaction Volume"} color={"#C7A072"}/>
         <Norm value={status === PROCESSING ? "-" : curOpenLongPositions.toFixed(2)} desc={"Current Open Long Positions (DCU)"} color={"#00B388"}/>
         <Norm value={status === PROCESSING ? "-" : curOpenShortPositions.toFixed(2)} desc={"Current Open Short Positions (DCU)"} color={"#F23A12"}/>
