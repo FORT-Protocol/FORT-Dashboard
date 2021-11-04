@@ -1,4 +1,4 @@
-import {Button, Spacer, Stack, Text} from "@chakra-ui/react";
+import {Button, Stack, Text} from "@chakra-ui/react";
 import {FC, useEffect, useState} from "react";
 import {Line} from '@ant-design/charts';
 import useWindowDimensions from "../../hooks/useWindowDimensions";
