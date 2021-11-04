@@ -25,6 +25,7 @@ import Swap from "./Swap";
 import useFetchFuturesTxList from "../hooks/useFetchFuturesTxList";
 import useFetchOptionsTxList from "../hooks/useFetchOptionsTxList";
 import useFetchSwapTxList from "../hooks/useFetchSwapTxList";
+import useBlockNumber from "../hooks/useBlockNumber";
 
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
     {index: 3, label: "Swap", path: "/swap", content: <Swap/>}
   ]
 
+  useBlockNumber()
   useFetchFuturesTxList()
   useFetchOptionsTxList()
   useFetchSwapTxList()
