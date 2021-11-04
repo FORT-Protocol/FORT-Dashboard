@@ -32,20 +32,15 @@ const useFetchFuturesTxList = () => {
   }
 
   async function fetchAllTx() {
-    let singleRes
-    let blockHigh
-    let res
-    singleRes = await fetchTxList("0", "latest")
-    blockHigh = Number(singleRes[singleRes.length - 1].blockNumber)
-    res = singleRes
+    let blockHigh = 0
+    let res: never[] = []
 
-    while(singleRes.length === 10000 ){
-      console.log("Futures 数据可能不完整")
-      singleRes = await fetchTxList(String(blockHigh), "latest")
-      blockHigh = singleRes[singleRes.length - 1].blockNumber
-      res = res.concat(singleRes)
+    while(res.length % 10000 === 0 ){
+      let request
+      request = await fetchTxList(String(blockHigh), "latest")
+      blockHigh = request[request.length - 1].blockNumber
+      res = res.concat(request)
     }
-    console.log("Futures 统计完成")
     setFuturesTxList(res)
   }
 
