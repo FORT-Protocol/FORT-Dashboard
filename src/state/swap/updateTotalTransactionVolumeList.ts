@@ -37,7 +37,6 @@ const updateTotalTransactionVolumeList = (txList: TokenTxBlock[]) => {
       category: "Total"
     })
   })
-
   return transactionVolumeList
 }
 
