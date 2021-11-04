@@ -31,8 +31,8 @@ const Options = () => {
         <Norm value={status === PROCESSING ? "-" : curShortOptionPosition.toFixed(2)} desc={"Current Short Option Positions (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
-        <LineChart title={"Total Transaction Volume"} data={totalTxVolumeList}/>
-        <LineChart title={"Total Trading Volume"} data={totalTradingVolumeList}/>
+        <LineChart title={"Total Transaction Volume"} data={totalTxVolumeList} suffix={"DCU"}/>
+        <LineChart title={"Total Trading Volume"} data={totalTradingVolumeList} suffix={"DCU"}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing={["22px", "22px", "44px"]}>
         <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>
