@@ -51,7 +51,6 @@ const useFetchSwapTxList = () => {
       res = res.concat(request)
     }
     setSwapTxList(res)
-    console.log(res)
     setStatus(IDLE)
   }
 }
