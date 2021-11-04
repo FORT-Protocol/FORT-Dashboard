@@ -20,7 +20,7 @@ const Users = () => {
 
   return (
     <Stack spacing={["22px", "22px", "44px"]} p={["22px", "22px", "44px"]}>
-      <SimpleGrid columns={[1, 1, 3, 3]} spacing={["22px", "22px", "44px"]}>
+      <SimpleGrid columns={[1, 1, 1, 3]} spacing={["22px", "22px", "44px"]}>
         <Norm value={status === PROCESSING ? "-" : allUser.size} desc={"All users"} color={"#C7A072"}/>
         <Norm value={status === PROCESSING ? "-" : futuresTradingUsers.size} desc={"Futures Trading users"} color={"#E57200"}/>
         <Norm value={status === PROCESSING ? "-" : optionsTradingUsers.size} desc={"Options Trading users"} color={"#00B388"}/>
