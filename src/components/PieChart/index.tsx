@@ -16,10 +16,10 @@ const PieChart: FC<PieChartProps> = props => {
     radius: 0.8,
     label: {
       type: 'spider',
-      labelHeight: 80,
+      labelHeight: 40,
       radius: 0.75,
       content: '{name}\n{percentage}',
-      style: { fontSize: 22, fontWeight: 700},
+      style: { fontSize: 12, fontWeight: 700},
     },
     interactions: [{type: 'pie-legend-active'}, {type: 'element-active'}],
     color: ["#4FB08B", "#D7772C", "#F6E272", "#BEDE9F", "#5BCBEA"]
