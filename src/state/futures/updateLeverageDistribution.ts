@@ -38,6 +38,25 @@ const updateLeverageDistribution = (txList: Block[]) => {
         times5 += Number(web3.utils.fromWei(parameters[3]))
       }
     }
+    if (func === "0x6214f36a") {
+      // buyDirect(uint256 index, uint256 fortAmount)
+      const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256"], block.input.slice(10))
+      if (parameters[0] === "1" || parameters[0] === "6") {
+        times1 += Number(web3.utils.fromWei(parameters[1]))
+      }
+      if (parameters[0] === "2" || parameters[0] === "7") {
+        times2 += Number(web3.utils.fromWei(parameters[1]))
+      }
+      if (parameters[0] === "3" || parameters[0] === "8") {
+        times3 += Number(web3.utils.fromWei(parameters[1]))
+      }
+      if (parameters[0] === "4" || parameters[0] === "9") {
+        times4 += Number(web3.utils.fromWei(parameters[1]))
+      }
+      if (parameters[0] === "5" || parameters[0] === "10") {
+        times5 += Number(web3.utils.fromWei(parameters[1]))
+      }
+    }
   })
 
   return [

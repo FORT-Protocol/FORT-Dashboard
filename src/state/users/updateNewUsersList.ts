@@ -22,7 +22,7 @@ const updateNewUsersList = (futuresTxList: Block[], optionsTxList: Block[]) => {
   let newUserList: {day: string, value: number, category: string}[] = []
 
   const now = new Date().getTime()
-  const past = new Date("2021.10.20").getTime()
+  const past = new Date("2021.10.1").getTime()
   fillAllDayToInitMap(newUserListMap, now, past, "set")
 
   futuresTxList.forEach((block) => {

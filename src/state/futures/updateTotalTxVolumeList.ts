@@ -22,7 +22,7 @@ const updateTotalTxVolumeList = (txList: Block[]) => {
   let totalTxVolumeList: {day: string, value: number, category: string}[] = []
 
   const now = new Date().getTime()
-  const past = new Date("2021.10.20").getTime()
+  const past = new Date("2021.10.1").getTime()
   fillAllDayToInitMap(totalTxVolumeListMap, now, past, "number")
   fillAllDayToInitMap(longTxVolumeListMap, now, past, "number")
   fillAllDayToInitMap(shortVolumeListMap, now, past, "number")

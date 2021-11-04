@@ -39,6 +39,10 @@ const updateOpenPriceDistribution = (txList: Block[]) => {
         distribution[1] += 1
       }
     }
+    if (func === "0x6214f36a") {
+      // buyDirect(uint256 index, uint256 fortAmount)
+      const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256"], block.input.slice(10))
+    }
   })
 
   return [

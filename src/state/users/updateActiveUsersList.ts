@@ -21,7 +21,7 @@ const updateActiveUsersList = (futuresTxList: Block[], optionsTxList: Block[]) =
   let activeUserList: {day: string, value: number, category: string}[] = []
 
   const now = new Date().getTime()
-  const past = new Date("2021.10.20").getTime()
+  const past = new Date("2021.10.1").getTime()
   fillAllDayToInitMap(activeUserListMap, now, past, "set")
 
   futuresTxList.forEach((block) => {
