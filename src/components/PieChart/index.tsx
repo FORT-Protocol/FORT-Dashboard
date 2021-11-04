@@ -15,8 +15,11 @@ const PieChart: FC<PieChartProps> = props => {
     colorField: 'type',
     radius: 0.8,
     label: {
-      type: 'outer',
-      content: '{name} {percentage}',
+      type: 'spider',
+      labelHeight: 80,
+      radius: 0.75,
+      content: '{name}\n{percentage}',
+      style: { fontSize: 18, fontWeight: 600},
     },
     interactions: [{type: 'pie-legend-active'}, {type: 'element-active'}],
     color: ["#4FB08B", "#D7772C", "#F6E272", "#BEDE9F", "#5BCBEA"]
