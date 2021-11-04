@@ -1,13 +1,19 @@
 import {swapContractAddress} from "../constant/contract";
-import {useRecoilState} from "recoil";
+import {atom, useRecoilState} from "recoil";
 import {blockNumberAtom} from "../state/app";
 import {useEffect} from "react";
 import {swapTxListAtom} from "../state/swap";
 import fetcher from "../utils/fetcher";
 import {etherscanEndpoint} from "../constant/etherscan";
+import {IDLE, PROCESSING} from "../constant/status";
 
 const env = process.env.REACT_APP_ENV || "mainnet"
 const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY3 || process.env.REACT_APP_ETHERSCAN_APIKEY
+
+export const statusAtom = atom({
+  key: "fetch-swap::status",
+  default: IDLE,
+})
 
 const useFetchSwapTxList = () => {
   const swapAddress = ( env === "mainnet" ) ?  swapContractAddress["mainnet"] : swapContractAddress["rinkeby"]
@@ -15,6 +21,7 @@ const useFetchSwapTxList = () => {
 
   const [swapTxList, setSwapTxList] = useRecoilState(swapTxListAtom)
   const [blockNumber] = useRecoilState(blockNumberAtom)
+  const [status, setStatus] = useRecoilState(statusAtom)
 
 
   useEffect(() => {
@@ -36,6 +43,7 @@ const useFetchSwapTxList = () => {
     let blockHigh = 0
     let res: never[] = []
 
+    setStatus(PROCESSING)
     while(res.length % 10000 === 0 ){
       let request
       request = await fetchTxList(String(blockHigh), "latest")
@@ -43,9 +51,8 @@ const useFetchSwapTxList = () => {
       res = res.concat(request)
     }
     setSwapTxList(res)
+    setStatus(IDLE)
   }
-
-  return swapTxList
 }
 
 export default useFetchSwapTxList

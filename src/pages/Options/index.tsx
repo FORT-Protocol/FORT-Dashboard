@@ -10,6 +10,8 @@ import {longShortDistributionAtom} from "../../state/options/updateLongShortDist
 import {totalTxVolumeListAtom} from "../../state/options/updateTotalTxVolumeList";
 import {distributionOfExerciseTimespanAtom} from "../../state/options/updateDistributionOfExerciseTimespan";
 import {totalTradingVolumeListAtom} from "../../state/options/updateTotalTradingVolumeList";
+import {statusAtom} from "../../hooks/useFetchOptionsTxList";
+import {PROCESSING} from "../../constant/status";
 
 const Options = () => {
   const totalTxVolume = useRecoilValue(totalTxVolumeAtom({}))
@@ -19,13 +21,14 @@ const Options = () => {
   const totalTxVolumeList = useRecoilValue(totalTxVolumeListAtom({}))
   const distributionOfExerciseTimespan = useRecoilValue(distributionOfExerciseTimespanAtom({}))
   const totalTradingVolumeList = useRecoilValue(totalTradingVolumeListAtom({}))
+  const status = useRecoilValue(statusAtom)
 
   return (
     <Stack spacing={"44px"} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 3, 3, 3, 3]} spacing="44px">
-        <Norm value={totalTxVolume.toFixed(2)} desc={"Total Transaction Volume (DCU)"} color={"#C7A072"}/>
-        <Norm value={curCallOptionPosition.toFixed(2)} desc={"Current Call Option Positions (DCU)"} color={"#00B388"}/>
-        <Norm value={curShortOptionPosition.toFixed(2)} desc={"Current Short Option Positions (DCU)"} color={"#F23A12"}/>
+        <Norm value={status === PROCESSING ? "-" : totalTxVolume.toFixed(2)} desc={"Total Transaction Volume (DCU)"} color={"#C7A072"}/>
+        <Norm value={status === PROCESSING ? "-" : curCallOptionPosition.toFixed(2)} desc={"Current Call Option Positions (DCU)"} color={"#00B388"}/>
+        <Norm value={status === PROCESSING ? "-" : curShortOptionPosition.toFixed(2)} desc={"Current Short Option Positions (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={"44px"}>
         <LineChart title={"Total Transaction Volume"} data={totalTxVolumeList}/>
