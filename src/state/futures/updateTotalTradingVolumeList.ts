@@ -23,7 +23,7 @@ const updateTotalTradingVolumeList = (txList: Block[]) => {
   let TotalTradingVolumeList: {day: string, value: number, category: string}[] = []
 
   const now = new Date().getTime()
-  const past = new Date("2021.10.1").getTime()
+  const past = new Date(1633046400000).getTime()
   fillAllDayToInitMap(totalTradingVolumeListMap, now, past, "number")
   fillAllDayToInitMap(buyTradingVolumeListMap, now, past, "number")
   fillAllDayToInitMap(sellTradingVolumeListMap, now, past, "number")
