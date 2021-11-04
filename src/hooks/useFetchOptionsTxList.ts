@@ -1,6 +1,5 @@
 import {optionsContractAddress} from "../constant/contract";
 import {atom, useRecoilState} from "recoil";
-import {blockNumberAtom} from "../state/app";
 import {useEffect} from "react";
 import {optionsTxListAtom} from "../state/options";
 import fetcher from "../utils/fetcher";
@@ -20,12 +19,11 @@ const useFetchOptionsTxList = () => {
   const api = ( env === "mainnet" ) ? etherscanEndpoint["mainnet"] : etherscanEndpoint["rinkeby"]
 
   const [optionsTxList, setOptionsTxList] = useRecoilState(optionsTxListAtom)
-  const [blockNumber] = useRecoilState(blockNumberAtom)
   const [status, setStatus] = useRecoilState(statusAtom)
 
   useEffect(() => {
     fetchAllTx()
-  }, [blockNumber])
+  }, [])
 
   async function fetchTxList(startblock = "0",
                              endblock = "latest",

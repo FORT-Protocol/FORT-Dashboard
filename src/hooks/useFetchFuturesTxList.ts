@@ -20,12 +20,11 @@ const useFetchFuturesTxList = () => {
   const api = ( env === "mainnet" ) ? etherscanEndpoint["mainnet"] : etherscanEndpoint["rinkeby"]
 
   const [futuresTxList, setFuturesTxList] = useRecoilState(futuresTxListAtom)
-  const [blockNumber] = useRecoilState(blockNumberAtom)
   const [status, setStatus] = useRecoilState(statusAtom)
 
   useEffect(() => {
     fetchAllTx()
-  }, [blockNumber])
+  },[])
 
   async function fetchTxList(startblock = "0",
                              endblock = "latest",

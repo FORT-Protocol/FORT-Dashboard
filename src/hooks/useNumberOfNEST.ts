@@ -1,5 +1,4 @@
 import {atom, useRecoilState} from "recoil";
-import {blockNumberAtom} from "../state/app";
 import {nestTokenAddress, swapContractAddress} from "../constant/contract";
 import {useEffect} from "react";
 import fetcher from "../utils/fetcher";
@@ -21,11 +20,10 @@ const useNumberOfNEST = () => {
   const tokenAddress = (env === "mainnet") ? nestTokenAddress["mainnet"] : nestTokenAddress["rinkeby"]
 
   const [numberOfNEST, setNumberOfNEST] = useRecoilState(numberOfNESTAtom)
-  const [blockNumber] = useRecoilState(blockNumberAtom)
 
   useEffect(() => {
     fetchTxList()
-  }, [blockNumber])
+  }, [])
 
   async function fetchTxList() {
     const res = await fetcher(api + "api?module=account&action=tokenbalance&apiKey=" + apiKey + "&tag=latest&contractaddress=" + tokenAddress + "&address=" + swapAddress)

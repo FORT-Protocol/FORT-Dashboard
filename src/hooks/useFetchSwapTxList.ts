@@ -1,6 +1,5 @@
 import {swapContractAddress} from "../constant/contract";
 import {atom, useRecoilState} from "recoil";
-import {blockNumberAtom} from "../state/app";
 import {useEffect} from "react";
 import {swapTxListAtom} from "../state/swap";
 import fetcher from "../utils/fetcher";
@@ -20,13 +19,12 @@ const useFetchSwapTxList = () => {
   const api = ( env === "mainnet" ) ? etherscanEndpoint["mainnet"] : etherscanEndpoint["rinkeby"]
 
   const [swapTxList, setSwapTxList] = useRecoilState(swapTxListAtom)
-  const [blockNumber] = useRecoilState(blockNumberAtom)
   const [status, setStatus] = useRecoilState(statusAtom)
 
 
   useEffect(() => {
     fetchAllTx()
-  }, [blockNumber])
+  }, [])
 
   async function fetchTxList(startblock = "0",
                              endblock = "latest",

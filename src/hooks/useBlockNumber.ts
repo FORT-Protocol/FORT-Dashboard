@@ -6,9 +6,7 @@ const useBlockNumber = () => {
   const [blockNumber, setBlockNumber] = useRecoilState(blockNumberAtom)
 
   web3.eth.getBlockNumber().then((res: any) => {
-    if (res !== blockNumber) {
-      setBlockNumber(res)
-    }
+    setBlockNumber(res)
   })
   return blockNumber
 }
