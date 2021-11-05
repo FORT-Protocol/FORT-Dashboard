@@ -34,8 +34,8 @@ const App = () => {
   const tabList = [
     {index: 0, label: "Futures", path: "/", content: <Futures/>},
     {index: 1, label: "Options", path: "/options", content: <Options/>},
-    {index: 2, label: "Users", path: "/users", content: <Users/>},
-    {index: 3, label: "Swap", path: "/swap", content: <Swap/>}
+    {index: 2, label: "Swap", path: "/swap", content: <Swap/>},
+    {index: 3, label: "Users", path: "/users", content: <Users/>},
   ]
 
   useBlockNumber()
