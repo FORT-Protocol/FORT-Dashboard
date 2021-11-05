@@ -53,11 +53,10 @@ const updateOpenInterest = (txList: Block[], logList: LogBlock[]) => {
   fillAllDayToInitMap(longOpenInterestMap, now, past, "number")
   fillAllDayToInitMap(shortOpenInterestMap, now, past, "number")
 
-  // logList.forEach((block)=>{
-  //   console.log(block)
-  //   const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
-  //   console.log(parameters)
-  // })
+  logList.forEach((block)=>{
+    const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
+    console.log(parameters)
+  })
 
   txList.forEach((block)=>{
     const func = block.input.slice(0,10)

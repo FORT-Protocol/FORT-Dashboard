@@ -4,7 +4,7 @@ import {optionsContractAddress} from "../constant/contract";
 import {useEffect} from "react";
 import fetcher from "../utils/fetcher";
 
-const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
+const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY5
 
 export const optionsLogListAtom = atom({
   key: "fetch-optionsLogListAtom::status",
@@ -34,12 +34,16 @@ const useFetchOptionsLogList = () => {
     let blockHigh = 0
     let res: never[] = []
 
+    const sleep = (ms: number) => {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
     while(res.length % 1000 === 0 ){
       let request
       request = await fetchTxList(String(blockHigh), "latest")
       blockHigh = Number(request[request.length - 1].blockNumber) + 1
-      console.log(request, blockHigh)
       res = res.concat(request)
+      await sleep(500);
     }
     setLogsList(res)
   }
