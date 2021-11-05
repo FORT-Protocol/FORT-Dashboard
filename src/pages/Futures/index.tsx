@@ -10,7 +10,7 @@ import {openingVolumeListAtom} from "../../state/futures/updateCumulativeOpenPos
 import {longShortDistributionAtom} from "../../state/futures/updateLongShortDistribution";
 import {leverageDistributionAtom} from "../../state/futures/updateLeverageDistribution";
 // import {openPriceDistributionAtom} from "../../state/futures/updateOpenPriceDistribution";
-import {positionListAtom} from "../../state/futures/updateTotalTradingVolumeList";
+import {positionListAtom} from "../../state/futures/updatePositionList";
 import {statusAtom} from "../../hooks/useFetchFuturesTxList";
 import {PROCESSING} from "../../constant/status";
 
