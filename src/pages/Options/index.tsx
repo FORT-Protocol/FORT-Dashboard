@@ -9,7 +9,7 @@ import {currentShortOptionsDCUAtom} from "../../state/options/updateCurrentShort
 import {longShortDistributionAtom} from "../../state/options/updateLongShortDistribution";
 import {totalTxVolumeListAtom} from "../../state/options/updateOpenPosition";
 import {distributionOfExerciseTimespanAtom} from "../../state/options/updateDistributionOfExerciseTimespan";
-import {totalTradingVolumeListAtom} from "../../state/options/updateTotalTradingVolumeList";
+import {OpenInterestAtom} from "../../state/options/updateOpenInterest";
 import {statusAtom} from "../../hooks/useFetchOptionsTxList";
 import {PROCESSING} from "../../constant/status";
 
@@ -20,7 +20,7 @@ const Options = () => {
   const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
   const totalTxVolumeList = useRecoilValue(totalTxVolumeListAtom({}))
   const distributionOfExerciseTimespan = useRecoilValue(distributionOfExerciseTimespanAtom({}))
-  const totalTradingVolumeList = useRecoilValue(totalTradingVolumeListAtom({}))
+  const totalTradingVolumeList = useRecoilValue(OpenInterestAtom({}))
   const status = useRecoilValue(statusAtom)
 
   return (

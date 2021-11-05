@@ -37,7 +37,7 @@ const useFetchFuturesLogList = () => {
     while(res.length % 1000 === 0 ){
       let request
       request = await fetchTxList(String(blockHigh), "latest")
-      blockHigh = request[request.length - 1].blockNumber
+      blockHigh = Number(request[request.length - 1].blockNumber) + 1
       res = res.concat(request)
     }
     setLogsList(res)
