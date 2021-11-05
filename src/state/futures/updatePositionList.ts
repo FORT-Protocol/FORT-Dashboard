@@ -12,7 +12,34 @@ export const positionListAtom = atomFamily({
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
       const logList = get(logsListAtom)
-      return updatePositionList(txList, logList)
+      const {positionList} = updatePositionList(txList, logList)
+      return positionList
+    }
+  })
+})
+
+export const currentOpenLongPositionsAtom = atomFamily({
+  key: "futures-curOpenLongPositions::value",
+  default: selectorFamily({
+    key: "futures-curOpenLongPositions::default",
+    get: () => ({get}) => {
+      const txList = get(futuresTxListAtom)
+      const logList = get(logsListAtom)
+      const {long} = updatePositionList(txList, logList)
+      return long
+    }
+  })
+})
+
+export const currentOpenShortPositionsAtom = atomFamily({
+  key: "futures-curOpenShortPositions::value",
+  default: selectorFamily({
+    key: "futures-curOpenShortPositions::default",
+    get: () => ({get}) => {
+      const txList = get(futuresTxListAtom)
+      const logList = get(logsListAtom)
+      const {short} = updatePositionList(txList, logList)
+      return short
     }
   })
 })
@@ -161,6 +188,9 @@ const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
     })
     short = shortPositionListMap[key]
   })
-
-  return positionList
+  return {
+    positionList,
+    long,
+    short
+  }
 }

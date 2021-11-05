@@ -1,6 +1,5 @@
 import {atomFamily, selectorFamily} from "recoil";
-import {currentOpenLongPositionsAtom} from "./updateCurrentOpenLongPositionsDCU";
-import {currentOpenShortPositionsAtom} from "./updateCurrentOpenShortPositionDCU";
+import {currentOpenLongPositionsAtom, currentOpenShortPositionsAtom} from "./updatePositionList";
 
 export const longShortDistributionAtom = atomFamily({
   key: "futures-longShortDistribution::value",

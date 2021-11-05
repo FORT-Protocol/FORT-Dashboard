@@ -4,13 +4,15 @@ import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import {cumulativeOpenPositionsAtom} from "../../state/futures/updateCumulativeOpenPositions";
 import {useRecoilValue} from "recoil";
-import {currentOpenShortPositionsAtom} from "../../state/futures/updateCurrentOpenShortPositionDCU";
-import {currentOpenLongPositionsAtom} from "../../state/futures/updateCurrentOpenLongPositionsDCU";
 import {openingVolumeListAtom} from "../../state/futures/updateOpeningVolumeList";
 import {longShortDistributionAtom} from "../../state/futures/updateLongShortDistribution";
 import {leverageDistributionAtom} from "../../state/futures/updateLeverageDistribution";
 // import {openPriceDistributionAtom} from "../../state/futures/updateOpenPriceDistribution";
-import {positionListAtom} from "../../state/futures/updatePositionList";
+import {
+  currentOpenLongPositionsAtom,
+  currentOpenShortPositionsAtom,
+  positionListAtom
+} from "../../state/futures/updatePositionList";
 import {statusAtom} from "../../hooks/useFetchFuturesTxList";
 import {PROCESSING} from "../../constant/status";
 
