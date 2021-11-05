@@ -26,13 +26,13 @@ const Options = () => {
   return (
     <Stack spacing={["22px", "22px", "44px"]} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 1, 1, 3, 3]} spacing={["22px", "22px", "44px"]}>
-        <Norm value={status === PROCESSING ? "-" : totalTxVolume.toFixed(2)} desc={"Total Transaction Volume (DCU)"} color={"#C7A072"}/>
+        <Norm value={status === PROCESSING ? "-" : totalTxVolume.toFixed(2)} desc={"Total Open Position"} color={"#C7A072"}/>
         <Norm value={status === PROCESSING ? "-" : curCallOptionPosition.toFixed(2)} desc={"Current Call Option Positions (DCU)"} color={"#00B388"}/>
         <Norm value={status === PROCESSING ? "-" : curShortOptionPosition.toFixed(2)} desc={"Current Short Option Positions (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
-        <LineChart title={"Total Transaction Volume"} data={totalTxVolumeList} suffix={"DCU"}/>
-        <LineChart title={"Total Trading Volume"} data={totalTradingVolumeList} suffix={"DCU"}/>
+        <LineChart title={"Open Position"} data={totalTxVolumeList} suffix={"DCU"}/>
+        <LineChart title={"Open Interest"} data={totalTradingVolumeList}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing={["22px", "22px", "44px"]}>
         <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>
