@@ -41,11 +41,10 @@ const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
     const parameters = web3.eth.abi.decodeParameters(["uint256", "address", "address"], block.data)
     const item = {
       index: Number(parameters[0]),
-      address: parameters[1]
+      address: parameters[1].toLowerCase()
     }
     logMap[block.transactionHash].push(item)
   })
-  console.log(logMap)
 
   txList.forEach((block) => {
     const func = block.input.slice(0, 10)
@@ -106,8 +105,27 @@ const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
       totalPosition -= Number(web3.utils.fromWei(parameters[1]))
       totalPositionListMap[date] = totalPosition
     }
+
+    if (func === "0xc09835f2") {
+    // settle(uint256 index, address[] addresses)
+      if (logMap[block.hash]) {
+        logMap[block.hash].forEach((item)=> {
+          const pool = addressMap[item.address.toLowerCase()]
+          if (item.index <= 5){
+            longPosition -= Number(pool[item.index - 1])
+            longPositionListMap[date] = longPosition
+          }
+          if (item.index > 5){
+            shortPosition -= Number(pool[item.index - 1])
+            shortPositionListMap[date] = shortPosition
+          }
+          totalPosition -= Number(pool[item.index - 1])
+          totalPositionListMap[date] = totalPosition
+          addressMap[item.address.toLowerCase()][item.index - 1] = 0
+        })
+      }
+    }
   })
-  console.log(addressMap)
   // 用于解决Map初始化为0的问题
   let total = 0
   Object.keys(totalPositionListMap).forEach((key) => {
