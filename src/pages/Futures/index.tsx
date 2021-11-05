@@ -6,7 +6,7 @@ import {cumulativeOpenPositionsAtom} from "../../state/futures/updateCumulativeO
 import {useRecoilValue} from "recoil";
 import {currentOpenShortPositionsAtom} from "../../state/futures/updateCurrentOpenShortPositionDCU";
 import {currentOpenLongPositionsAtom} from "../../state/futures/updateCurrentOpenLongPositionsDCU";
-import {openingVolumeListAtom} from "../../state/futures/updateCumulativeOpenPositionsList";
+import {openingVolumeListAtom} from "../../state/futures/updateOpeningVolumeList";
 import {longShortDistributionAtom} from "../../state/futures/updateLongShortDistribution";
 import {leverageDistributionAtom} from "../../state/futures/updateLeverageDistribution";
 // import {openPriceDistributionAtom} from "../../state/futures/updateOpenPriceDistribution";
