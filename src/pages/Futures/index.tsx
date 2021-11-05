@@ -6,7 +6,7 @@ import {cumulativeOpenPositionsAtom} from "../../state/futures/updateCumulativeO
 import {useRecoilValue} from "recoil";
 import {currentOpenShortPositionsAtom} from "../../state/futures/updateCurrentOpenShortPositionDCU";
 import {currentOpenLongPositionsAtom} from "../../state/futures/updateCurrentOpenLongPositionsDCU";
-import {updateCumulativeOpenPositionsListAtom} from "../../state/futures/updateCumulativeOpenPositionsList";
+import {openingVolumeListAtom} from "../../state/futures/updateCumulativeOpenPositionsList";
 import {longShortDistributionAtom} from "../../state/futures/updateLongShortDistribution";
 import {leverageDistributionAtom} from "../../state/futures/updateLeverageDistribution";
 // import {openPriceDistributionAtom} from "../../state/futures/updateOpenPriceDistribution";
@@ -18,7 +18,7 @@ const Futures = () => {
   const cumulativeOpenPositions = useRecoilValue(cumulativeOpenPositionsAtom({}))
   const curOpenLongPositions = useRecoilValue(currentOpenLongPositionsAtom({}))
   const curOpenShortPositions = useRecoilValue(currentOpenShortPositionsAtom({}))
-  const totalTxVolumeList = useRecoilValue(updateCumulativeOpenPositionsListAtom({}))
+  const openingVolumeList = useRecoilValue(openingVolumeListAtom({}))
   const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
   const leverageDistribution = useRecoilValue(leverageDistributionAtom({}))
   // const openPriceDistribution = useRecoilValue(openPriceDistributionAtom({}))
@@ -33,8 +33,8 @@ const Futures = () => {
         <Norm value={status === PROCESSING ? "-" : curOpenShortPositions.toFixed(2)} desc={"Current Open Short Positions (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
-        <LineChart title={"Total Transaction Volume"} suffix={"DCU"} data={totalTxVolumeList}/>
-        <LineChart title={"Total Trading Volume"} suffix={"DCU"} data={totalTradingVolumeList}/>
+        <LineChart title={"Opening volume"} suffix={"DCU"} data={openingVolumeList}/>
+        <LineChart title={"Position"} suffix={"DCU"} data={totalTradingVolumeList}/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing={["22px", "22px", "44px"]}>
         <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>

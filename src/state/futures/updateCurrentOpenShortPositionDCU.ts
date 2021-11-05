@@ -34,6 +34,13 @@ const updateCurrentOpenShortPositionDCU = (txList: Block[]) => {
         currentOpenShortPositions += Number(web3.utils.fromWei(parameters[1]))
       }
     }
+    if (func === "0xd79875eb") {
+      // sell(uint256 amount, uint256 sellPrice)
+      const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256"], block.input.slice(10))
+      if (Number(parameters[0]) > 5) {
+        currentOpenShortPositions -= Number(web3.utils.fromWei(parameters[1]))
+      }
+    }
   })
   return currentOpenShortPositions
 }

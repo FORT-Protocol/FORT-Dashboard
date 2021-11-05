@@ -4,18 +4,18 @@ import {Block} from "../app";
 import {web3} from "../../provider";
 import fillAllDayToInitMap from "../../utils/fillAllDayToInitMap";
 
-export const updateCumulativeOpenPositionsListAtom = atomFamily({
-  key: "futures-updateCumulativeOpenPositionsList::value",
+export const openingVolumeListAtom = atomFamily({
+  key: "futures-openingVolumeList::value",
   default: selectorFamily({
-    key: "futures-updateCumulativeOpenPositionsList::default",
+    key: "futures-openingVolumeList::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
-      return updateCumulativeOpenPositionsList(txList)
+      return updateOpeningVolumeList(txList)
     }
   })
 })
 
-const updateCumulativeOpenPositionsList = (txList: Block[]) => {
+const updateOpeningVolumeList = (txList: Block[]) => {
   let totalTxVolumeListMap: {[index: string]: number} = {}
   let longTxVolumeListMap: {[index: string]: number} = {}
   let shortVolumeListMap: {[index: string]: number} = {}
