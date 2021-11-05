@@ -3,10 +3,9 @@ import {atom, useRecoilState} from "recoil";
 import {useEffect} from "react";
 import {optionsTxListAtom} from "../state/options";
 import fetcher from "../utils/fetcher";
-import {etherscanEndpoint} from "../constant/etherscan";
+import {api, env} from "../constant/etherscan";
 import {IDLE, PROCESSING} from "../constant/status";
 
-const env = process.env.REACT_APP_ENV || "mainnet"
 const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY2 || process.env.REACT_APP_ETHERSCAN_APIKEY
 
 export const statusAtom = atom({
@@ -15,10 +14,8 @@ export const statusAtom = atom({
 })
 
 const useFetchOptionsTxList = () => {
-  const address = (env === "mainnet") ? optionsContractAddress["mainnet"] : optionsContractAddress["rinkeby"]
-  const api = ( env === "mainnet" ) ? etherscanEndpoint["mainnet"] : etherscanEndpoint["rinkeby"]
-
   const [optionsTxList, setOptionsTxList] = useRecoilState(optionsTxListAtom)
+  const address = (env === "mainnet") ? optionsContractAddress["mainnet"] : optionsContractAddress["rinkeby"]
   const [status, setStatus] = useRecoilState(statusAtom)
 
   useEffect(() => {

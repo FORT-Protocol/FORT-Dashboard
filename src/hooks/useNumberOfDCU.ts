@@ -3,7 +3,7 @@ import {dcuTokenAddress, swapContractAddress} from "../constant/contract";
 import {useEffect} from "react";
 import fetcher from "../utils/fetcher";
 import {web3} from "../provider";
-import {etherscanEndpoint} from "../constant/etherscan";
+import {env, etherscanEndpoint} from "../constant/etherscan";
 
 export const numberOfDCUAtom = atom({
   key: "swap-numberOfDCU::value",
@@ -11,7 +11,6 @@ export const numberOfDCUAtom = atom({
 })
 
 const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY4 || process.env.REACT_APP_ETHERSCAN_APIKEY
-const env = process.env.REACT_APP_ENV || "mainnet"
 
 const useNumberOfDCU = () => {
   const swapAddress = (env === "mainnet") ? swapContractAddress["mainnet"] : swapContractAddress["rinkeby"]

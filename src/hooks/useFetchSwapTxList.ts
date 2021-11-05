@@ -3,10 +3,9 @@ import {atom, useRecoilState} from "recoil";
 import {useEffect} from "react";
 import {swapTxListAtom} from "../state/swap";
 import fetcher from "../utils/fetcher";
-import {etherscanEndpoint} from "../constant/etherscan";
+import {api, env} from "../constant/etherscan";
 import {IDLE, PROCESSING} from "../constant/status";
 
-const env = process.env.REACT_APP_ENV || "mainnet"
 const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY3 || process.env.REACT_APP_ETHERSCAN_APIKEY
 
 export const statusAtom = atom({
@@ -16,7 +15,6 @@ export const statusAtom = atom({
 
 const useFetchSwapTxList = () => {
   const swapAddress = ( env === "mainnet" ) ?  swapContractAddress["mainnet"] : swapContractAddress["rinkeby"]
-  const api = ( env === "mainnet" ) ? etherscanEndpoint["mainnet"] : etherscanEndpoint["rinkeby"]
 
   const [swapTxList, setSwapTxList] = useRecoilState(swapTxListAtom)
   const [status, setStatus] = useRecoilState(statusAtom)

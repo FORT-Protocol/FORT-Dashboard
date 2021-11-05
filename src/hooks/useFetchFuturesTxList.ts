@@ -1,14 +1,12 @@
 import {atom, useRecoilState} from "recoil"
 import {futuresTxListAtom} from "../state/futures"
-import {blockNumberAtom} from "../state/app"
 import {useEffect} from "react"
-import {futuresContractAddress} from "../constant/contract"
 import fetcher from "../utils/fetcher";
-import {etherscanEndpoint} from "../constant/etherscan";
+import {api, env} from "../constant/etherscan";
 import {IDLE, PROCESSING} from "../constant/status";
+import {futuresContractAddress} from "../constant/contract";
 
-const env = process.env.REACT_APP_ENV || "mainnet"
-const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY || process.env.REACT_APP_ETHERSCAN_APIKEY
+const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
 
 export const statusAtom = atom({
   key: "fetch-futures::status",
@@ -17,8 +15,6 @@ export const statusAtom = atom({
 
 const useFetchFuturesTxList = () => {
   const address = ( env === "mainnet" ) ?  futuresContractAddress["mainnet"] : futuresContractAddress["rinkeby"]
-  const api = ( env === "mainnet" ) ? etherscanEndpoint["mainnet"] : etherscanEndpoint["rinkeby"]
-
   const [futuresTxList, setFuturesTxList] = useRecoilState(futuresTxListAtom)
   const [status, setStatus] = useRecoilState(statusAtom)
 

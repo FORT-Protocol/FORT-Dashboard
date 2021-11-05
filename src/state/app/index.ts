@@ -47,3 +47,16 @@ export interface TokenTxBlock {
   transactionIndex: string
   value: string
 }
+
+export interface LogBlock {
+  address: string
+  blockNumber: string
+  data: string
+  gasPrice: string
+  gasUsed: string
+  logIndex: string
+  timeStamp: string
+  topics: string[]
+  transactionHash: string
+  transactionIndex: string
+}

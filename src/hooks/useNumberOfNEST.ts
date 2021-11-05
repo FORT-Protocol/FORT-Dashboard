@@ -3,7 +3,7 @@ import {nestTokenAddress, swapContractAddress} from "../constant/contract";
 import {useEffect} from "react";
 import fetcher from "../utils/fetcher";
 import {web3} from "../provider";
-import {etherscanEndpoint} from "../constant/etherscan";
+import {api} from "../constant/etherscan";
 
 const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY5 || process.env.REACT_APP_ETHERSCAN_APIKEY
 const env = process.env.REACT_APP_ENV || "mainnet"
@@ -14,8 +14,6 @@ export const numberOfNESTAtom = atom({
 })
 
 const useNumberOfNEST = () => {
-  const api = ( env === "mainnet" ) ? etherscanEndpoint["mainnet"] : etherscanEndpoint["rinkeby"]
-
   const swapAddress = (env === "mainnet") ? swapContractAddress["mainnet"] : swapContractAddress["rinkeby"]
   const tokenAddress = (env === "mainnet") ? nestTokenAddress["mainnet"] : nestTokenAddress["rinkeby"]
 

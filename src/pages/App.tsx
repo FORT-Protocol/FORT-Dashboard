@@ -26,6 +26,7 @@ import useFetchFuturesTxList from "../hooks/useFetchFuturesTxList";
 import useFetchOptionsTxList from "../hooks/useFetchOptionsTxList";
 import useFetchSwapTxList from "../hooks/useFetchSwapTxList";
 import useBlockNumber from "../hooks/useBlockNumber";
+import useFetchLogsList from "../hooks/useFetchLogsList";
 
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
   ]
 
   useBlockNumber()
+  useFetchLogsList()
   useFetchFuturesTxList()
   useFetchOptionsTxList()
   useFetchSwapTxList()
