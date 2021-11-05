@@ -76,31 +76,37 @@ const updatePositionList = (txList: Block[]) => {
     }
   })
 
-  let value = 0
+  let total = 0
   Object.keys(totalPositionListMap).forEach((key)=>{
-    totalPositionListMap[key] = totalPositionListMap[key] === 0 ? value : totalPositionListMap[key]
+    totalPositionListMap[key] = totalPositionListMap[key] === 0 ? total : totalPositionListMap[key]
     positionList.push({
       day: key,
       value: totalPositionListMap[key],
       category: "Total"
     })
-    value = totalPositionListMap[key]
+    total = totalPositionListMap[key]
   })
 
+  let long = 0
   Object.keys(longPositionListMap).forEach((key)=>{
+    longPositionListMap[key] = longPositionListMap[key] === 0 ? long : longPositionListMap[key]
     positionList.push({
       day: key,
       value: longPositionListMap[key],
       category: "Long"
     })
+    long = longPositionListMap[key]
   })
 
+  let short = 0
   Object.keys(shortPositionListMap).forEach((key)=>{
+    shortPositionListMap[key] = shortPositionListMap[key] === 0 ? short : shortPositionListMap[key]
     positionList.push({
       day: key,
       value: shortPositionListMap[key],
       category: "Short"
     })
+    short = shortPositionListMap[key]
   })
 
   return positionList
