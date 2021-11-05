@@ -5,14 +5,14 @@ import {web3} from "../../provider";
 import fillAllDayToInitMap from "../../utils/fillAllDayToInitMap";
 import {logsListAtom} from "../../hooks/useFetchLogsList";
 
-export const positionListAtom = atomFamily({
-  key: "futures-positionList::value",
+export const positionInterestAtom = atomFamily({
+  key: "futures-positionInterest::value",
   default: selectorFamily({
-    key: "futures-positionList::default",
+    key: "futures-positionInterest::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
       const logList = get(logsListAtom)
-      const {positionList} = updatePositionList(txList, logList)
+      const {positionList} = updatePositionInterest(txList, logList)
       return positionList
     }
   })
@@ -25,7 +25,7 @@ export const currentOpenLongPositionsAtom = atomFamily({
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
       const logList = get(logsListAtom)
-      const {long} = updatePositionList(txList, logList)
+      const {long} = updatePositionInterest(txList, logList)
       return long
     }
   })
@@ -38,16 +38,16 @@ export const currentOpenShortPositionsAtom = atomFamily({
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
       const logList = get(logsListAtom)
-      const {short} = updatePositionList(txList, logList)
+      const {short} = updatePositionInterest(txList, logList)
       return short
     }
   })
 })
 
-const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
+const updatePositionInterest = (txList: Block[], logList: LogBlock[]) => {
   let totalPositionListMap: { [index: string]: number } = {},
-    longPositionListMap: { [index: string]: number } = {},
-    shortPositionListMap: { [index: string]: number } = {},
+    longPositionInterestMap: { [index: string]: number } = {},
+    shortPositionInterestMap: { [index: string]: number } = {},
     // 地址Map，存储当时时刻下，每个用户的持仓分布
     addressMap: { [index: string]: number[] } = {},
     logMap: { [index: string]: {index: number, address: string}[]} = {}
@@ -58,8 +58,8 @@ const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
   const now = new Date().getTime()
   const past = new Date(1633046400000).getTime()
   fillAllDayToInitMap(totalPositionListMap, now, past, "number")
-  fillAllDayToInitMap(longPositionListMap, now, past, "number")
-  fillAllDayToInitMap(shortPositionListMap, now, past, "number")
+  fillAllDayToInitMap(longPositionInterestMap, now, past, "number")
+  fillAllDayToInitMap(shortPositionInterestMap, now, past, "number")
 
   logList.forEach((block)=>{
     if (!logMap.hasOwnProperty(block.transactionHash)){
@@ -85,13 +85,13 @@ const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
       const parameters = web3.eth.abi.decodeParameters(["address", "uint256", "bool", "uint256"], block.input.slice(10))
       if (parameters[2]) {
         longPosition += Number(web3.utils.fromWei(parameters[3]))
-        longPositionListMap[date] = longPosition
+        longPositionInterestMap[date] = longPosition
         const index = Number(parameters[1] - 1)
         addressMap[block.from][index] += Number(web3.utils.fromWei(parameters[3]))
       }
       if (!parameters[2]) {
         shortPosition += Number(web3.utils.fromWei(parameters[3]))
-        shortPositionListMap[date] = shortPosition
+        shortPositionInterestMap[date] = shortPosition
         const index = Number(parameters[1]) + 4
         addressMap[block.from][index] += Number(web3.utils.fromWei(parameters[3]))
       }
@@ -106,11 +106,11 @@ const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
       addressMap[block.from][index] += Number(web3.utils.fromWei(parameters[1]))
       if (Number(parameters[0]) <= 5) {
         longPosition += Number(web3.utils.fromWei(parameters[1]))
-        longPositionListMap[date] = longPosition
+        longPositionInterestMap[date] = longPosition
       }
       if (Number(parameters[0]) > 5) {
         shortPosition += Number(web3.utils.fromWei(parameters[1]))
-        shortPositionListMap[date] = shortPosition
+        shortPositionInterestMap[date] = shortPosition
       }
       totalPosition += Number(web3.utils.fromWei(parameters[1]))
       totalPositionListMap[date] = totalPosition
@@ -123,11 +123,11 @@ const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
       addressMap[block.from][index] -= Number(web3.utils.fromWei(parameters[1]))
       if (Number(parameters[0]) <= 5) {
         longPosition -= Number(web3.utils.fromWei(parameters[1]))
-        longPositionListMap[date] = longPosition
+        longPositionInterestMap[date] = longPosition
       }
       if (Number(parameters[0]) > 5) {
         shortPosition -= Number(web3.utils.fromWei(parameters[1]))
-        shortPositionListMap[date] = shortPosition
+        shortPositionInterestMap[date] = shortPosition
       }
       totalPosition -= Number(web3.utils.fromWei(parameters[1]))
       totalPositionListMap[date] = totalPosition
@@ -140,11 +140,11 @@ const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
           const pool = addressMap[item.address.toLowerCase()]
           if (item.index <= 5){
             longPosition -= Number(pool[item.index - 1])
-            longPositionListMap[date] = longPosition
+            longPositionInterestMap[date] = longPosition
           }
           if (item.index > 5){
             shortPosition -= Number(pool[item.index - 1])
-            shortPositionListMap[date] = shortPosition
+            shortPositionInterestMap[date] = shortPosition
           }
           totalPosition -= Number(pool[item.index - 1])
           totalPositionListMap[date] = totalPosition
@@ -167,26 +167,26 @@ const updatePositionList = (txList: Block[], logList: LogBlock[]) => {
 
   // 用于解决Map初始化为0的问题
   let long = 0
-  Object.keys(longPositionListMap).forEach((key) => {
-    longPositionListMap[key] = longPositionListMap[key] === 0 ? long : longPositionListMap[key]
+  Object.keys(longPositionInterestMap).forEach((key) => {
+    longPositionInterestMap[key] = longPositionInterestMap[key] === 0 ? long : longPositionInterestMap[key]
     positionList.push({
       day: key,
-      value: longPositionListMap[key],
+      value: longPositionInterestMap[key],
       category: "Long"
     })
-    long = longPositionListMap[key]
+    long = longPositionInterestMap[key]
   })
 
   // 用于解决Map初始化为0的问题
   let short = 0
-  Object.keys(shortPositionListMap).forEach((key) => {
-    shortPositionListMap[key] = shortPositionListMap[key] === 0 ? short : shortPositionListMap[key]
+  Object.keys(shortPositionInterestMap).forEach((key) => {
+    shortPositionInterestMap[key] = shortPositionInterestMap[key] === 0 ? short : shortPositionInterestMap[key]
     positionList.push({
       day: key,
-      value: shortPositionListMap[key],
+      value: shortPositionInterestMap[key],
       category: "Short"
     })
-    short = shortPositionListMap[key]
+    short = shortPositionInterestMap[key]
   })
   return {
     positionList,

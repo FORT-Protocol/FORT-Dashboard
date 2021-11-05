@@ -10,22 +10,22 @@ export const totalTxVolumeListAtom = atomFamily({
     key: "options-totalTxVolumeList::default",
     get: () => ({get}) => {
       const txList = get(optionsTxListAtom)
-      return updateTotalTxVolumeList(txList)
+      return updateOpenPosition(txList)
     }
   })
 })
 
-const updateTotalTxVolumeList = (txList: Block[]) => {
-  let totalTxVolumeListMap: {[index: string]: number} = {}
-  let longTxVolumeListMap: {[index: string]: number} = {}
-  let shortVolumeListMap: {[index: string]: number} = {}
-  let totalTxVolumeList: {day: string, value: number, category: string}[] = []
+const updateOpenPosition = (txList: Block[]) => {
+  let totalOpenPositionMap: {[index: string]: number} = {}
+  let longOpenPositionMap: {[index: string]: number} = {}
+  let shortOpenPositionMap: {[index: string]: number} = {}
+  let totalOpenPositionList: {day: string, value: number, category: string}[] = []
 
   const now = new Date().getTime()
   const past = new Date(1633046400000).getTime()
-  fillAllDayToInitMap(totalTxVolumeListMap, now, past, "number")
-  fillAllDayToInitMap(longTxVolumeListMap, now, past, "number")
-  fillAllDayToInitMap(shortVolumeListMap, now, past, "number")
+  fillAllDayToInitMap(totalOpenPositionMap, now, past, "number")
+  fillAllDayToInitMap(longOpenPositionMap, now, past, "number")
+  fillAllDayToInitMap(shortOpenPositionMap, now, past, "number")
 
   txList.forEach((block) => {
     const func = block.input.slice(0,10)
@@ -35,40 +35,40 @@ const updateTotalTxVolumeList = (txList: Block[]) => {
       // open(address tokenAddress, uint256 strikePrice, bool orientation, uint256 exerciseBlock, uint256 dcuAmount)
       const parameters = web3.eth.abi.decodeParameters(["address", "uint256", "bool", "uint256", "uint256"], block.input.slice(10))
       if (parameters[2]) {
-        longTxVolumeListMap[date] += Number(web3.utils.fromWei(parameters[4]))
+        longOpenPositionMap[date] += Number(web3.utils.fromWei(parameters[4]))
       }
       if (!parameters[2]) {
-        shortVolumeListMap[date] += Number(web3.utils.fromWei(parameters[4]))
+        shortOpenPositionMap[date] += Number(web3.utils.fromWei(parameters[4]))
       }
-      totalTxVolumeListMap[date] += Number(web3.utils.fromWei(parameters[4]))
+      totalOpenPositionMap[date] += Number(web3.utils.fromWei(parameters[4]))
     }
   })
 
-  Object.keys(totalTxVolumeListMap).forEach((key)=>{
-    totalTxVolumeList.push({
+  Object.keys(totalOpenPositionMap).forEach((key)=>{
+    totalOpenPositionList.push({
       day: key,
-      value: totalTxVolumeListMap[key],
+      value: totalOpenPositionMap[key],
       category: "Total"
     })
   })
 
-  Object.keys(longTxVolumeListMap).forEach((key)=>{
-    totalTxVolumeList.push({
+  Object.keys(longOpenPositionMap).forEach((key)=>{
+    totalOpenPositionList.push({
       day: key,
-      value: longTxVolumeListMap[key],
+      value: longOpenPositionMap[key],
       category: "Long"
     })
   })
 
-  Object.keys(shortVolumeListMap).forEach((key)=>{
-    totalTxVolumeList.push({
+  Object.keys(shortOpenPositionMap).forEach((key)=>{
+    totalOpenPositionList.push({
       day: key,
-      value: shortVolumeListMap[key],
+      value: shortOpenPositionMap[key],
       category: "Short"
     })
   })
 
-  return totalTxVolumeList
+  return totalOpenPositionList
 }
 
-export default updateTotalTxVolumeList
+export default updateOpenPosition

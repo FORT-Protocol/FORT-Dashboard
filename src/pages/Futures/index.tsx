@@ -2,7 +2,7 @@ import {SimpleGrid, Stack} from "@chakra-ui/react";
 import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
-import {cumulativeOpenPositionsAtom} from "../../state/futures/updateCumulativeOpenPositions";
+import {totalOpenPositionsAtom} from "../../state/futures/updateTotalOpenPosition";
 import {useRecoilValue} from "recoil";
 import {openingVolumeListAtom} from "../../state/futures/updateOpeningVolumeList";
 import {longShortDistributionAtom} from "../../state/futures/updateLongShortDistribution";
@@ -11,32 +11,32 @@ import {leverageDistributionAtom} from "../../state/futures/updateLeverageDistri
 import {
   currentOpenLongPositionsAtom,
   currentOpenShortPositionsAtom,
-  positionListAtom
-} from "../../state/futures/updatePositionList";
+  positionInterestAtom
+} from "../../state/futures/updatePositionInterest";
 import {statusAtom} from "../../hooks/useFetchFuturesTxList";
 import {PROCESSING} from "../../constant/status";
 
 const Futures = () => {
-  const cumulativeOpenPositions = useRecoilValue(cumulativeOpenPositionsAtom({}))
+  const totalOpenPositions = useRecoilValue(totalOpenPositionsAtom({}))
   const curOpenLongPositions = useRecoilValue(currentOpenLongPositionsAtom({}))
   const curOpenShortPositions = useRecoilValue(currentOpenShortPositionsAtom({}))
   const openingVolumeList = useRecoilValue(openingVolumeListAtom({}))
   const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
   const leverageDistribution = useRecoilValue(leverageDistributionAtom({}))
   // const openPriceDistribution = useRecoilValue(openPriceDistributionAtom({}))
-  const positionList = useRecoilValue(positionListAtom({}))
+  const positionInterest = useRecoilValue(positionInterestAtom({}))
   const status = useRecoilValue(statusAtom)
 
   return (
     <Stack spacing={["22px", "22px", "44px"]} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 1, 1, 3]} spacing={["22px", "22px", "44px"]}>
-        <Norm value={status === PROCESSING ? "-" : cumulativeOpenPositions.toFixed(2)} desc={"Total Open Position"} color={"#C7A072"}/>
+        <Norm value={status === PROCESSING ? "-" : totalOpenPositions.toFixed(2)} desc={"Total Open Position"} color={"#C7A072"}/>
         <Norm value={status === PROCESSING ? "-" : curOpenLongPositions.toFixed(2)} desc={"Current Open Long Positions (DCU)"} color={"#00B388"}/>
         <Norm value={status === PROCESSING ? "-" : curOpenShortPositions.toFixed(2)} desc={"Current Open Short Positions (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
         <LineChart title={"Open Position"} suffix={"DCU"} data={openingVolumeList}/>
-        <LineChart title={"Open Interest"} suffix={"DCU"} data={positionList} noTotal/>
+        <LineChart title={"Open Interest"} suffix={"DCU"} data={positionInterest} noTotal/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing={["22px", "22px", "44px"]}>
         <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>
