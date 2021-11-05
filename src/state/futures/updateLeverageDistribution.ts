@@ -15,7 +15,7 @@ export const leverageDistributionAtom = atomFamily({
 })
 
 const updateLeverageDistribution = (txList: Block[]) => {
-  let times1 = 0, times2 = 0, times3 = 0, times4 = 0, times5 = 0
+  let distribution = [0, 0, 0, 0, 0]
 
   txList.forEach((block) => {
     const func = block.input.slice(0, 10)
@@ -23,38 +23,57 @@ const updateLeverageDistribution = (txList: Block[]) => {
       // buy(address tokenAddress, uint256 lever, bool orientation, uint256 dcuAmount)
       const parameters = web3.eth.abi.decodeParameters(["address", "uint256", "bool", "uint256"], block.input.slice(10))
       if (parameters[1] === "1") {
-        times1 += Number(web3.utils.fromWei(parameters[3]))
+        distribution[0] += Number(web3.utils.fromWei(parameters[3]))
       }
       if (parameters[1] === "2") {
-        times2 += Number(web3.utils.fromWei(parameters[3]))
+        distribution[1] += Number(web3.utils.fromWei(parameters[3]))
       }
       if (parameters[1] === "3") {
-        times3 += Number(web3.utils.fromWei(parameters[3]))
+        distribution[2] += Number(web3.utils.fromWei(parameters[3]))
       }
       if (parameters[1] === "4") {
-        times4 += Number(web3.utils.fromWei(parameters[3]))
+        distribution[3] += Number(web3.utils.fromWei(parameters[3]))
       }
       if (parameters[1] === "5") {
-        times5 += Number(web3.utils.fromWei(parameters[3]))
+        distribution[4] += Number(web3.utils.fromWei(parameters[3]))
       }
     }
     if (func === "0x6214f36a") {
       // buyDirect(uint256 index, uint256 fortAmount)
       const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256"], block.input.slice(10))
       if (parameters[0] === "1" || parameters[0] === "6") {
-        times1 += Number(web3.utils.fromWei(parameters[1]))
+        distribution[0] += Number(web3.utils.fromWei(parameters[1]))
       }
       if (parameters[0] === "2" || parameters[0] === "7") {
-        times2 += Number(web3.utils.fromWei(parameters[1]))
+        distribution[1] += Number(web3.utils.fromWei(parameters[1]))
       }
       if (parameters[0] === "3" || parameters[0] === "8") {
-        times3 += Number(web3.utils.fromWei(parameters[1]))
+        distribution[2] += Number(web3.utils.fromWei(parameters[1]))
       }
       if (parameters[0] === "4" || parameters[0] === "9") {
-        times4 += Number(web3.utils.fromWei(parameters[1]))
+        distribution[3] += Number(web3.utils.fromWei(parameters[1]))
       }
       if (parameters[0] === "5" || parameters[0] === "10") {
-        times5 += Number(web3.utils.fromWei(parameters[1]))
+        distribution[4] += Number(web3.utils.fromWei(parameters[1]))
+      }
+    }
+    if (func === "0xd79875eb"){
+      // sell(uint256 amount, uint256 sellPrice)
+      const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256"], block.input.slice(10))
+      if (parameters[0] === "1" || parameters[0] === "6") {
+        distribution[0] -= Number(web3.utils.fromWei(parameters[1]))
+      }
+      if (parameters[0] === "2" || parameters[0] === "7") {
+        distribution[1] -= Number(web3.utils.fromWei(parameters[1]))
+      }
+      if (parameters[0] === "3" || parameters[0] === "8") {
+        distribution[2] -= Number(web3.utils.fromWei(parameters[1]))
+      }
+      if (parameters[0] === "4" || parameters[0] === "9") {
+        distribution[3] -= Number(web3.utils.fromWei(parameters[1]))
+      }
+      if (parameters[0] === "5" || parameters[0] === "10") {
+        distribution[4] -= Number(web3.utils.fromWei(parameters[1]))
       }
     }
   })
@@ -62,23 +81,23 @@ const updateLeverageDistribution = (txList: Block[]) => {
   return [
     {
       "type": "1 Times",
-      "value": times1
+      "value": distribution[0]
     },
     {
       "type": "2 Times",
-      "value": times2
+      "value": distribution[1]
     },
     {
       "type": "3 Times",
-      "value": times3
+      "value": distribution[2]
     },
     {
       "type": "4 Times",
-      "value": times4
+      "value": distribution[3]
     },
     {
       "type": "5 Times",
-      "value": times5
+      "value": distribution[4]
     },
   ]
 }
