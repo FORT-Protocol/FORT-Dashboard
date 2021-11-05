@@ -53,7 +53,6 @@ const updateOpeningVolumeList = (txList: Block[]) => {
         shortVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
       }
       totalTxVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
-
     }
   })
 

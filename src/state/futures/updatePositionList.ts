@@ -76,12 +76,15 @@ const updatePositionList = (txList: Block[]) => {
     }
   })
 
+  let value = 0
   Object.keys(totalPositionListMap).forEach((key)=>{
+    totalPositionListMap[key] = totalPositionListMap[key] === 0 ? value : totalPositionListMap[key]
     positionList.push({
       day: key,
       value: totalPositionListMap[key],
       category: "Total"
     })
+    value = totalPositionListMap[key]
   })
 
   Object.keys(longPositionListMap).forEach((key)=>{
