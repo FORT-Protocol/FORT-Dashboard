@@ -4,17 +4,18 @@ import {api, env} from "../constant/etherscan";
 import {useEffect} from "react";
 import {futuresContractAddress} from "../constant/contract";
 
-const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY || process.env.REACT_APP_ETHERSCAN_APIKEY
+const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY
 
-export const logsListAtom = atom({
-  key: "fetch-logsListAtom::status",
+export const futuresLogListAtom = atom({
+  key: "fetch-futuresLogListAtom::status",
   default: [],
 })
 
-const useFetchLogsList = () => {
-  const [logsList, setLogsList] = useRecoilState(logsListAtom)
+const useFetchFuturesLogList = () => {
+  const [logsList, setLogsList] = useRecoilState(futuresLogListAtom)
   const address = ( env === "mainnet" ) ?  futuresContractAddress["mainnet"] : futuresContractAddress["rinkeby"]
   const topic = "0x639a1e51b7d1ed316ba35664da82f6aac6dbb251b8968388c15951df975f9c93"
+
   useEffect(() => {
     fetchAllTx()
   },[])
@@ -41,6 +42,8 @@ const useFetchLogsList = () => {
     }
     setLogsList(res)
   }
+
+  return { logsList }
 }
 
-export default useFetchLogsList
+export default useFetchFuturesLogList

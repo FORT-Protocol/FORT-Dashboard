@@ -3,7 +3,7 @@ import {futuresTxListAtom} from "./index";
 import {Block, LogBlock} from "../app";
 import {web3} from "../../provider";
 import fillAllDayToInitMap from "../../utils/fillAllDayToInitMap";
-import {logsListAtom} from "../../hooks/useFetchLogsList";
+import {futuresLogListAtom} from "../../hooks/useFetchFuturesLogList";
 
 export const positionInterestAtom = atomFamily({
   key: "futures-positionInterest::value",
@@ -11,7 +11,7 @@ export const positionInterestAtom = atomFamily({
     key: "futures-positionInterest::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
-      const logList = get(logsListAtom)
+      const logList = get(futuresLogListAtom)
       const {positionList} = updatePositionInterest(txList, logList)
       return positionList
     }
@@ -24,7 +24,7 @@ export const currentOpenLongPositionsAtom = atomFamily({
     key: "futures-curOpenLongPositions::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
-      const logList = get(logsListAtom)
+      const logList = get(futuresLogListAtom)
       const {long} = updatePositionInterest(txList, logList)
       return long
     }
@@ -37,7 +37,7 @@ export const currentOpenShortPositionsAtom = atomFamily({
     key: "futures-curOpenShortPositions::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
-      const logList = get(logsListAtom)
+      const logList = get(futuresLogListAtom)
       const {short} = updatePositionInterest(txList, logList)
       return short
     }

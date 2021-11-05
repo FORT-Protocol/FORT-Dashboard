@@ -47,6 +47,8 @@ const useFetchOptionsTxList = () => {
     setOptionsTxList(res)
     setStatus(IDLE)
   }
+
+  return { optionsTxList, status }
 }
 
 export default useFetchOptionsTxList

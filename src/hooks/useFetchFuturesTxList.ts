@@ -47,6 +47,8 @@ const useFetchFuturesTxList = () => {
     setFuturesTxList(res)
     setStatus(IDLE)
   }
+
+  return { futuresTxList, status }
 }
 
 export default useFetchFuturesTxList
