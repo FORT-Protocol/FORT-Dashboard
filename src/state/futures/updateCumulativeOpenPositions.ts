@@ -1,21 +1,21 @@
-// 更新 Total Transaction Volume
+// 更新 Total Volume 累计开仓量
 import {web3} from "../../provider";
 import {atomFamily, selectorFamily} from "recoil";
 import {futuresTxListAtom} from "./index";
 import {Block} from "../app";
 
-export const totalTxVolumeAtom = atomFamily({
-  key: "futures-totalTxVolume::value",
+export const cumulativeOpenPositionsAtom = atomFamily({
+  key: "futures-cumulativeOpenPositions::value",
   default: selectorFamily({
-    key: "futures-totalTxVolume::default",
+    key: "futures-cumulativeOpenPositions::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
-      return updateTotalTxVolume(txList)
+      return updateCumulativeOpenPositions(txList)
     }
   })
 })
 
-const updateTotalTxVolume = (txList: Block[]) => {
+const updateCumulativeOpenPositions = (txList: Block[]) => {
   let totalTxVolume = 0
 
   txList.forEach((block) => {

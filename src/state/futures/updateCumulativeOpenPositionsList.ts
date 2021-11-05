@@ -4,18 +4,18 @@ import {Block} from "../app";
 import {web3} from "../../provider";
 import fillAllDayToInitMap from "../../utils/fillAllDayToInitMap";
 
-export const totalTxVolumeListAtom = atomFamily({
-  key: "futures-totalTxVolumeList::value",
+export const updateCumulativeOpenPositionsListAtom = atomFamily({
+  key: "futures-updateCumulativeOpenPositionsList::value",
   default: selectorFamily({
-    key: "futures-totalTxVolumeList::default",
+    key: "futures-updateCumulativeOpenPositionsList::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
-      return updateTotalTxVolumeList(txList)
+      return updateCumulativeOpenPositionsList(txList)
     }
   })
 })
 
-const updateTotalTxVolumeList = (txList: Block[]) => {
+const updateCumulativeOpenPositionsList = (txList: Block[]) => {
   let totalTxVolumeListMap: {[index: string]: number} = {}
   let longTxVolumeListMap: {[index: string]: number} = {}
   let shortVolumeListMap: {[index: string]: number} = {}
@@ -41,6 +41,18 @@ const updateTotalTxVolumeList = (txList: Block[]) => {
         shortVolumeListMap[date] += Number(web3.utils.fromWei(parameters[3]))
       }
       totalTxVolumeListMap[date] += Number(web3.utils.fromWei(parameters[3]))
+
+    }
+    if (func === "0x6214f36a") {
+      // buyDirect(uint256 index, uint256 fortAmount)
+      const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256"], block.input.slice(10))
+      if (Number(parameters[1]) <= 5) {
+        longTxVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
+      }
+      if (Number(parameters[1]) > 5) {
+        shortVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
+      }
+      totalTxVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
 
     }
   })
