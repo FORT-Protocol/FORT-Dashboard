@@ -9,6 +9,7 @@ interface LineChartProps {
   suffix?: string
   data: { day: string, value: number, category: string }[]
   noFixed?: boolean
+  noTotal?: boolean
 }
 
 const LineChart: FC<LineChartProps> = props => {
@@ -87,11 +88,15 @@ const LineChart: FC<LineChartProps> = props => {
       )}
       { width < 600 ? (
         <Stack>
-          <Stack direction={"row"} alignItems={"baseline"}>
-            <Text color={"hedge"} fontSize={28} fontWeight={600}
-                  fontFamily={"Montserrat"}>{props.prefix} {props.noFixed ? sum : sum.toFixed(2)}</Text>
-            <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
-          </Stack>
+          {!props.noTotal ? (
+            <Stack direction={"row"} alignItems={"baseline"}>
+              <Text color={"hedge"} fontSize={28} fontWeight={600}
+                    fontFamily={"Montserrat"}>{props.prefix} {props.noFixed ? sum : sum.toFixed(2)}</Text>
+              <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
+            </Stack>
+          ) : (
+            <Text/>
+          )}
           <Stack direction={"row"} spacing={"20px"}>
             <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
                     color={selector === "1W" ? "hedge" : "black"}
@@ -112,11 +117,15 @@ const LineChart: FC<LineChartProps> = props => {
         </Stack>
       ) : (
         <Stack direction={"row"} justifyContent={"space-between"}>
-          <Stack direction={"row"} alignItems={"baseline"}>
-            <Text color={"hedge"} fontSize={28} fontWeight={600}
-                  fontFamily={"Montserrat"}>{props.prefix} {props.noFixed ? sum : sum.toFixed(2)}</Text>
-            <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
-          </Stack>
+          {!props.noTotal ? (
+            <Stack direction={"row"} alignItems={"baseline"}>
+              <Text color={"hedge"} fontSize={28} fontWeight={600}
+                    fontFamily={"Montserrat"}>{props.prefix} {props.noFixed ? sum : sum.toFixed(2)}</Text>
+              <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
+            </Stack>
+          ) : (
+            <Text/>
+          )}
           <Stack direction={"row"} spacing={"20px"}>
             <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
                     color={selector === "1W" ? "hedge" : "black"}

@@ -4,29 +4,29 @@ import {Block} from "../app";
 import {web3} from "../../provider";
 import fillAllDayToInitMap from "../../utils/fillAllDayToInitMap";
 
-export const totalTradingVolumeListAtom = atomFamily({
-  key: "futures-totalTradingVolumeList::value",
+export const positionListAtom = atomFamily({
+  key: "futures-positionList::value",
   default: selectorFamily({
-    key: "futures-totalTradingVolumeList::default",
+    key: "futures-positionList::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
-      return updateTotalTradingVolumeList(txList)
+      return updatePositionList(txList)
     }
   })
 })
 
-const updateTotalTradingVolumeList = (txList: Block[]) => {
-  let totalTradingVolumeListMap: {[index: string]: number} = {}
-  let buyTradingVolumeListMap: {[index: string]: number} = {}
-  let sellTradingVolumeListMap: {[index: string]: number} = {}
-
-  let TotalTradingVolumeList: {day: string, value: number, category: string}[] = []
+const updatePositionList = (txList: Block[]) => {
+  let totalPositionListMap: {[index: string]: number} = {}
+  let longPositionListMap: {[index: string]: number} = {}
+  let shortPositionListMap: {[index: string]: number} = {}
+  let longPosition = 0, shortPosition = 0, totalPosition = 0
+  let positionList: {day: string, value: number, category: string}[] = []
 
   const now = new Date().getTime()
   const past = new Date(1633046400000).getTime()
-  fillAllDayToInitMap(totalTradingVolumeListMap, now, past, "number")
-  fillAllDayToInitMap(buyTradingVolumeListMap, now, past, "number")
-  fillAllDayToInitMap(sellTradingVolumeListMap, now, past, "number")
+  fillAllDayToInitMap(totalPositionListMap, now, past, "number")
+  fillAllDayToInitMap(longPositionListMap, now, past, "number")
+  fillAllDayToInitMap(shortPositionListMap, now, past, "number")
 
   txList.forEach((block) => {
     const func = block.input.slice(0,10)
@@ -35,47 +35,70 @@ const updateTotalTradingVolumeList = (txList: Block[]) => {
     if (func === "0x15ee0aad") {
       // buy(address tokenAddress, uint256 lever, bool orientation, uint256 dcuAmount)
       const parameters = web3.eth.abi.decodeParameters(["address", "uint256", "bool", "uint256"], block.input.slice(10))
-      buyTradingVolumeListMap[date] += Number(web3.utils.fromWei(parameters[3]))
-      totalTradingVolumeListMap[date] += Number(web3.utils.fromWei(parameters[3]))
+      if (parameters[2]){
+        longPosition += Number(web3.utils.fromWei(parameters[3]))
+        longPositionListMap[date] = longPosition
+      }
+      if (!parameters[2]){
+        shortPosition += Number(web3.utils.fromWei(parameters[3]))
+        shortPositionListMap[date] = shortPosition
+      }
+      totalPosition += Number(web3.utils.fromWei(parameters[3]))
+      totalPositionListMap[date] = totalPosition
     }
     if (func === "0x6214f36a") {
       // buyDirect(uint256 index, uint256 fortAmount)
       const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256"], block.input.slice(10))
-      buyTradingVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
-      totalTradingVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
+      if (Number(parameters[0])<=5){
+        longPosition += Number(web3.utils.fromWei(parameters[1]))
+        longPositionListMap[date] = longPosition
+      }
+      if (Number(parameters[0])>5){
+        shortPosition += Number(web3.utils.fromWei(parameters[1]))
+        shortPositionListMap[date] = shortPosition
+      }
+      totalPosition += Number(web3.utils.fromWei(parameters[1]))
+      totalPositionListMap[date] = totalPosition
     }
-
     if (func === "0xd79875eb"){
       // sell(uint256 amount, uint256 sellPrice)
       const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256"], block.input.slice(10))
-      sellTradingVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
-      totalTradingVolumeListMap[date] += Number(web3.utils.fromWei(parameters[1]))
+      if (Number(parameters[0])<=5){
+        longPosition -= Number(web3.utils.fromWei(parameters[1]))
+        longPositionListMap[date] = longPosition
+      }
+      if (Number(parameters[0])>5){
+        shortPosition -= Number(web3.utils.fromWei(parameters[1]))
+        shortPositionListMap[date] = shortPosition
+      }
+      totalPosition -= Number(web3.utils.fromWei(parameters[1]))
+      totalPositionListMap[date] = totalPosition
     }
   })
 
-  Object.keys(totalTradingVolumeListMap).forEach((key)=>{
-    TotalTradingVolumeList.push({
+  Object.keys(totalPositionListMap).forEach((key)=>{
+    positionList.push({
       day: key,
-      value: totalTradingVolumeListMap[key],
+      value: totalPositionListMap[key],
       category: "Total"
     })
   })
 
-  Object.keys(buyTradingVolumeListMap).forEach((key)=>{
-    TotalTradingVolumeList.push({
+  Object.keys(longPositionListMap).forEach((key)=>{
+    positionList.push({
       day: key,
-      value: buyTradingVolumeListMap[key],
-      category: "Buy"
+      value: longPositionListMap[key],
+      category: "Long"
     })
   })
 
-  Object.keys(sellTradingVolumeListMap).forEach((key)=>{
-    TotalTradingVolumeList.push({
+  Object.keys(shortPositionListMap).forEach((key)=>{
+    positionList.push({
       day: key,
-      value: sellTradingVolumeListMap[key],
-      category: "Sell"
+      value: shortPositionListMap[key],
+      category: "Short"
     })
   })
 
-  return TotalTradingVolumeList
+  return positionList
 }
