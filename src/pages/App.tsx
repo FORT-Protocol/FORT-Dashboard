@@ -27,7 +27,8 @@ import useFetchOptionsTxList from "../hooks/useFetchOptionsTxList";
 import useFetchSwapTxList from "../hooks/useFetchSwapTxList";
 import useBlockNumber from "../hooks/useBlockNumber";
 import useFetchFuturesLogList from "../hooks/useFetchFuturesLogList";
-import useFetchOptionsLogList from "../hooks/useFetchOptionsLogList";
+import useFetchOptionsOpenLogList from "../hooks/useFetchOptionsOpenLogList";
+import useFetchOptionsSellLogList from "../hooks/useFetchOptionsSellLogList";
 
 
 const App = () => {
@@ -42,10 +43,12 @@ const App = () => {
 
   useBlockNumber()
   useFetchFuturesLogList()
+  useFetchOptionsOpenLogList()
+  useFetchOptionsSellLogList()
   useFetchFuturesTxList()
   useFetchOptionsTxList()
   useFetchSwapTxList()
-  useFetchOptionsLogList()
+
 
   const handleTabsChange = (index: number) => {
     setIndex(index)

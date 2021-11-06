@@ -6,15 +6,15 @@ import fetcher from "../utils/fetcher";
 
 const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY5
 
-export const optionsLogListAtom = atom({
-  key: "fetch-optionsLogListAtom::status",
+export const optionsSellLogListAtom = atom({
+  key: "fetch-optionsSellLogListAtom::status",
   default: [],
 })
 
-const useFetchOptionsLogList = () => {
-  const [logsList, setLogsList] = useRecoilState(optionsLogListAtom)
+const useFetchOptionsSellLogList = () => {
+  const [logsList, setLogsList] = useRecoilState(optionsSellLogListAtom)
   const address = ( env === "mainnet" ) ?  optionsContractAddress["mainnet"] : optionsContractAddress["rinkeby"]
-  const topic = "0x39b02417d6826eadf5421ac690db0dd00065bb988a2f8cd32341c68d74d36beb"
+  const topic = "0xb69e24112cb4483e933dc3bda2d474e8d511e1d7058a983fe98a7d5d78fb9743"
 
   useEffect(() => {
     fetchAllTx()
@@ -50,4 +50,4 @@ const useFetchOptionsLogList = () => {
   return { logsList }
 }
 
-export default useFetchOptionsLogList
+export default useFetchOptionsSellLogList
