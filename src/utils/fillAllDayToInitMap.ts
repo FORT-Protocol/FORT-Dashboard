@@ -8,6 +8,15 @@ const fillAllDayToInitMap = (map: {[index: string]: any}, future: number, past: 
       map[day] = new Set<string>()
     }
   }
+
+  const today = new Date().toJSON().substr(0, 10)
+  if (type === "number") {
+    map[today] = 0
+  }
+  if (type === "set") {
+    map[today] = new Set<string>()
+  }
+
   return map
 }
 

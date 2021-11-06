@@ -44,6 +44,8 @@ const updateOpenInterest = (txList: Block[], logList: LogBlock[]) => {
   let longOpenInterestMap: {[index: string]: number} = {}
   let shortOpenInterestMap: {[index: string]: number} = {}
   let totalOpenInterestList: {day: string, value: number, category: string}[] = []
+  let amountMap: {[index: string]: number} = {}
+  let exerciseMap: {[index: string]: number} = {}
 
   let totalOpenInterest = 0, longOpenInterest = 0, shortOpenInterest = 0
 
@@ -54,8 +56,9 @@ const updateOpenInterest = (txList: Block[], logList: LogBlock[]) => {
   fillAllDayToInitMap(shortOpenInterestMap, now, past, "number")
 
   logList.forEach((block)=>{
+    // index, dcuAmount, owner, amount
     const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
-    console.log(parameters)
+    amountMap[block.transactionHash.toLowerCase()]=Number(web3.utils.fromWei(parameters[3]))
   })
 
   txList.forEach((block)=>{
@@ -65,17 +68,29 @@ const updateOpenInterest = (txList: Block[], logList: LogBlock[]) => {
     if (func === "0xee1ca960") {
     //  open(address tokenAddress, uint256 strikePrice, bool orientation, uint256 exerciseBlock, uint256 dcuAmount)
       const parameters = web3.eth.abi.decodeParameters(["address", "uint256", "bool", "uint256", "uint256"], block.input.slice(10))
-      const fene = 0
+      if (!exerciseMap.hasOwnProperty(Number(parameters[3]))){
+        exerciseMap[parameters[3]] = 0
+      }
+
+      exerciseMap[parameters[3]] += amountMap[block.hash.toLowerCase()]
+
+      let amount = 0
+
+      if (amountMap[block.hash.toLowerCase()]){
+        amount = amountMap[block.hash.toLowerCase()]
+      }
+
       if (parameters[2]){
-        longOpenInterest += fene
+        longOpenInterest += amount
         longOpenInterestMap[date] = longOpenInterest
       }
       if (!parameters[2]){
-        shortOpenInterest += fene
+        shortOpenInterest += amount
         shortOpenInterestMap[date] = shortOpenInterest
       }
-      totalOpenInterest += fene
+      totalOpenInterest += amount
       totalOpenInterestMap[date] = totalOpenInterest
+
     }
 
     if (func === "0xd79875eb") {

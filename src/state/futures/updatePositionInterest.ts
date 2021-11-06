@@ -68,9 +68,9 @@ const updatePositionInterest = (txList: Block[], logList: LogBlock[]) => {
     const parameters = web3.eth.abi.decodeParameters(["uint256", "address", "address"], block.data)
     const item = {
       index: Number(parameters[0]),
-      address: parameters[1].toLowerCase()
+      address: parameters[1]
     }
-    logMap[block.transactionHash].push(item)
+    logMap[block.transactionHash.toLowerCase()].push(item)
   })
 
   txList.forEach((block) => {
