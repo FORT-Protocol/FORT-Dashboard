@@ -53,7 +53,7 @@ const updateOpenInterest = (txList: Block[], openLogList: LogBlock[], sellLogLis
   let longOpenInterestMap: {[index: string]: number} = {}
   let shortOpenInterestMap: {[index: string]: number} = {}
   let totalOpenInterestList: {day: string, value: number, category: string}[] = []
-  // Open Log 区块hash：份额 + index
+  // Open Log 区块hash: index
   let openHashIndexMap: {[index: string]: string} = {}
   // 区块高度：[看涨行权份额,看跌行权份额]
   let exBlockNumberAmountMap: {[index: string]: number[]} = {}
@@ -75,7 +75,6 @@ const updateOpenInterest = (txList: Block[], openLogList: LogBlock[], sellLogLis
   openLogList.forEach((block)=>{
     // index, dcuAmount, owner, amount
     const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
-    // amount: Number(web3.utils.fromWei(parameters[3]))
     openHashIndexMap[block.transactionHash.toLowerCase()]= parameters[0]
 
     // 默认置为true，看涨，待遍历tx时，更新orientation
