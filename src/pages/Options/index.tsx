@@ -34,7 +34,7 @@ const Options = () => {
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
         <LineChart title={"Open Position"} data={totalTxVolumeList} suffix={"DCU"}/>
-        <LineChart title={"Open Interest"} data={totalTradingVolumeList}/>
+        <LineChart title={"Open Interest"} data={totalTradingVolumeList} noTotal/>
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing={["22px", "22px", "44px"]}>
         <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>
