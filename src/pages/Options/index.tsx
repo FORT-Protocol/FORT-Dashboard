@@ -4,12 +4,14 @@ import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import {useRecoilValue} from "recoil";
 import {totalTxVolumeAtom} from "../../state/options/updateTotalOpenPosition";
-import {currentCallOptionsDCUAtom} from "../../state/options/updateCurrentCallOptionsETH";
-import {currentShortOptionsDCUAtom} from "../../state/options/updateCurrentShortOptionsETH";
 import {longShortDistributionAtom} from "../../state/options/updateLongShortDistribution";
 import {totalTxVolumeListAtom} from "../../state/options/updateOpenPosition";
 import {distributionOfExerciseTimespanAtom} from "../../state/options/updateDistributionOfExerciseTimespan";
-import {OpenInterestAtom} from "../../state/options/updateOpenInterest";
+import {
+  currentCallOptionsDCUAtom,
+  currentShortOptionsDCUAtom,
+  OpenInterestAtom
+} from "../../state/options/updateOpenInterest";
 import {statusAtom} from "../../hooks/useFetchOptionsTxList";
 import {PROCESSING} from "../../constant/status";
 
@@ -27,8 +29,8 @@ const Options = () => {
     <Stack spacing={["22px", "22px", "44px"]} p={["22px", "22px", "44px"]}>
       <SimpleGrid columns={[1, 1, 1, 3, 3]} spacing={["22px", "22px", "44px"]}>
         <Norm value={status === PROCESSING ? "-" : totalTxVolume.toFixed(2)} desc={"Total Open Position"} color={"#C7A072"}/>
-        <Norm value={status === PROCESSING ? "-" : curCallOptionPosition.toFixed(2)} desc={"Current Call Option Positions (DCU)"} color={"#00B388"}/>
-        <Norm value={status === PROCESSING ? "-" : curShortOptionPosition.toFixed(2)} desc={"Current Short Option Positions (DCU)"} color={"#F23A12"}/>
+        <Norm value={status === PROCESSING ? "-" : curCallOptionPosition.toFixed(2)} desc={"Current Call Option Positions"} color={"#00B388"}/>
+        <Norm value={status === PROCESSING ? "-" : curShortOptionPosition.toFixed(2)} desc={"Current Short Option Positions"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
         <LineChart title={"Open Position"} data={totalTxVolumeList} suffix={"DCU"}/>

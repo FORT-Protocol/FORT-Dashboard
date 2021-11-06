@@ -1,6 +1,5 @@
 import {atomFamily, selectorFamily} from "recoil";
-import {currentCallOptionsDCUAtom} from "./updateCurrentCallOptionsETH";
-import {currentShortOptionsDCUAtom} from "./updateCurrentShortOptionsETH";
+import {currentCallOptionsDCUAtom, currentShortOptionsDCUAtom} from "./updateOpenInterest";
 
 export const longShortDistributionAtom = atomFamily({
   key: "options-longShortDistribution::value",
