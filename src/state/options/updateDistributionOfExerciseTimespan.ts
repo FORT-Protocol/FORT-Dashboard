@@ -3,6 +3,7 @@ import {optionsTxListAtom} from "./index";
 import {Block, blockNumberAtom, LogBlock} from "../app";
 import {web3} from "../../provider";
 import {optionsOpenLogListAtom} from "../../hooks/useFetchOptionsOpenLogList";
+import {optionsSellLogListAtom} from "../../hooks/useFetchOptionsSellLogList";
 
 export const distributionOfExerciseTimespanAtom = atomFamily({
   key: "options-distributionOfExerciseTimespan::value",
@@ -12,47 +13,70 @@ export const distributionOfExerciseTimespanAtom = atomFamily({
       const txList = get(optionsTxListAtom)
       const blockNumber = get(blockNumberAtom)
       const openLogList = get(optionsOpenLogListAtom)
-      return updateDistributionOfExerciseTimespan(txList, blockNumber, openLogList)
+      const sellLogList = get(optionsSellLogListAtom)
+      return updateDistributionOfExerciseTimespan(txList, blockNumber, openLogList, sellLogList)
     }
   })
 })
 
-const updateDistributionOfExerciseTimespan = (txList: Block[], blockNumber: number, openLogList: LogBlock[]) => {
+const updateDistributionOfExerciseTimespan = (txList: Block[], blockNumber: number, openLogList: LogBlock[], sellLogList: LogBlock[]) => {
   // 1 Month, 1-3 Month, 3-6 Month, 6-12 Month, 1 year
   let distribution = [0, 0, 0, 0, 0]
 
-  // Open Log 区块hash：份额
-  let openHashAmountMap: {[index: string]: number} = {}
+  // Open Log 区块hash：index
+  let openHashIndexMap: {[index: string]: string} = {}
+  // 期权表
+  let indexInfoMap: {[index: string]: {amount: number, exerciseBlock: number, sale: boolean}} = {}
 
-  // 记录开仓Open hash以及对应期权的index，首次获得到index后，初始化indexInfoMap，
-  // orientation置为true，初始化看涨，待遍历tx列表后更新indexInfoMap的orientation状态
+  // 遍历开仓Log，并初始化indexInfoMap，其中exerciseBlock初始化为0，sale初始化为false
   openLogList.forEach((block)=>{
     // index, dcuAmount, owner, amount
     const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
-    openHashAmountMap[block.transactionHash.toLowerCase()]= Number(web3.utils.fromWei(parameters[3]))
-    console.log(Number(web3.utils.fromWei(parameters[3])))
+    openHashIndexMap[block.transactionHash.toLowerCase()]= parameters[0]
+    // 初始化indexInfoMap
+    indexInfoMap[parameters[0]] = {
+      amount: Number(web3.utils.fromWei(parameters[3])),
+      exerciseBlock: 0,
+      sale: false,
+    }
   })
 
+  // 遍历Sell Log，更新indexInfoMap中的sale字段
+  sellLogList.forEach((block)=>{
+    // Sell (uint256 index, uint256 amount, address owner, uint256 dcuAmount)
+    const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
+    indexInfoMap[parameters[0]].sale = true
+  })
+
+  // 遍历txList，更新indexInfoMap重的exerciseBlock字段
   txList.forEach((block) => {
     const func = block.input.slice(0,10)
     if (func === "0xee1ca960") {
       // open(address tokenAddress, uint256 strikePrice, bool orientation, uint256 exerciseBlock, uint256 dcuAmount)
       const parameters = web3.eth.abi.decodeParameters(["address", "uint256", "bool", "uint256", "uint256"], block.input.slice(10))
-      const time = (Number(parameters[3]) - blockNumber) * 14
-      if (!openHashAmountMap[block.hash.toLowerCase()]){
-        openHashAmountMap[block.hash.toLowerCase()] = 0
+      const index = openHashIndexMap[block.hash]
+      if (index){
+        indexInfoMap[index].exerciseBlock = Number(parameters[3])
       }
-      if (time > 0 && time <= 30*24*60*60 ){
-        distribution[0] += openHashAmountMap[block.hash.toLowerCase()]
-      }else if (time > 30*24*60*60 && time <= 30*24*60*60*3 ){
-        distribution[1] += openHashAmountMap[block.hash.toLowerCase()]
-      }else if (time > 30*24*60*60*3 && time <= 30*24*60*60*6){
-        distribution[2] += openHashAmountMap[block.hash.toLowerCase()]
-      }else if (time > 30*24*60*60*6 && time <= 30*24*60*60*12){
-        distribution[3] += openHashAmountMap[block.hash.toLowerCase()]
-      }else if (time > 30*24*60*60*12){
-        distribution[4] += openHashAmountMap[block.hash.toLowerCase()]
-      }
+    }
+  })
+
+  // 遍历indexInfoMap，筛选当前的持仓，并计算时间
+  Object.keys(indexInfoMap).forEach((key)=>{
+    const exerciseBlock = indexInfoMap[key].exerciseBlock
+    const amount = indexInfoMap[key].amount
+
+    const time =(exerciseBlock - blockNumber) * 14
+    if (time > 0 && time <= 30*24*60*60 ){
+      distribution[0] += amount
+    }else if (time > 30*24*60*60 && time <= 30*24*60*60*3 ){
+      distribution[1] += amount
+    }else if (time > 30*24*60*60*3 && time <= 30*24*60*60*6){
+      distribution[2] += amount
+    }else if (time > 30*24*60*60*6 && time <= 30*24*60*60*12){
+      distribution[3] += amount
+    }else if (time > 30*24*60*60*12){
+      distribution[4] += amount
     }
   })
 
