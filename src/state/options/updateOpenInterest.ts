@@ -165,28 +165,37 @@ const updateOpenInterest = (txList: Block[], openLogList: LogBlock[], sellLogLis
     }
   })
 
+  let total = 0
   Object.keys(totalOpenInterestMap).forEach((key)=>{
+    totalOpenInterestMap[key] = totalOpenInterestMap[key] === 0 ? total : totalOpenInterestMap[key]
     totalOpenInterestList.push({
       day: key,
       value: totalOpenInterestMap[key],
       category: "Total"
     })
+    total = totalOpenInterestMap[key]
   })
 
+  let long = 0
   Object.keys(longOpenInterestMap).forEach((key)=>{
+    longOpenInterestMap[key] = longOpenInterestMap[key] === 0 ? long : longOpenInterestMap[key]
     totalOpenInterestList.push({
       day: key,
       value: longOpenInterestMap[key],
       category: "Long"
     })
+    long = longOpenInterestMap[key]
   })
 
+  let short = 0
   Object.keys(shortOpenInterestMap).forEach((key)=>{
+    shortOpenInterestMap[key] = shortOpenInterestMap[key] === 0 ? short : shortOpenInterestMap[key]
     totalOpenInterestList.push({
       day: key,
       value: shortOpenInterestMap[key],
       category: "Short"
     })
+    short = shortOpenInterestMap[key]
   })
 
   return {
