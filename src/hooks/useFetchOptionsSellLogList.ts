@@ -7,7 +7,7 @@ import fetcher from "../utils/fetcher";
 const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY5
 
 export const optionsSellLogListAtom = atom({
-  key: "fetch-optionsSellLogListAtom::status",
+  key: "fetch-optionsSellLogList::status",
   default: [],
 })
 
