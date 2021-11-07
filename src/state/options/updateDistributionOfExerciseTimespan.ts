@@ -44,7 +44,9 @@ const updateDistributionOfExerciseTimespan = (txList: Block[], blockNumber: numb
   sellLogList.forEach((block)=>{
     // Sell (uint256 index, uint256 amount, address owner, uint256 dcuAmount)
     const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
-    indexInfoMap[parameters[0]].amount = 0
+    if (indexInfoMap[parameters[0]]){
+      indexInfoMap[parameters[0]].amount = 0
+    }
   })
 
   // 遍历txList，更新indexInfoMap重的exerciseBlock字段

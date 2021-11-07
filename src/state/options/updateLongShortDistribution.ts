@@ -78,8 +78,6 @@ const updatelongShortDistribution = (txList: Block[], blockNumber: number, openL
     }
   })
 
-  console.log(distribution[0]+ distribution[1])
-
   return [
     {
       "type": "Long",
