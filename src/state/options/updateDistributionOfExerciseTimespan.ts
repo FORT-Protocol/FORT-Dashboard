@@ -26,7 +26,7 @@ const updateDistributionOfExerciseTimespan = (txList: Block[], blockNumber: numb
   // Open Log 区块hash：index
   let openHashIndexMap: {[index: string]: string} = {}
   // 期权表
-  let indexInfoMap: {[index: string]: {amount: number, exerciseBlock: number, sale: boolean}} = {}
+  let indexInfoMap: {[index: string]: {amount: number, exerciseBlock: number}} = {}
 
   // 遍历开仓Log，并初始化indexInfoMap，其中exerciseBlock初始化为0，sale初始化为false
   openLogList.forEach((block)=>{
@@ -37,7 +37,6 @@ const updateDistributionOfExerciseTimespan = (txList: Block[], blockNumber: numb
     indexInfoMap[parameters[0]] = {
       amount: Number(web3.utils.fromWei(parameters[3])),
       exerciseBlock: 0,
-      sale: false,
     }
   })
 
@@ -45,7 +44,7 @@ const updateDistributionOfExerciseTimespan = (txList: Block[], blockNumber: numb
   sellLogList.forEach((block)=>{
     // Sell (uint256 index, uint256 amount, address owner, uint256 dcuAmount)
     const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
-    indexInfoMap[parameters[0]].sale = true
+    indexInfoMap[parameters[0]].amount = 0
   })
 
   // 遍历txList，更新indexInfoMap重的exerciseBlock字段
@@ -67,6 +66,7 @@ const updateDistributionOfExerciseTimespan = (txList: Block[], blockNumber: numb
     const amount = indexInfoMap[key].amount
 
     const time =(exerciseBlock - blockNumber) * 14
+
     if (time > 0 && time <= 30*24*60*60 ){
       distribution[0] += amount
     }else if (time > 30*24*60*60 && time <= 30*24*60*60*3 ){

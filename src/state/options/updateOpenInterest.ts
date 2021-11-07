@@ -14,36 +14,7 @@ export const OpenInterestAtom = atomFamily({
       const txList = get(optionsTxListAtom)
       const openLogList = get(optionsOpenLogListAtom)
       const sellLogList = get(optionsSellLogListAtom)
-      const { totalOpenInterestList } = updateOpenInterest(txList, openLogList, sellLogList)
-      return totalOpenInterestList
-    }
-  })
-})
-
-export const currentCallOptionsDCUAtom = atomFamily({
-  key: "options-currentCallOptionsDCU::value",
-  default: selectorFamily({
-    key: "options-currentCallOptionsDCU::default",
-    get: () => ({get}) => {
-      const txList = get(optionsTxListAtom)
-      const openLogList = get(optionsOpenLogListAtom)
-      const sellLogList = get(optionsSellLogListAtom)
-      const { longOpenInterest } = updateOpenInterest(txList, openLogList, sellLogList)
-      return longOpenInterest
-    }
-  })
-})
-
-export const currentShortOptionsDCUAtom = atomFamily({
-  key: "options-currentShortOptionsDCU::value",
-  default: selectorFamily({
-    key: "options-currentShortOptionsDCU::default",
-    get: () => ({get}) => {
-      const txList = get(optionsTxListAtom)
-      const openLogList = get(optionsOpenLogListAtom)
-      const sellLogList = get(optionsSellLogListAtom)
-      const { shortOpenInterest } = updateOpenInterest(txList, openLogList, sellLogList)
-      return shortOpenInterest
+      return updateOpenInterest(txList, openLogList, sellLogList)
     }
   })
 })
@@ -147,7 +118,7 @@ const updateOpenInterest = (txList: Block[], openLogList: LogBlock[], sellLogLis
       // 通过hash查找sellHashIndexMap，获取index
       const index = sellHashIndexMap[block.hash.toLowerCase()]
       // 通过index查找indexInfoMap获取看涨看跌和份额
-      if (index){
+      if (index && indexInfoMap[index]){
         const amount = indexInfoMap[index]["amount"]
         const orientation = indexInfoMap[index]["orientation"]
         if (orientation){
@@ -197,11 +168,8 @@ const updateOpenInterest = (txList: Block[], openLogList: LogBlock[], sellLogLis
     short = shortOpenInterestMap[key]
   })
 
-  return {
-    totalOpenInterestList,
-    longOpenInterest,
-    shortOpenInterest,
-  }
+  return totalOpenInterestList
+
 }
 
 export default updateOpenInterest
