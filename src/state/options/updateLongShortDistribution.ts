@@ -39,7 +39,6 @@ const updatelongShortDistribution = (txList: Block[], blockNumber: number, openL
         exerciseBlock: 0,
         orientation: true
       }
-      console.log(Number(web3.utils.fromWei(parameters[3])), parameters[0], block.transactionHash)
     }else{
       console.log("重复index")
     }
@@ -53,7 +52,6 @@ const updatelongShortDistribution = (txList: Block[], blockNumber: number, openL
     if (indexInfoMap[parameters[0]]){
       // ? Sell Log与Open构建的index列表，相同的index，amount 不一致，如330，317，256，247，2563
       indexInfoMap[parameters[0]].amount -= Number(web3.utils.fromWei(parameters[1]))
-      console.log(indexInfoMap[parameters[0]].amount)
     }
   })
 
@@ -75,7 +73,6 @@ const updatelongShortDistribution = (txList: Block[], blockNumber: number, openL
   Object.keys(indexInfoMap).forEach((key)=>{
     const exerciseBlock = indexInfoMap[key].exerciseBlock
     const amount = indexInfoMap[key].amount
-
     const time = exerciseBlock - blockNumber
     if (time > 0) {
       if (indexInfoMap[key].orientation){
