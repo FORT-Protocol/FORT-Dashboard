@@ -35,6 +35,12 @@ const updateOpenInterest = (txList: Block[], openLogList: LogBlock[], sellLogLis
 
   let totalOpenInterest = 0, longOpenInterest = 0, shortOpenInterest = 0
 
+  // 存储已经open的index
+  let addMap: {[index: string]: number} = {}
+
+  // 存储已经sell的index
+  let sellMap: {[index: string]: number} = {}
+
   const now = new Date().getTime()
   const past = new Date(1633046400000).getTime()
   fillAllDayToInitMap(totalOpenInterestMap, now, past, "number")
@@ -47,11 +53,14 @@ const updateOpenInterest = (txList: Block[], openLogList: LogBlock[], sellLogLis
     // index, dcuAmount, owner, amount
     const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
     openHashIndexMap[block.transactionHash.toLowerCase()]= parameters[0]
-
-    // 默认置为true，看涨，待遍历tx时，更新orientation
-    indexInfoMap[parameters[0]]={
-      amount: Number(web3.utils.fromWei(parameters[3])),
-      orientation: true
+    if (indexInfoMap[parameters[0]]){
+      console.log(parameters[0] , "重复")
+    }else{
+      // 默认置为true，看涨，待遍历tx时，更新orientation
+      indexInfoMap[parameters[0]]={
+        amount: Number(web3.utils.fromWei(parameters[3])),
+        orientation: true
+      }
     }
   })
 
@@ -85,22 +94,27 @@ const updateOpenInterest = (txList: Block[], openLogList: LogBlock[], sellLogLis
           amount = indexInfoMap[index].amount
         }
       }
-      if (parameters[2]){
-        longOpenInterest += amount
-        exBlockNumberAmountMap[parameters[3]][0] += amount
-        longOpenInterestMap[date] = longOpenInterest
-      }
-      if (!parameters[2]){
-        shortOpenInterest += amount
-        exBlockNumberAmountMap[parameters[3]][1] += amount
-        shortOpenInterestMap[date] = shortOpenInterest
-        // 更新indexInfoMap的看跌
-        if (index){
-          indexInfoMap[index].orientation = false
+      if (!addMap[index]){
+        if (parameters[2]){
+          longOpenInterest += amount
+          exBlockNumberAmountMap[parameters[3]][0] += amount
+          longOpenInterestMap[date] = longOpenInterest
         }
+        if (!parameters[2]){
+          shortOpenInterest += amount
+          exBlockNumberAmountMap[parameters[3]][1] += amount
+          shortOpenInterestMap[date] = shortOpenInterest
+          // 更新indexInfoMap的看跌
+          if (index){
+            indexInfoMap[index].orientation = false
+          }
+        }
+        totalOpenInterest += amount
+        totalOpenInterestMap[date] = totalOpenInterest
+        addMap[index] = amount
+      }else{
+        console.log(index, "重复")
       }
-      totalOpenInterest += amount
-      totalOpenInterestMap[date] = totalOpenInterest
 
       if (exBlockNumberAmountMap[block.blockNumber]){
         longOpenInterest -= exBlockNumberAmountMap[block.blockNumber][0]
@@ -118,8 +132,12 @@ const updateOpenInterest = (txList: Block[], openLogList: LogBlock[], sellLogLis
       // 通过hash查找sellHashIndexMap，获取index
       const index = sellHashIndexMap[block.hash.toLowerCase()]
       // 通过index查找indexInfoMap获取看涨看跌和份额
-      if (index && indexInfoMap[index]){
+      if (sellMap[index]){
+        console.log("index：", index, "重复")
+      }
+      if (index && indexInfoMap[index] && !sellMap[index]){
         const amount = indexInfoMap[index]["amount"]
+        sellMap[index] = indexInfoMap[index]["amount"]
         const orientation = indexInfoMap[index]["orientation"]
         if (orientation){
           longOpenInterest -= amount

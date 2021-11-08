@@ -5,6 +5,7 @@ import {optionsTxListAtom} from "../state/options";
 import fetcher from "../utils/fetcher";
 import {api, env} from "../constant/etherscan";
 import {IDLE, PROCESSING} from "../constant/status";
+import {Block} from "../state/app";
 
 const apiKey = process.env.REACT_APP_ETHERSCAN_APIKEY2 || process.env.REACT_APP_ETHERSCAN_APIKEY
 
@@ -44,7 +45,9 @@ const useFetchOptionsTxList = () => {
       blockHigh = Number(request[request.length - 1].blockNumber) + 1
       res = res.concat(request)
     }
-    setOptionsTxList(res)
+    setOptionsTxList(res.filter((block: Block)=>{
+      return block.isError === "0"
+    }))
     setStatus(IDLE)
   }
 

@@ -7,9 +7,9 @@ import {totalTxVolumeAtom} from "../../state/options/updateTotalOpenPosition";
 import {longShortDistributionAtom} from "../../state/options/updateLongShortDistribution";
 import {totalTxVolumeListAtom} from "../../state/options/updateOpenPosition";
 import {distributionOfExerciseTimespanAtom} from "../../state/options/updateDistributionOfExerciseTimespan";
-import {
-  OpenInterestAtom
-} from "../../state/options/updateOpenInterest";
+// import {
+//   OpenInterestAtom
+// } from "../../state/options/updateOpenInterest";
 import {statusAtom} from "../../hooks/useFetchOptionsTxList";
 import {PROCESSING} from "../../constant/status";
 
@@ -18,7 +18,7 @@ const Options = () => {
   const longShortDistribution = useRecoilValue(longShortDistributionAtom({}))
   const totalTxVolumeList = useRecoilValue(totalTxVolumeListAtom({}))
   const distributionOfExerciseTimespan = useRecoilValue(distributionOfExerciseTimespanAtom({}))
-  const totalTradingVolumeList = useRecoilValue(OpenInterestAtom({}))
+  // const totalTradingVolumeList = useRecoilValue(OpenInterestAtom({}))
   const status = useRecoilValue(statusAtom)
 
   return (
@@ -30,7 +30,7 @@ const Options = () => {
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
         <LineChart title={"Open Position"} data={totalTxVolumeList} suffix={"DCU"}/>
-        <LineChart title={"Open Interest"} data={totalTradingVolumeList} noTotal/>
+        {/*<LineChart title={"Open Interest"} data={totalTradingVolumeList} noTotal/>*/}
       </SimpleGrid>
       <SimpleGrid columns={[1, 1, 1, 2]} spacing={["22px", "22px", "44px"]}>
         <PieChart title={"Long-Short Distribution"} data={longShortDistribution}/>

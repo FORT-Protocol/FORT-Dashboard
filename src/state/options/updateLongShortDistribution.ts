@@ -33,10 +33,15 @@ const updatelongShortDistribution = (txList: Block[], blockNumber: number, openL
     const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
     openHashIndexMap[block.transactionHash.toLowerCase()]= parameters[0]
     // 初始化indexInfoMap
-    indexInfoMap[parameters[0]] = {
-      amount: Number(web3.utils.fromWei(parameters[3])),
-      exerciseBlock: 0,
-      orientation: true
+    if (!indexInfoMap[parameters[0]]){
+      indexInfoMap[parameters[0]] = {
+        amount: Number(web3.utils.fromWei(parameters[3])),
+        exerciseBlock: 0,
+        orientation: true
+      }
+      console.log(Number(web3.utils.fromWei(parameters[3])), parameters[0], block.transactionHash)
+    }else{
+      console.log("重复index")
     }
   })
 
@@ -44,8 +49,11 @@ const updatelongShortDistribution = (txList: Block[], blockNumber: number, openL
   sellLogList.forEach((block)=>{
     // Sell (uint256 index, uint256 amount, address owner, uint256 dcuAmount)
     const parameters = web3.eth.abi.decodeParameters(["uint256", "uint256", "address", "uint256"], block.data)
+    // 出售index 存在重复，如3058，2105，1169，916，909，665，672，675
     if (indexInfoMap[parameters[0]]){
-      indexInfoMap[parameters[0]].amount = 0
+      // ? Sell Log与Open构建的index列表，相同的index，amount 不一致，如330，317，256，247，2563
+      indexInfoMap[parameters[0]].amount -= Number(web3.utils.fromWei(parameters[1]))
+      console.log(indexInfoMap[parameters[0]].amount)
     }
   })
 
