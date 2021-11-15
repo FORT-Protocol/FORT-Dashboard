@@ -1,6 +1,7 @@
 import {atomFamily, selectorFamily} from "recoil";
 import {futuresTxListAtom} from "../futures";
 import {Block} from "../app";
+import {rinkebyFuturesTxListAtom} from "../../hooks/useRinkebyFetchFuturesTxList";
 
 export const futuresTradingUsersAtom = atomFamily({
   key: "users-futuresTradingUsers::value",
@@ -8,15 +9,20 @@ export const futuresTradingUsersAtom = atomFamily({
     key: "users-futuresTradingUsers::default",
     get: () => ({get}) => {
       const txList = get(futuresTxListAtom)
-      return updateFuturesTradingUsers(txList)
+      const rinkebyTxList = get(rinkebyFuturesTxListAtom)
+      return updateFuturesTradingUsers(txList, rinkebyTxList)
     }
   })
 })
 
-const updateFuturesTradingUsers = (txList: Block[]) => {
+const updateFuturesTradingUsers = (txList: Block[], rinkebyTxList: Block[]) => {
   let users = new Set<string>()
 
   txList.forEach((block)=>{
+    users.add(block.from)
+  })
+
+  rinkebyTxList.forEach((block)=>{
     users.add(block.from)
   })
 
