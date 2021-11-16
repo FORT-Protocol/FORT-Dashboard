@@ -27,7 +27,7 @@ const Users = () => {
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
         <LineChart title={"New Users"} data={newUsersList} noFixed={true}/>
-        <LineChart title={"Active Users"} data={activeUsersList} noFixed={true}/>
+        <LineChart title={"Active Users"} data={activeUsersList} noFixed={true} noTotal/>
       </SimpleGrid>
     </Stack>
   )
