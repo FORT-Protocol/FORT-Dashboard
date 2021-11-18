@@ -15,6 +15,7 @@ import {
 } from "../../state/futures/updatePositionInterest";
 import {statusAtom} from "../../hooks/useFetchFuturesTxList";
 import {PROCESSING} from "../../constant/status";
+import {futuresCumulativeNumberOfTransactionAtom} from "../../state/futures/updateCumulativeNumberOfTransaction";
 
 const Futures = () => {
   const totalOpenPositions = useRecoilValue(totalOpenPositionsAtom({}))
@@ -26,12 +27,14 @@ const Futures = () => {
   // const openPriceDistribution = useRecoilValue(openPriceDistributionAtom({}))
   const positionInterest = useRecoilValue(positionInterestAtom({}))
   const status = useRecoilValue(statusAtom)
+  const cumluativeNumberOfTransaction = useRecoilValue(futuresCumulativeNumberOfTransactionAtom({}))
 
   return (
     <Stack spacing={["22px", "22px", "44px"]} p={["22px", "22px", "44px"]}>
-      <SimpleGrid columns={[1, 1, 1, 3]} spacing={["22px", "22px", "44px"]}>
+      <SimpleGrid columns={[1, 1, 2, 2, 4]} spacing={["22px", "22px", "44px"]}>
         <Norm value={status === PROCESSING ? "-" : totalOpenPositions.toFixed(2)} desc={"Total Open Position"} color={"#C7A072"}/>
         <Norm value={status === PROCESSING ? "-" : curOpenLongPositions.toFixed(2)} desc={"Current Open Long Positions (DCU)"} color={"#00B388"}/>
+        <Norm value={status === PROCESSING ? "-" : cumluativeNumberOfTransaction.toFixed(0)} desc={"Cumulative Number of Transaction (DCU)"} color={"#E57200"} />
         <Norm value={status === PROCESSING ? "-" : curOpenShortPositions.toFixed(2)} desc={"Current Open Short Positions (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
