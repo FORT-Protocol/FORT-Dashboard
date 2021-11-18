@@ -28,7 +28,7 @@ const Options = () => {
       <SimpleGrid columns={[1, 1, 2, 2, 4]} spacing={["22px", "22px", "44px"]}>
         <Norm value={status === PROCESSING ? "-" : totalTxVolume.toFixed(2)} desc={"Total Open Position"} color={"#C7A072"}/>
         <Norm value={status === PROCESSING ? "-" : longShortDistribution[0].value.toFixed(2)} desc={"Current Call Option Positions"} color={"#00B388"}/>
-        <Norm value={status === PROCESSING ? "-" : cumluativeNumberOfTransaction.toFixed(0)} desc={"Cumulative Number of Transaction (DCU)"} color={"#E57200"} />
+        <Norm value={status === PROCESSING ? "-" : cumluativeNumberOfTransaction.toFixed(0)} desc={"Cumulative Number of Transaction"} color={"#E57200"} />
         <Norm value={status === PROCESSING ? "-" : longShortDistribution[1].value.toFixed(2)} desc={"Current Short Option Positions"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>

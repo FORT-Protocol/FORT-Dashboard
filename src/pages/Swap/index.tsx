@@ -23,7 +23,7 @@ const Swap = () => {
       <SimpleGrid columns={[1, 1, 2, 2, 4]} spacing={["22px", "22px", "44px"]}>
         <Norm value={status === PROCESSING ? "-" : numberOfNEST.toFixed(2)} desc={"Number of NEST"} color={"#C7A072"}/>
         <Norm value={status === PROCESSING ? "-" : numberOfDCU.toFixed(2)} desc={"Number of DCU"} color={"#E57200"}/>
-        <Norm value={status === PROCESSING ? "-" : cumulativeNumberOfTransaction} desc={"Cumulative Number of Transaction (DCU)"} color={"#00B388"}/>
+        <Norm value={status === PROCESSING ? "-" : cumulativeNumberOfTransaction} desc={"Cumulative Number of Transaction"} color={"#00B388"}/>
         <Norm value={status === PROCESSING ? "-" : totalTransactionVolume.toFixed(2)} desc={"Total Transaction Volume (DCU)"} color={"#F23A12"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
