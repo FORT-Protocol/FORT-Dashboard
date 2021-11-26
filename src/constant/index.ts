@@ -1,1 +1,1 @@
-export const APIHOSTNAME = "http://192.168.2.52:8080"
+export const APIHOSTNAME = "https://api.hedge.red"

@@ -34,7 +34,7 @@ const Options = () => {
     fetch(APIHOSTNAME + "/api/options/dirDist/total")
       .then((res) => res.json())
       .then((json) => setDistributionOfLongShort(json["value"]))
-    fetch(APIHOSTNAME + "/api/options/openedQtyOfDaily/total")
+    fetch(APIHOSTNAME + "/api/options/openedQtyOfDaily/ethereum")
       .then((res) => res.json())
       .then((json) => setTotalTxVolumeList(json["value"]))
     fetch(APIHOSTNAME + "/api/options/strikePriceDist")

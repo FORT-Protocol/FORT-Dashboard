@@ -33,7 +33,7 @@ const Futures = () => {
     fetch(APIHOSTNAME + "/api/futures/transactionCounts")
       .then((res) => res.json())
       .then((json) => setCumluativeNumberOfTransaction(json["value"]))
-    fetch(APIHOSTNAME + "/api/futures/openedQtyOfDaily/total")
+    fetch(APIHOSTNAME + "/api/futures/openedQtyOfDaily/ethereum")
       .then((res) => res.json())
       .then((json) => setOpeningVolumeList(json["value"]))
     fetch(APIHOSTNAME + "/api/futures/dirDist")
@@ -45,7 +45,7 @@ const Futures = () => {
     fetch(APIHOSTNAME + "/api/futures/openPriceDist")
       .then((res) => res.json())
       .then((json) => setOpenPriceDistribution(json["value"]))
-    fetch(APIHOSTNAME + "/api/futures/holdQtyOfDaily/total")
+    fetch(APIHOSTNAME + "/api/futures/holdQtyOfDaily/ethereum")
       .then((res) => res.json())
       .then((json) => setPositionInterest(json["value"]))
   }

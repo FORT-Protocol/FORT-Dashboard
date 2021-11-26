@@ -32,7 +32,7 @@ const Swap = () => {
       .then((res) => res.json())
       .then((json) => setTotalTransactionVolume(Number(json["value"]).toFixed(2))
       )
-    fetch(APIHOSTNAME + "/api/swap/ducTransactionVolumeOfDaily/total")
+    fetch(APIHOSTNAME + "/api/swap/ducTransactionVolumeOfDaily/ethereum")
       .then((res) => res.json())
       .then((json) => setTotalTransactionVolumeList(json["value"])
       )
