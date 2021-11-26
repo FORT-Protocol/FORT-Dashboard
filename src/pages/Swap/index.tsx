@@ -1,18 +1,14 @@
 import {SimpleGrid, Stack} from "@chakra-ui/react";
 import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
-import {totalTransactionVolumeListAtom} from "../../state/swap/updateTotalTransactionVolumeList";
-import {useRecoilValue} from "recoil";
-import {statusAtom} from "../../hooks/useFetchSwapTxList";
 import {useEffect, useState} from "react";
 
 const Swap = () => {
   const [cumulativeNumberOfTransaction, setCumulativeNumberOfTransaction] = useState("-")
   const [numberOfNEST, setNumberOfNEST] = useState("-")
   const [numberOfDCU, setNumberOfDCU] = useState("-")
-  const totalTransactionVolumeList = useRecoilValue(totalTransactionVolumeListAtom({}))
   const [totalTransactionVolume, setTotalTransactionVolume] = useState("-")
-  const status = useRecoilValue(statusAtom)
+  const [totalTransactionVolumeList, setTotalTransactionVolumeList] = useState<{ day: string, value: number, category: string }[]>([])
 
   useEffect(()=>{
     asyncFetch()
@@ -34,6 +30,10 @@ const Swap = () => {
     fetch("https://api.hedge.red/api/swap/ducTransactionVolume")
       .then((res) => res.json())
       .then((json) => setTotalTransactionVolume(Number(json["value"]).toFixed(2))
+      )
+    fetch("http://192.168.2.52:8080/api/swap/ducTransactionVolumeOfDaily/total")
+      .then((res) => res.json())
+      .then((json) => setTotalTransactionVolumeList(json["value"])
       )
   }
 
