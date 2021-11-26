@@ -22,15 +22,6 @@ import {useState} from "react";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import {HamburgerIcon, CloseIcon} from "@chakra-ui/icons";
 import Swap from "./Swap";
-import useFetchFuturesTxList from "../hooks/useFetchFuturesTxList";
-import useFetchOptionsTxList from "../hooks/useFetchOptionsTxList";
-import useFetchSwapTxList from "../hooks/useFetchSwapTxList";
-import useBlockNumber from "../hooks/useBlockNumber";
-import useFetchFuturesLogList from "../hooks/useFetchFuturesLogList";
-import useFetchOptionsOpenLogList from "../hooks/useFetchOptionsOpenLogList";
-import useFetchOptionsSellLogList from "../hooks/useFetchOptionsSellLogList";
-import useFetchRinkebyOptionsTxList from "../hooks/useRinkebyFetchOptionsTxList";
-import useFetchRinkebyFuturesTxList from "../hooks/useRinkebyFetchFuturesTxList";
 
 const App = () => {
   const [index, setIndex] = useState(0)
@@ -41,16 +32,6 @@ const App = () => {
     {index: 2, label: "Swap", path: "/swap", content: <Swap/>},
     {index: 3, label: "Users", path: "/users", content: <Users/>},
   ]
-
-  useBlockNumber()
-  useFetchFuturesLogList()
-  useFetchOptionsOpenLogList()
-  useFetchOptionsSellLogList()
-  useFetchFuturesTxList()
-  useFetchOptionsTxList()
-  useFetchSwapTxList()
-  useFetchRinkebyOptionsTxList()
-  useFetchRinkebyFuturesTxList()
 
   const handleTabsChange = (index: number) => {
     setIndex(index)
