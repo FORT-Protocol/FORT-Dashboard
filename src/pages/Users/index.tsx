@@ -2,6 +2,7 @@ import {SimpleGrid, Stack} from "@chakra-ui/react";
 import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import {useEffect, useState} from "react";
+import {APIHOSTNAME} from "../../constant";
 
 const Users = () => {
   const [allUser, setAllUser] = useState("-")
@@ -15,23 +16,23 @@ const Users = () => {
   }, [])
 
   const asyncFetch = () => {
-    fetch("https://api.hedge.red/api/users/totalNumber")
+    fetch(APIHOSTNAME + "/api/users/totalNumber")
       .then((res) => res.json())
       .then((json) => setAllUser(Number(json["value"]).toFixed(0))
       )
-    fetch("https://api.hedge.red/api/users/futuresUsersNumber")
+    fetch(APIHOSTNAME + "/api/users/futuresUsersNumber")
       .then((res) => res.json())
       .then((json) => setFuturesTradingUsers(Number(json["value"]).toFixed(0))
       )
-    fetch("https://api.hedge.red/api/users/optionsUsersNumber")
+    fetch(APIHOSTNAME + "/api/users/optionsUsersNumber")
       .then((res) => res.json())
       .then((json) => setOptionsTradingUsers(Number(json["value"]).toFixed(0))
       )
-    fetch("http://192.168.2.52:8080/api/users/newUsersNumberOfDaily")
+    fetch(APIHOSTNAME + "/api/users/newUsersNumberOfDaily")
       .then((res) => res.json())
       .then((json) => setNewUsersList(json["value"])
       )
-    fetch("http://192.168.2.52:8080/api/users/activeUsersNumberOfDaily")
+    fetch(APIHOSTNAME + "/api/users/activeUsersNumberOfDaily")
       .then((res) => res.json())
       .then((json) => setActiveUsersList(json["value"])
       )

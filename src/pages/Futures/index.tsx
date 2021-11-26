@@ -3,6 +3,7 @@ import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import {useEffect, useState} from "react";
+import {APIHOSTNAME} from "../../constant";
 
 const Futures = () => {
   const [totalOpenPositions, setTotalOpenPositions] = useState("-")
@@ -20,43 +21,33 @@ const Futures = () => {
   }, [])
 
   const asyncFetch = () => {
-    fetch("https://api.hedge.red/api/futures/openedOfTotal")
+    fetch( APIHOSTNAME + "/api/futures/openedOfTotal")
       .then((res) => res.json())
-      .then((json) => setTotalOpenPositions(json["value"])
-      )
-    fetch("https://api.hedge.red/api/futures/currentBullishQty")
+      .then((json) => setTotalOpenPositions(json["value"]))
+    fetch(APIHOSTNAME +"/api/futures/currentBullishQty")
       .then((res) => res.json())
       .then((json) => setCurOpenLongPositions(json["value"]))
-    fetch("https://api.hedge.red/api/futures/currentBearishQty")
+    fetch(APIHOSTNAME + "/api/futures/currentBearishQty")
       .then((res) => res.json())
       .then((json) => setCurOpenShortPositions(json["value"]))
-    fetch("https://api.hedge.red/api/futures/transactionCounts")
+    fetch(APIHOSTNAME + "/api/futures/transactionCounts")
       .then((res) => res.json())
       .then((json) => setCumluativeNumberOfTransaction(json["value"]))
-    // https://api.hedge.red/api/futures/openedQtyOfDaily
-    fetch("http://192.168.2.52:8080/api/futures/openedQtyOfDaily/total")
+    fetch(APIHOSTNAME + "/api/futures/openedQtyOfDaily/total")
       .then((res) => res.json())
       .then((json) => setOpeningVolumeList(json["value"]))
-    fetch("http://192.168.2.52:8080/api/futures/dirDist")
+    fetch(APIHOSTNAME + "/api/futures/dirDist")
       .then((res) => res.json())
-      .then((json) => {
-        setLongShortDistribution(json["value"])
-      })
-    fetch("http://192.168.2.52:8080/api/futures/leverDist")
+      .then((json) => setLongShortDistribution(json["value"]))
+    fetch(APIHOSTNAME + "/api/futures/leverDist")
       .then((res) => res.json())
-      .then((json) => {
-        setLeverageDistribution(json["value"])
-      })
-    fetch("http://192.168.2.52:8080/api/futures/openPriceDist")
+      .then((json) => setLeverageDistribution(json["value"]))
+    fetch(APIHOSTNAME + "/api/futures/openPriceDist")
       .then((res) => res.json())
-      .then((json) => {
-        setOpenPriceDistribution(json["value"])
-      })
-    fetch("http://192.168.2.52:8080/api/futures/holdQtyOfDaily/total")
+      .then((json) => setOpenPriceDistribution(json["value"]))
+    fetch(APIHOSTNAME + "/api/futures/holdQtyOfDaily/total")
       .then((res) => res.json())
-      .then((json) => {
-        setPositionInterest(json["value"])
-      })
+      .then((json) => setPositionInterest(json["value"]))
   }
 
   return (

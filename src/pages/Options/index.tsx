@@ -3,6 +3,7 @@ import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import {useEffect, useState} from "react";
+import {APIHOSTNAME} from "../../constant";
 
 const Options = () => {
   const [totalTxVolume, setTotalTxVolume] = useState("-")
@@ -18,34 +19,27 @@ const Options = () => {
   }, [])
 
   const  asyncFetch = () => {
-    fetch("https://api.hedge.red/api/options/openedOfTotal")
+    fetch( APIHOSTNAME + "/api/options/openedOfTotal")
       .then((res) => res.json())
-      .then((json) => setTotalTxVolume(json["value"])
-      )
-    fetch("https://api.hedge.red/api/options/currentBullishQty")
+      .then((json) => setTotalTxVolume(json["value"]))
+    fetch(APIHOSTNAME + "/api/options/currentBullishQty")
       .then((res) => res.json())
-      .then((json) => setCurrentBullishQty(json["value"])
-      )
-    fetch("https://api.hedge.red/api/options/currentBearishQty")
+      .then((json) => setCurrentBullishQty(json["value"]))
+    fetch(APIHOSTNAME + "/api/options/currentBearishQty")
       .then((res) => res.json())
-      .then((json) => setCurrentBearishQty(json["value"])
-      )
-    fetch("https://api.hedge.red/api/options/transactionCounts")
+      .then((json) => setCurrentBearishQty(json["value"]))
+    fetch(APIHOSTNAME + "/api/options/transactionCounts")
       .then((res) => res.json())
-      .then((json) => setCumluativeNumberOfTransaction(json["value"])
-      )
-    fetch("http://192.168.2.52:8080/api/options/dirDist/total")
+      .then((json) => setCumluativeNumberOfTransaction(json["value"]))
+    fetch(APIHOSTNAME + "/api/options/dirDist/total")
       .then((res) => res.json())
-      .then((json) => setDistributionOfLongShort(json["value"])
-      )
-    fetch("http://192.168.2.52:8080/api/options/openedQtyOfDaily/total")
+      .then((json) => setDistributionOfLongShort(json["value"]))
+    fetch(APIHOSTNAME + "/api/options/openedQtyOfDaily/total")
       .then((res) => res.json())
-      .then((json) => setTotalTxVolumeList(json["value"])
-      )
-    fetch("http://192.168.2.52:8080/api/options/strikePriceDist")
+      .then((json) => setTotalTxVolumeList(json["value"]))
+    fetch(APIHOSTNAME + "/api/options/strikePriceDist")
       .then((res) => res.json())
-      .then((json) => setDistributionOfExerciseTimespan(json["value"])
-      )
+      .then((json) => setDistributionOfExerciseTimespan(json["value"]))
   }
 
 
