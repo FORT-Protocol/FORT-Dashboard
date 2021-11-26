@@ -43,8 +43,8 @@ const Swap = () => {
       <SimpleGrid columns={[1, 1, 2, 2, 4]} spacing={["22px", "22px", "44px"]}>
         <Norm value={numberOfNEST} desc={"Number of NEST"} color={"#C7A072"}/>
         <Norm value={numberOfDCU} desc={"Number of DCU"} color={"#E57200"}/>
-        <Norm value={cumulativeNumberOfTransaction} desc={"Cumulative Number of Transaction"} color={"#00B388"}/>
         <Norm value={totalTransactionVolume} desc={"Total Transaction Volume (DCU)"} color={"#F23A12"}/>
+        <Norm value={cumulativeNumberOfTransaction} desc={"Cumulative Number of Transaction"} color={"#00B388"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
         <LineChart title={"Total Transaction Volume"} suffix={"DCU"} data={totalTransactionVolumeList}/>

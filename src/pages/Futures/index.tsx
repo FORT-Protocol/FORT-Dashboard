@@ -55,8 +55,8 @@ const Futures = () => {
       <SimpleGrid columns={[1, 1, 2, 2, 4]} spacing={["22px", "22px", "44px"]}>
         <Norm value={totalOpenPositions} desc={"Total Open Position"} color={"#C7A072"}/>
         <Norm value={curOpenLongPositions} desc={"Current Open Long Positions (DCU)"} color={"#00B388"}/>
-        <Norm value={cumluativeNumberOfTransaction} desc={"Cumulative Number of Transaction"} color={"#E57200"}/>
         <Norm value={curOpenShortPositions} desc={"Current Open Short Positions (DCU)"} color={"#F23A12"}/>
+        <Norm value={cumluativeNumberOfTransaction} desc={"Cumulative Number of Transaction"} color={"#E57200"}/>
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
         <LineChart title={"Open Position"} suffix={"DCU"} data={openingVolumeList}/>
