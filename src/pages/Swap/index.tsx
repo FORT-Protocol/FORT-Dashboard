@@ -39,7 +39,14 @@ const Swap = () => {
       )
     fetch(APIHOSTNAME + "/api/swap/ducTotalsupplyOfDaily")
       .then((res) => res.json())
-      .then((json) => setTotalSupply(json["value"]))
+      .then((json) => json["value"])
+      .then((data) => {
+        const newData = data.filter((data: { day: string, value: number, category: string }) => {
+          const day = new Date(data.day).getTime()
+          return day > new Date("2021.10.26").getTime()
+        })
+        setTotalSupply(newData)
+      })
   }
 
   return (
@@ -52,7 +59,7 @@ const Swap = () => {
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
         <LineChart title={"Total Transaction Volume"} suffix={"DCU"} data={totalTransactionVolumeList}/>
-        <LineChart title={"Total Supply"} suffix={"DCU"} data={totalSupply} useLast/>
+        <LineChart title={"Total Supply"} suffix={"DCU"} data={totalSupply} useLast useLimit/>
       </SimpleGrid>
     </Stack>
   )

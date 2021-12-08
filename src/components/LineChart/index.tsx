@@ -12,6 +12,7 @@ interface LineChartProps {
   noTotal?: boolean
   value?: number
   useLast?: boolean
+  useLimit?: boolean
 }
 
 const LineChart: FC<LineChartProps> = props => {
@@ -20,6 +21,23 @@ const LineChart: FC<LineChartProps> = props => {
   const [data, setData] = useState(props.data)
   const today = new Date().getTime()
   const [sum, setSum] = useState(0)
+  const [maxLimit, setMaxLimit] = useState(0)
+  const [minLimit, setMinLimit] = useState(0)
+
+  useEffect(()=>{
+    let max = data[0]?.value;
+    let min = data[0]?.value;
+    data.forEach((d: { day: string, value: number, category: string }) => {
+      if (d.value > max) {
+        max = d.value
+      }
+      if (d.value < min) {
+        min = d.value
+      }
+    })
+    setMaxLimit(max)
+    setMinLimit(min)
+  }, [data])
 
   useEffect(()=> {
     if (props.useLast) {
@@ -64,6 +82,10 @@ const LineChart: FC<LineChartProps> = props => {
     point: {
       shape: "circle",
       size: 4
+    },
+    yAxis: {
+      maxLimit: props.useLimit ? Math.ceil(maxLimit / 10000) * 10000 : null,
+      minLimit: props.useLimit ? Math.floor(minLimit / 10000) * 10000 : null,
     },
     interactions: [{ type: 'marker-active' }],
     lineStyle: {
