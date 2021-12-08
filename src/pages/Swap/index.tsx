@@ -10,6 +10,7 @@ const Swap = () => {
   const [numberOfDCU, setNumberOfDCU] = useState("-")
   const [totalTransactionVolume, setTotalTransactionVolume] = useState("-")
   const [totalTransactionVolumeList, setTotalTransactionVolumeList] = useState<{ day: string, value: number, category: string }[]>([])
+  const [totalSupply, setTotalSupply] = useState<{day: string, value: number, category: string}[]>([])
 
   useEffect(()=>{
     asyncFetch()
@@ -36,6 +37,9 @@ const Swap = () => {
       .then((res) => res.json())
       .then((json) => setTotalTransactionVolumeList(json["value"])
       )
+    fetch(APIHOSTNAME + "/api/swap/ducTotalsupplyOfDaily")
+      .then((res) => res.json())
+      .then((json) => setTotalSupply(json["value"]))
   }
 
   return (
@@ -48,6 +52,7 @@ const Swap = () => {
       </SimpleGrid>
       <SimpleGrid columns={1} spacing={["22px", "22px", "44px"]}>
         <LineChart title={"Total Transaction Volume"} suffix={"DCU"} data={totalTransactionVolumeList}/>
+        <LineChart title={"Total Supply"} suffix={"DCU"} data={totalSupply} useLast/>
       </SimpleGrid>
     </Stack>
   )

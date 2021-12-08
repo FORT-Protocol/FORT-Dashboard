@@ -10,6 +10,8 @@ interface LineChartProps {
   data: { day: string, value: number, category: string }[]
   noFixed?: boolean
   noTotal?: boolean
+  value?: number
+  useLast?: boolean
 }
 
 const LineChart: FC<LineChartProps> = props => {
@@ -19,6 +21,20 @@ const LineChart: FC<LineChartProps> = props => {
   const today = new Date().getTime()
   const [sum, setSum] = useState(0)
 
+  useEffect(()=> {
+    if (props.useLast) {
+      setSum(data[data.length - 1]?.value || 0)
+    } else if (!props.noTotal){
+      let s = 0
+      data.forEach((d: { day: string, value: number, category: string }) => {
+        if (d.category === "Total") {
+          s += d.value
+        }
+      })
+      setSum(s)
+    }
+  }, [data])
+
   useEffect(() => {
     if (selector === "1W") {
       const tempData = props.data.filter((data) => {
@@ -26,13 +42,6 @@ const LineChart: FC<LineChartProps> = props => {
         return today - day <= 7 * 84600000
       })
       setData(tempData)
-      let s = 0
-      tempData.forEach((d: { day: string, value: number, category: string }) => {
-        if (d.category === "Total") {
-          s += d.value
-        }
-      })
-      setSum(s)
     }
     if (selector === "1M") {
       const tempData = props.data.filter((data: { day: string, value: number, category: string }) => {
@@ -40,23 +49,9 @@ const LineChart: FC<LineChartProps> = props => {
         return today - day <= 30 * 84600000
       })
       setData(tempData)
-      let s = 0
-      tempData.forEach((d: { day: string, value: number, category: string }) => {
-        if (d.category === "Total") {
-          s += d.value
-        }
-      })
-      setSum(s)
     }
     if (selector === "All") {
       setData(props.data)
-      let s = 0
-      props.data.forEach((d: { day: string, value: number, category: string }) => {
-        if (d.category === "Total") {
-          s += d.value
-        }
-      })
-      setSum(s)
     }
   }, [selector, setSelector, props])
 
