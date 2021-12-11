@@ -83,6 +83,7 @@ const LineChart: FC<LineChartProps> = props => {
       shape: "circle",
       size: 4
     },
+    autoFit: true,
     yAxis: {
       maxLimit: props.useLimit ? Math.ceil(maxLimit / 10000) * 10000 : null,
       minLimit: props.useLimit ? Math.floor(minLimit / 10000) * 10000 : null,

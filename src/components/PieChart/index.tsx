@@ -17,6 +17,8 @@ const PieChart: FC<PieChartProps> = props => {
     angleField: 'value',
     colorField: 'type',
     radius: 0.8,
+    autoFit: true,
+    legend: undefined,
     label: {
       type: 'spider',
       labelHeight: 40,
