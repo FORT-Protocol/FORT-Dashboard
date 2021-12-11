@@ -64,8 +64,10 @@ const App = () => {
       ) : (
         <Stack w={"100%"} alignItems={"center"} spacing={0}>
           <Stack direction={"row"} alignItems={"center"} px={2} w={"100%"}>
-            <IconButton aria-label="Search database" icon={<HamburgerIcon/>}
+            <IconButton aria-label="menu" icon={<HamburgerIcon/>}
                         _focus={{ outline: "none" }}
+                        _active={{ bg: "white" }}
+                        _hover={{ bg: "white" }}
                         variant={"ghost"} position={"absolute"} onClick={onOpen}/>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} w={"100%"} h={"64px"}>
               <img src={smallLogo} alt={"logo"}/>
@@ -77,7 +79,10 @@ const App = () => {
             <DrawerContent>
               <DrawerBody>
                 <Stack direction={"row"} alignItems={"center"} w={"100%"}>
-                  <IconButton aria-label="Search database" icon={<CloseIcon/>} color={"hedge"}
+                  <IconButton aria-label="close" icon={<CloseIcon/>} color={"hedge"}
+                              _hover={{ bg: "white" }}
+                              _active={{ bg: "white" }}
+                              size={"sm"}
                               _focus={{ outline: "none" }}
                               variant={"ghost"} position={"absolute"} onClick={onClose}/>
                   <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} w={"100%"} h={"64px"}>
