@@ -97,6 +97,31 @@ const LineChart: FC<LineChartProps> = props => {
     },
   };
 
+  const ButtonGroups = () => {
+    return (
+      <Stack direction={"row"} spacing={"20px"}>
+        <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
+                color={selector === "1W" ? "hedge" : "black"}
+                _focus={{outline: "none"}}
+                onClick={() => setSelector("1W")}
+                border={"2px"}
+                borderColor={selector === "1W" ? "#0047BB" : "#EDF2F7"}>1W</Button>
+        <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
+                color={selector === "1M" ? "hedge" : "black"}
+                _focus={{outline: "none"}}
+                onClick={() => setSelector("1M")}
+                border={"2px"}
+                borderColor={selector === "1M" ? "#0047BB" : "#EDF2F7"}>1M</Button>
+        <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
+                color={selector === "All" ? "hedge" : "black"}
+                _focus={{outline: "none"}}
+                onClick={() => setSelector("All")}
+                border={"2px"}
+                borderColor={selector === "All" ? "#0047BB" : "#EDF2F7"}>ALL</Button>
+      </Stack>
+    )
+  }
+
   return (
     <Stack borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} p={["22px", "22px", "44px"]} spacing={"8px"}>
       {props.title && (
@@ -114,23 +139,7 @@ const LineChart: FC<LineChartProps> = props => {
           ) : (
             <Text/>
           )}
-          <Stack direction={"row"} spacing={"20px"}>
-            <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
-                    color={selector === "1W" ? "hedge" : "black"}
-                    _focus={{outline: "none"}}
-                    onClick={() => setSelector("1W")}
-                    border={selector === "1W" ? "2px solid #0047BB" : "none"}>1W</Button>
-            <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
-                    color={selector === "1M" ? "hedge" : "black"}
-                    _focus={{outline: "none"}}
-                    onClick={() => setSelector("1M")}
-                    border={selector === "1M" ? "2px solid #0047BB" : "none"}>1M</Button>
-            <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
-                    color={selector === "All" ? "hedge" : "black"}
-                    _focus={{outline: "none"}}
-                    onClick={() => setSelector("All")}
-                    border={selector === "All" ? "2px solid #0047BB" : "none"}>ALL</Button>
-          </Stack>
+          <ButtonGroups />
         </Stack>
       ) : (
         <Stack direction={"row"} justifyContent={"space-between"}>
@@ -143,23 +152,7 @@ const LineChart: FC<LineChartProps> = props => {
           ) : (
             <Text/>
           )}
-          <Stack direction={"row"} spacing={"20px"}>
-            <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
-                    color={selector === "1W" ? "hedge" : "black"}
-                    _focus={{outline: "none"}}
-                    onClick={() => setSelector("1W")}
-                    border={selector === "1W" ? "2px solid #0047BB" : "none"}>1W</Button>
-            <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
-                    color={selector === "1M" ? "hedge" : "black"}
-                    _focus={{outline: "none"}}
-                    onClick={() => setSelector("1M")}
-                    border={selector === "1M" ? "2px solid #0047BB" : "none"}>1M</Button>
-            <Button variant={"solid"} borderRadius={"20px"} size={"sm"} fontFamily={"Montserrat"}
-                    color={selector === "All" ? "hedge" : "black"}
-                    _focus={{outline: "none"}}
-                    onClick={() => setSelector("All")}
-                    border={selector === "All" ? "2px solid #0047BB" : "none"}>ALL</Button>
-          </Stack>
+          <ButtonGroups />
         </Stack>
       ) }
       <Line {...config} />
