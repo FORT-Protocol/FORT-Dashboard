@@ -89,8 +89,9 @@ const LineChart: FC<LineChartProps> = props => {
     },
     interactions: [{ type: 'marker-active' }],
     lineStyle: {
-      lineWidth: 3,
+      lineWidth: 2.5,
     },
+    smooth: true,
     slider: {
       start: 0,
       end: 1,
@@ -157,7 +158,9 @@ const LineChart: FC<LineChartProps> = props => {
           <ButtonGroups />
         </Stack>
       ) }
-      <Line {...config} />
+      <Stack h={width < 600 ? "240px" : "360px"} w={"100%"} p={"20px"}>
+        <Line {...config} />
+      </Stack>
     </Stack>
   )
 }
