@@ -56,14 +56,14 @@ const LineChart: FC<LineChartProps> = props => {
   useEffect(() => {
     if (selector === "1W") {
       const tempData = props.data.filter((data) => {
-        const day = new Date(data.day).getTime()
-        return today - day <= 7 * 84600000
+        const day = new Date(data.day.replace(/\./g, "/")).getTime()
+        return (today - day) <= 7 * 84600000
       })
       setData(tempData)
     }
     if (selector === "1M") {
-      const tempData = props.data.filter((data: { day: string, value: number, category: string }) => {
-        const day = new Date(data.day).getTime()
+      const tempData = props.data.filter((data) => {
+        const day = new Date(data.day.replace(/\./g, "/")).getTime()
         return today - day <= 30 * 84600000
       })
       setData(tempData)
