@@ -158,7 +158,7 @@ const LineChart: FC<LineChartProps> = props => {
           <ButtonGroups />
         </Stack>
       ) }
-      <Stack h={width < 600 ? "240px" : "360px"} w={"100%"} p={"20px"}>
+      <Stack h={width < 600 ? "240px" : "360px"} w={"100%"}>
         <Line {...config} />
       </Stack>
     </Stack>
