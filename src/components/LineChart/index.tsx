@@ -92,10 +92,6 @@ const LineChart: FC<LineChartProps> = props => {
       lineWidth: 2.5,
     },
     smooth: true,
-    slider: {
-      start: 0,
-      end: 1,
-    },
   };
 
   const ButtonGroups = () => {
