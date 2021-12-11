@@ -42,8 +42,8 @@ const Swap = () => {
       .then((json) => json["value"])
       .then((data) => {
         const newData = data.filter((data: { day: string, value: number, category: string }) => {
-          const day = new Date(data.day).getTime()
-          return day > new Date("2021.10.26").getTime()
+          const day = new Date(data.day.replace(/\./g, "/")).getTime()
+          return day > new Date("2021/10/26").getTime()
         })
         setTotalSupply(newData)
       })

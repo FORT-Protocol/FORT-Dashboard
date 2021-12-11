@@ -134,6 +134,12 @@ const LineChart: FC<LineChartProps> = props => {
 
   return (
     <Stack borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} p={["22px", "22px", "44px"]} spacing={"8px"}>
+      <Text>
+        { data.map((data)=>(
+            data.day
+        )) }
+      </Text>
+
       {props.title && (
         <Text fontSize={width < 1000 ? 12 : 18} fontWeight={600} color={"#878787"}
               fontFamily={"Montserrat"}>{props.title}</Text>
