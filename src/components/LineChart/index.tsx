@@ -122,6 +122,16 @@ const LineChart: FC<LineChartProps> = props => {
     )
   }
 
+  const Total = () => {
+    return (
+      <Stack direction={"row"} alignItems={"baseline"}>
+        <Text color={"hedge"} fontSize={28} fontWeight={600}
+              fontFamily={"Montserrat"}>{props.prefix} {props.noFixed ? sum : sum.toFixed(2)}</Text>
+        <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
+      </Stack>
+    )
+  }
+
   return (
     <Stack borderRadius={"20px"} boxShadow={"0 0 10px #E5E5E5"} p={["22px", "22px", "44px"]} spacing={"8px"}>
       {props.title && (
@@ -131,11 +141,7 @@ const LineChart: FC<LineChartProps> = props => {
       { width < 600 ? (
         <Stack>
           {!props.noTotal ? (
-            <Stack direction={"row"} alignItems={"baseline"}>
-              <Text color={"hedge"} fontSize={28} fontWeight={600}
-                    fontFamily={"Montserrat"}>{props.prefix} {props.noFixed ? sum : sum.toFixed(2)}</Text>
-              <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
-            </Stack>
+           <Total />
           ) : (
             <Text/>
           )}
@@ -144,11 +150,7 @@ const LineChart: FC<LineChartProps> = props => {
       ) : (
         <Stack direction={"row"} justifyContent={"space-between"}>
           {!props.noTotal ? (
-            <Stack direction={"row"} alignItems={"baseline"}>
-              <Text color={"hedge"} fontSize={28} fontWeight={600}
-                    fontFamily={"Montserrat"}>{props.prefix} {props.noFixed ? sum : sum.toFixed(2)}</Text>
-              <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
-            </Stack>
+            <Total />
           ) : (
             <Text/>
           )}
