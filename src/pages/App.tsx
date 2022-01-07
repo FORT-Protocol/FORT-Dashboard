@@ -22,10 +22,12 @@ import {useState} from "react";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import {HamburgerIcon, CloseIcon} from "@chakra-ui/icons";
 import Swap from "./Swap";
+import {useGA4React} from "ga-4-react";
 
 const App = () => {
   const [index, setIndex] = useState(0)
   const {isOpen, onOpen, onClose} = useDisclosure()
+  const ga4 = useGA4React()
   const tabList = [
     {index: 0, label: "Futures", path: "/", content: <Futures/>},
     {index: 1, label: "Options", path: "/options", content: <Options/>},
@@ -34,6 +36,9 @@ const App = () => {
   ]
 
   const handleTabsChange = (index: number) => {
+    if (ga4) {
+      ga4.pageview(tabList[index].path)
+    }
     setIndex(index)
   }
 

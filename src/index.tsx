@@ -6,6 +6,7 @@ import {ChakraProvider} from "@chakra-ui/react"
 import {RecoilRoot} from "recoil"
 import {HashRouter} from "react-router-dom"
 import { extendTheme } from "@chakra-ui/react"
+import GA4React  from "ga-4-react";
 
 const theme = extendTheme({
   colors: {
@@ -13,18 +14,28 @@ const theme = extendTheme({
   },
 })
 
-ReactDOM.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <HashRouter>
-        <ChakraProvider theme={theme}>
-          <App/>
-        </ChakraProvider>
-      </HashRouter>
-    </RecoilRoot>
-  </React.StrictMode>,
-  document.getElementById("root")
-)
+const ga4react = new GA4React("G-CFFDLDX99F", {
+  send_page_view: true
+});
+
+(async ()=>{
+  await ga4react.initialize();
+
+  ReactDOM.render(
+    <React.StrictMode>
+      <RecoilRoot>
+        <HashRouter>
+          <ChakraProvider theme={theme}>
+            <App/>
+          </ChakraProvider>
+        </HashRouter>
+      </RecoilRoot>
+    </React.StrictMode>,
+    document.getElementById("root")
+  )
+})();
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
