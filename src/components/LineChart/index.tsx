@@ -51,7 +51,7 @@ const LineChart: FC<LineChartProps> = props => {
       })
       setSum(s)
     }
-  }, [data])
+  }, [data, props.noTotal, props.useLast])
 
   useEffect(() => {
     if (selector === "1W") {
@@ -71,7 +71,7 @@ const LineChart: FC<LineChartProps> = props => {
     if (selector === "All") {
       setData(props.data)
     }
-  }, [selector, setSelector, props])
+  }, [selector, setSelector, props, today])
 
   const config = {
     data: data,
