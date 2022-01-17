@@ -19,7 +19,6 @@ const LineChart: FC<LineChartProps> = props => {
   const [selector, setSelector] = useState("1M")
   const {width} = useWindowDimensions()
   const [data, setData] = useState(props.data)
-  const today = new Date().getTime()
   const [sum, setSum] = useState(0)
   const [maxLimit, setMaxLimit] = useState(0)
   const [minLimit, setMinLimit] = useState(0)
@@ -57,21 +56,21 @@ const LineChart: FC<LineChartProps> = props => {
     if (selector === "1W") {
       const tempData = props.data.filter((data) => {
         const day = new Date(data.day.replace(/\./g, "/")).getTime()
-        return (today - day) <= 7 * 84600000
+        return (new Date().getTime() - day) <= 7 * 84600000
       })
       setData(tempData)
     }
     if (selector === "1M") {
       const tempData = props.data.filter((data) => {
         const day = new Date(data.day.replace(/\./g, "/")).getTime()
-        return today - day <= 30 * 84600000
+        return new Date().getTime() - day <= 30 * 84600000
       })
       setData(tempData)
     }
     if (selector === "All") {
       setData(props.data)
     }
-  }, [selector, setSelector, props, today])
+  }, [selector, setSelector, props.data])
 
   const config = {
     data: data,
