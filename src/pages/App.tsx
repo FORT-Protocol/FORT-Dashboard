@@ -21,7 +21,7 @@ import useWindowDimensions from "../hooks/useWindowDimensions";
 import {HamburgerIcon, CloseIcon} from "@chakra-ui/icons";
 import Swap from "./Swap";
 import {useGA4React} from "ga-4-react";
-import {FortLogo, FortSMLogo} from "../assets";
+import {FortLogo} from "../assets";
 
 const App = () => {
   const [index, setIndex] = useState(0)
@@ -48,8 +48,8 @@ const App = () => {
       {width >= 1000 ? (
         <TabList alignItems={"center"} h={"66px"}>
           <Stack w={"100%"} h={"66px"} justifyContent={"center"} spacing={0}>
-            <Stack pl={["20px", "20px", "40px"]} h={"44px"} spacing={4} position={"absolute"}>
-              <FortLogo />
+            <Stack pl={["20px", "20px", "40px"]} h={"34px"} spacing={4} position={"absolute"}>
+              <FortLogo height={"34px"} />
             </Stack>
             <Stack justifyContent={"center"} direction={"row"} w={"100%"} spacing={0}>
               {tabList.map((tab) => (
@@ -74,7 +74,7 @@ const App = () => {
                         _hover={{ bg: "white" }}
                         variant={"ghost"} position={"absolute"} onClick={onOpen}/>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} w={"100%"} h={"64px"}>
-              <FortSMLogo />
+              <FortLogo height={"20px"} />
             </Stack>
           </Stack>
           <Divider/>
@@ -90,7 +90,7 @@ const App = () => {
                               _focus={{ outline: "none" }}
                               variant={"ghost"} position={"absolute"} onClick={onClose}/>
                   <Stack direction={"row"} alignItems={"center"} justifyContent={"center"} w={"100%"} h={"64px"}>
-                    <FortSMLogo />
+                    <FortLogo height={"20px"} />
                   </Stack>
                 </Stack>
                 <TabList>
