@@ -2,6 +2,7 @@ import {Button, Stack, Text} from "@chakra-ui/react";
 import {FC, useEffect, useState} from "react";
 import {Line} from '@ant-design/charts';
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import {formatNumber} from "../../utils/util";
 
 interface LineChartProps {
   title?: string,
@@ -123,7 +124,7 @@ const LineChart: FC<LineChartProps> = props => {
     return (
       <Stack direction={"row"} alignItems={"baseline"}>
         <Text color={"hedge"} fontSize={28} fontWeight={600}
-              fontFamily={"Montserrat"}>{props.prefix} {props.noFixed ? sum : sum.toFixed(2)}</Text>
+              fontFamily={"Montserrat"}>{props.prefix} {formatNumber(props.noFixed ? sum : sum.toFixed(2))}</Text>
         <Text color={"hedge"} fontWeight={600} fontFamily={"Montserrat"}>{props.suffix}</Text>
       </Stack>
     )

@@ -3,6 +3,7 @@ import Norm from "../../components/Norm";
 import LineChart from "../../components/LineChart";
 import {useEffect, useState} from "react";
 import {APIHOSTNAME} from "../../constant";
+import {formatNumber} from "../../utils/util";
 
 const Users = () => {
   const [allUser, setAllUser] = useState("-")
@@ -18,15 +19,15 @@ const Users = () => {
   const asyncFetch = () => {
     fetch(APIHOSTNAME + "/api/users/totalNumber")
       .then((res) => res.json())
-      .then((json) => setAllUser(Number(json["value"]).toFixed(0))
+      .then((json) => setAllUser(formatNumber(json["value"]))
       )
     fetch(APIHOSTNAME + "/api/users/futuresUsersNumber")
       .then((res) => res.json())
-      .then((json) => setFuturesTradingUsers(Number(json["value"]).toFixed(0))
+      .then((json) => setFuturesTradingUsers(formatNumber(json["value"]))
       )
     fetch(APIHOSTNAME + "/api/users/optionsUsersNumber")
       .then((res) => res.json())
-      .then((json) => setOptionsTradingUsers(Number(json["value"]).toFixed(0))
+      .then((json) => setOptionsTradingUsers(formatNumber(json["value"]))
       )
     fetch(APIHOSTNAME + "/api/users/newUsersNumberOfDaily")
       .then((res) => res.json())

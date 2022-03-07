@@ -4,6 +4,7 @@ import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import {useEffect, useState} from "react";
 import {APIHOSTNAME} from "../../constant";
+import {formatNumber} from "../../utils/util";
 
 const Futures = () => {
   const [totalOpenPositions, setTotalOpenPositions] = useState("-")
@@ -23,16 +24,16 @@ const Futures = () => {
   const asyncFetch = () => {
     fetch( APIHOSTNAME + "/api/futures/openedOfTotal")
       .then((res) => res.json())
-      .then((json) => setTotalOpenPositions(json["value"]))
+      .then((json) => setTotalOpenPositions(formatNumber(json["value"])))
     fetch(APIHOSTNAME +"/api/futures/currentBullishQty")
       .then((res) => res.json())
-      .then((json) => setCurOpenLongPositions(json["value"]))
+      .then((json) => setCurOpenLongPositions(formatNumber(json["value"])))
     fetch(APIHOSTNAME + "/api/futures/currentBearishQty")
       .then((res) => res.json())
-      .then((json) => setCurOpenShortPositions(json["value"]))
+      .then((json) => setCurOpenShortPositions(formatNumber(json["value"])))
     fetch(APIHOSTNAME + "/api/futures/transactionCounts")
       .then((res) => res.json())
-      .then((json) => setCumluativeNumberOfTransaction(json["value"]))
+      .then((json) => setCumluativeNumberOfTransaction(formatNumber(json["value"])))
     fetch(APIHOSTNAME + "/api/futures/openedQtyOfDaily/ethereum")
       .then((res) => res.json())
       .then((json) => setOpeningVolumeList(json["value"]))

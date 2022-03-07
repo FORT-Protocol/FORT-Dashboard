@@ -4,6 +4,7 @@ import LineChart from "../../components/LineChart";
 import PieChart from "../../components/PieChart";
 import {useEffect, useState} from "react";
 import {APIHOSTNAME} from "../../constant";
+import {formatNumber} from "../../utils/util";
 
 const Options = () => {
   const [totalTxVolume, setTotalTxVolume] = useState("-")
@@ -21,13 +22,13 @@ const Options = () => {
   const  asyncFetch = () => {
     fetch( APIHOSTNAME + "/api/options/openedOfTotal")
       .then((res) => res.json())
-      .then((json) => setTotalTxVolume(json["value"]))
+      .then((json) => setTotalTxVolume(formatNumber(json["value"])))
     fetch(APIHOSTNAME + "/api/options/currentBullishQty")
       .then((res) => res.json())
-      .then((json) => setCurrentBullishQty(json["value"]))
+      .then((json) => setCurrentBullishQty(formatNumber(json["value"])))
     fetch(APIHOSTNAME + "/api/options/currentBearishQty")
       .then((res) => res.json())
-      .then((json) => setCurrentBearishQty(json["value"]))
+      .then((json) => setCurrentBearishQty(formatNumber(json["value"])))
     fetch(APIHOSTNAME + "/api/options/transactionCounts")
       .then((res) => res.json())
       .then((json) => setCumluativeNumberOfTransaction(json["value"]))
